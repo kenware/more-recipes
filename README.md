@@ -27,6 +27,6 @@ More-recipe: Add your most favorite recipes and also
 # <a name="licence"></a>Licence
 * This project is licenced under GNU GENERAL PUBLIC LICENSE
 * Version 3, 29 June 2007
-*[![Coverage Status](https://coveralls.io/repos/github/kenware/more-recipes/badge.svg?branch=gh-pages)](https://coveralls.io/github/kenware/more-recipes?branch=gh-pages)
+* [![Coverage Status](https://coveralls.io/repos/github/kenware/more-recipes/badge.svg?branch=gh-pages)](https://coveralls.io/github/kenware/more-recipes?branch=gh-pages)
 
-*https://coveralls.io/repos/github/kenware/more-recipes/badge.svg?branch=master(Coverage Status)!:https://coveralls.io/github/kenware/more-recipes?branch=master
+* https://coveralls.io/repos/github/kenware/more-recipes/badge.svg?branch=master(Coverage Status)!:https://coveralls.io/github/kenware/more-recipes?branch=master
