@@ -1,0 +1,38 @@
+{
+  "name": "expapp",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "start": "node app.js",
+    "build": "babel ./server -d ./dist",
+    "b": "babel app.js -d app.js",
+    "moch": "mocha ",
+    "test": "mocha"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-core": "^6.26.0",
+    "babel-loader": "^7.1.2",
+    "babel-preset-env": "^1.6.0",
+    "babel-preset-latest": "^6.24.1",
+    "chai": "^4.1.2",
+    "chai-http": "^3.0.0",
+    "gulp": "^3.9.0",
+    "gulp-develop-server": "^0.5.0",
+    "gulp-jshint": "^1.12.0",
+    "jsdoc": "^3.4.0",
+    "mocha": "^2.5.3",
+    "should": "^7.1.1",
+    "supertest": "^1.1.0"
+  },
+  "dependencies": {
+    "config": "^1.20.1",
+    "body-parser": "^1.14.1",
+    "express": "^4.13.3",
+    "express-session": "^1.12.1",
+    "morgan": "^1.9.0"
+  }
+}
