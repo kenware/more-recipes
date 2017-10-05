@@ -1,11 +1,11 @@
 import model from '../models';
+
 const  recipesDetail = model.recipesDetail;
 
   const createrecipe = (req, res) => {
-
       return recipesDetail
        .create({
-         tittle:      req.body.tittle,
+         tittle: req.body.tittle,
          content:     req.body.content,
          ingredients: req.body.ingredients,
          category :   req.body.category,
@@ -20,7 +20,7 @@ const update = (req, res) => {
   return recipesDetail
     .findOne({
         where: {
-          id: req.decoded.id,
+          UserId: req.decoded.id,
           id: req.params.recipesId
         },
       })
@@ -35,7 +35,8 @@ const update = (req, res) => {
         .update({
           tittle : req.body.tittle ,
           content: req.body.content,
-          ingredients: req.body.ingredients
+          ingredients: req.body.ingredients,
+          category :   req.body.category,
         })
         .then(recipesDetail => res.status(200).send(recipesDetail))
         .catch(error => res.status(400).send(error));
@@ -64,18 +65,16 @@ const destroy = (req, res) => {
     .catch(error => res.status(400).send(error));
 }
 
-const list =(req, res) => {
+const list = (req, res) => {
   return recipesDetail
     .all()
     .then(recipesDetail => res.status(200).send(recipesDetail))
     .catch(error => res.status(400).send({message:"no recipes in in the list",error:error}));
 }
 
-
 export default {
   createrecipe,
   update,
   destroy,
   list
-
 }

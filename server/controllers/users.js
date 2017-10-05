@@ -3,6 +3,7 @@ const user = model.User;
 import jwt from 'jsonwebtoken';
 import bcrypt from 'bcryptjs';
 const secret = "keeny"
+const  recipesDetail = model.recipesDetail;
 
   const createUser = (req, res) => {
     return user
@@ -31,9 +32,30 @@ const userSignIn = (req, res) => {
 
 };
 
+const favorite = (req, res) => {
+  return recipesDetail
+    .findAll({
+        where: {
+          UserId: req.params.userId
+        }
+      })
+    .then(recipesDetail => {
+      if (!recipesDetail) {
+        return res.status(404).send({
+          message: ' No favorite recipes Found'
+        });
+      }
+           return res.status(200).send({
+           recipes: recipesDetail           
+           })
+    })
+    .catch(error => res.status(405).send(error));
+}
+
 
 
 export default {
   createUser,
-  userSignIn
+  userSignIn,
+  favorite
 }

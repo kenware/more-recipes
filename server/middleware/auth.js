@@ -21,11 +21,16 @@ const verifyToken = (req, res, next) => {
    });
  }
 
+const validate = (req, res, next) => {
+   if ((req.body.username) === ""){
+       return res.status(401).send({ message: 'username cannot be empty' });
+   }
+   next();
+ }
 
- 
+
 
  export default {
-  verifyToken
-
-
+  verifyToken,
+  validate
  }
