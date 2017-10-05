@@ -6,7 +6,7 @@ import auth from '../middleware/auth';
 
  router.post('/users/signup', User.createUser);
  router.post('/recipes',auth.verifyToken,recipe.createrecipe);
- router.post('/recipes/:recipesId',auth.verifyToken,recipe.update);
+ router.put('/recipes/:recipesId',auth.verifyToken,recipe.update);
  router.post('/users/signin', User.userSignIn);
 
 export default router;
