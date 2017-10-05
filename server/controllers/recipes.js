@@ -17,11 +17,11 @@ const  recipesDetail = model.recipesDetail;
 
 const update = (req, res) => {
   return recipesDetail
-    .findOne({
+    .find({
         where: {
-          id: req.decoded.id,
+          UserId: req.decoded.id,
           id: req.params.recipesId
-        },
+        }
       })
     .then(recipesDetail => {
       if (!recipesDetail) {
