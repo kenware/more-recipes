@@ -2,6 +2,7 @@ let express = require('express'), router = express.Router();
 import User from '../controllers/users';
 import recipe from '../controllers/recipes';
 import auth from '../middleware/auth';
+import review from '../controllers/review';
 
 
  router.post('/users/signup', User.createUser);
@@ -10,5 +11,5 @@ import auth from '../middleware/auth';
  router.delete('/recipes/:recipesId',auth.verifyToken,recipe.destroy);
  router.post('/users/signin', User.userSignIn);
  router.get('/recipes',recipe.list);
-
+ router.post('/recipes/:recipesId/reviews',auth.verifyToken,review.reviewR);
 export default router;

@@ -9,7 +9,8 @@ const  recipesDetail = model.recipesDetail;
          content:     req.body.content,
          ingredients: req.body.ingredients,
          category :   req.body.category,
-         UserId :     req.decoded.id
+         UserId :     req.decoded.id,
+         favorite  :  req.body.favorite
        })
       .then(recipesDetail => res.status(201).send(recipesDetail))
       .catch(error => res.status(400).send(error));

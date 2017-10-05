@@ -1,13 +1,13 @@
 import model from '../models';
-const  review = model.review;
-const  recipesDetail = model.recipesDetail;
+const recipesDetail = model.recipesDetail;
+const  recipeReview = model.recipeReview;
 
-const reviewRecipes = (req, res) => {
+const reviewR = (req, res) => {
   return recipesDetail
-    .findOne({
+    .find({
         where: {
           id: req.params.recipesId
-        },
+        }
       })
     .then(recipesDetail => {
       if (!recipesDetail) {
@@ -16,12 +16,17 @@ const reviewRecipes = (req, res) => {
         });
       }
 
-      return review
+      return recipeReview
         .create({
-        review: req.body.review,
+        recipesDetailId : req.body.recipesId,
+        reviews: req.body.reviews
       })
-      .then(user => res.status(201).send(review))
+      .then(recipeReview => res.status(201).send(recipeReview))
         .catch(error => res.status(400).send(error));
     })
     .catch(error => res.status(405).send(error));
+}
+
+export default {
+  reviewR
 }
