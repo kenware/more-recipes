@@ -7,8 +7,25 @@ import server from '../app';
 let should = chai.should();
 
 chai.use(chaiHttp);
+
 //existing user should not sign up
 describe('/POST api/users/signup', () => {
+      it('user should sign up', (done) => {
+        chai.request(server)
+            .post('/api/users/signup')
+            .send({
+                  username:'ken',
+                  fullName:'ken',
+                  email:'kelvin@gmail.kev',
+                  password:'12345678'
+                 })
+            .end((err, res) => {
+                res.should.have.status(201);
+                res.body.should.have.property('username').eql('ken');
+                done();
+            });
+      });
+
       it('user with existing email should not sign up', (done) => {
         chai.request(server)
             .post('/api/users/signup')
@@ -46,7 +63,7 @@ describe('/POST api/users/signin', () => {
       it('it should not sign in', (done) => {
         chai.request(server)
             .post('/api/users/signin')
-            .send({email:'kelvin@gmail.ker',
+            .send({email:'kelvin@gmail.kev',
                   password:'wrongpassword'})
             .end((err, res) => {
                 res.should.have.status(200);
@@ -76,7 +93,7 @@ let id = 0;
  before((done) => {
         chai.request(server)
             .post('/api/users/signin')
-            .send({email:'kelvin@gmail.ker',
+            .send({email:'kelvin@gmail.kev',
                   password:'12345678'})
             .end((err, res) => {
                 res.should.have.status(200);
