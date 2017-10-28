@@ -1,6 +1,6 @@
 
 import model from '../models';
-const user = model.User;
+const user = model.user;
 import validator from 'validator';
 import jwt from 'jsonwebtoken';
 import bcrypt from 'bcryptjs';

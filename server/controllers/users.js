@@ -1,5 +1,5 @@
 import model from '../models';
-const user = model.User;
+const user = model.user;
 import jwt from 'jsonwebtoken';
 import bcrypt from 'bcryptjs';
 const secret = "keeny"

@@ -1,7 +1,7 @@
 //'use strict';
 import bcrypt from 'bcryptjs';
 module.exports = (sequelize, DataTypes) => {
-  const User = sequelize.define('User', {
+  const user = sequelize.define('user', {
     fullName: {
       type: DataTypes.STRING,
       allowNull: false
@@ -20,15 +20,15 @@ module.exports = (sequelize, DataTypes) => {
     
   });
 
-  User.associate = (models) => {
-    User.hasMany(models.recipesDetail, {
+  user.associate = (models) => {
+    user.hasMany(models.recipesDetail, {
       foreignKey: 'UserId',
       as: 'recipesDetails'
       });
-    User.hasMany(models.favorite, {
+    user.hasMany(models.favorite, {
       foreignKey: 'UserId',
       as: 'favorites'
       });
   }
-  return User;
+  return user;
 };

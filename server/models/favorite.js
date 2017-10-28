@@ -7,7 +7,7 @@ module.exports = (sequelize, DataTypes) => {
     category: DataTypes.STRING
   });
   favorite.associate = (models) => {
-    favorite.belongsTo(models.User, {
+    favorite.belongsTo(models.user, {
       foreignKey: 'UserId',
       onDelete: 'CASCADE'
     });

@@ -34,7 +34,7 @@ module.exports = (sequelize, DataTypes) => {
       foreignKey: 'recipesDetailId',
       as: 'votes',
     });
-    recipesDetail.belongsTo(models.User, {
+    recipesDetail.belongsTo(models.user, {
       foreignKey: 'UserId',
       onDelete: 'CASCADE',
     });
