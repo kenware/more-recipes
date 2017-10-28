@@ -9,7 +9,7 @@
   },
   "test": {
     "username": "progres",
-    "password": "dehydrogenase",
+    "password": "",
     "database": "recipesdb",
     "host": "127.0.0.1",
     "port": 5432,
