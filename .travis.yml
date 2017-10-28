@@ -6,6 +6,6 @@ services:
  - postgresql
 before_script:
  - psql -c "CREATE DATABASE recipesdb;" -U postgres
- cache:
+cache:
   directories:
    - node_modules
