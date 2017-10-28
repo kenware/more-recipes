@@ -10,12 +10,14 @@ app.use(bodyParser.json({ type: 'application/json'}));
 import route from './server/route/index.js';
 
 app.use('/api', route);
-app.listen('3000', () => {
-	console.log('server is running');
-});
+
 
 app.get('*', (req, res) => res.status(200).send({
-  message: 'Welcome to the beginning of nothingness.',
+  message: 'Welcome to the beginning of nothingness.'
 }));
+
+app.listen('8000', () => {
+	console.log('server is running');
+});
 
 export default app;

@@ -4,11 +4,11 @@
   "description": "",
   "main": "app.js",
   "scripts": {
-    "start": "babel-node app.js",
+    "start": "nodemon ./app.js --exec babel-node",
     "build": "babel ./server -d ./dist",
     "b": "babel app.js -d app.js",
-    "start:dev": "nodemon ./bin/www",
-    "test": "mocha"
+    "tes": "babel-node ./node_modules/.bin/_mocha",
+    "test": "./node_modules/.bin/_mocha --compilers js:babel-register"
   },
   "author": "",
   "license": "ISC",

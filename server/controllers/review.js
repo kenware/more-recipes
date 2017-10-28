@@ -18,8 +18,10 @@ const reviewR = (req, res) => {
 
       return recipeReview
         .create({
-        recipesDetailId : req.body.recipesId,
-        reviews: req.body.reviews
+        recipesDetailId : req.params.recipesId,
+        reviews: req.body.reviews,
+        title: req.body.title,
+        reviewedBy: req.decoded.username
       })
       .then(recipeReview => res.status(201).send(recipeReview))
         .catch(error => res.status(400).send(error));

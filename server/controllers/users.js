@@ -3,59 +3,72 @@ const user = model.User;
 import jwt from 'jsonwebtoken';
 import bcrypt from 'bcryptjs';
 const secret = "keeny"
-const  recipesDetail = model.recipesDetail;
+const  favorite = model.favorite;
 
   const createUser = (req, res) => {
+    let password = req.body.password;
+    bcrypt.hash(password, 10, function(err, hash) {
+     // Store hash in your password DB.
+     
     return user
       .create({
         fullName: req.body.fullName,
         username: req.body.username,
-        password: req.body.password,
+        password: hash,
         email :   req.body.email
       })
       .then(user => res.status(201).send(user))
       .catch(error => res.status(400).send(error));
+    });
   
-};
+  };
 
 const userSignIn = (req, res) => {
+    const passwordy = req.body.password;
      user.findOne({ where: {
       email: req.body.email,
-      password :req.body.password
+      //password :req.body.password
       }
      }).then(user => {
-    let token = jwt.sign({id : user.id }, secret, { expiresIn: 86400});
-    res.status(201).send({message:'succesful', token : token});
+     bcrypt.compare(passwordy, user.password, function(err, match) {
+      if (match){
+      let token = jwt.sign({id : user.id,username:user.username }, secret, { expiresIn: 86400});
+      return res.json({message:'succesful', token : token});
+       
+      }
+       return res.json('incorrect password or email');
+     });
+     
    })
-   .catch(error => res.status(400).send(error));
-
+   .catch(error => res.status(400).send(res.json("incorrect password or email")));
+  
 
 };
 
-const favorite = (req, res) => {
-  return recipesDetail
+const favoriteRecipes = (req, res) => {
+  return favorite
     .findAll({
         where: {
           UserId: req.params.userId
         }
       })
-    .then(recipesDetail => {
-      if (!recipesDetail) {
+    .then(favorite => {
+      if (!favorite) {
         return res.status(404).send({
           message: ' No favorite recipes Found'
         });
       }
-           return res.status(200).send({
-           recipes: recipesDetail           
-           })
+      return res.status(200).send({
+        favoriteRecipes: favorite           
+        });
     })
     .catch(error => res.status(405).send(error));
-}
+};
 
 
 
 export default {
   createUser,
   userSignIn,
-  favorite
+  favoriteRecipes
 }
