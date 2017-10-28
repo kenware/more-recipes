@@ -67,11 +67,11 @@ const validate = (req, res, next) => {
            if (!user) {
              next();
            }else{
-             return res.status(401).send(res.json('username already exist'));
+             return res.json('username already exist');
            }
         });
       }else{
-        res.status(401).send(res.json('email already exist'));
+        return res.json('email already exist');
       }
    });
    
