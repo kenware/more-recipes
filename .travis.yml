@@ -6,7 +6,7 @@ services:
  - postgresql
 before_script:
  - psql -c "CREATE DATABASE recipesdb;" -U postgres
- - psql -c "CREATE USER postgres WITH PASSWORD 'dehydrogenase';" -U postgres
+ - psql -c "CREATE PASSWORD 'dehydrogenase';" -U postgres
 cache:
   directories:
    - node_modules
