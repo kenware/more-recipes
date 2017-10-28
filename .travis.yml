@@ -1,8 +1,4 @@
 language: node_js
 node_js:
  - "node"
- - "8"
-before_install: cd server
-cache:
- directories:
-  - "node_modules"
+ - "6"
