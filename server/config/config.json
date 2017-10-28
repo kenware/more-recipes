@@ -8,7 +8,7 @@
     "dialect": "postgres"
   },
   "test": {
-    "username": "progres",
+    "username": "postgres",
     "password": "",
     "database": "recipesdb",
     "host": "127.0.0.1",
