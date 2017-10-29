@@ -13,7 +13,7 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    
+    "sequelize": "^4.13.2"
   },
   "dependencies": {
     "bcryptjs": "^2.4.3",
@@ -27,7 +27,6 @@
     "morgan": "^1.9.0",
     "pg": "^7.3.0",
     "pg-hstore": "^2.3.2",
-    "sequelize": "^4.13.2",
     "validator": "^9.0.0",
     "babel-cli": "^6.26.0",
     "babel-core": "^6.26.0",

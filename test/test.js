@@ -5,11 +5,51 @@ import chai from 'chai';
 import chaiHttp from 'chai-http';
 import server from '../app';
 let should = chai.should();
-
+import model from '../server/models';
+const user = model.user;
+const recipesDetail = model.recipesDetail;
+const  recipeReview = model.recipeReview;
+const  favorite = model.favorite;
 chai.use(chaiHttp);
 
 //existing user should not sign up
 describe('/POST api/users/signup', () => {
+       before((done) => {
+        user.sync()
+        .then(() => {
+            done();
+        });
+      });
+      before((done) => {
+        recipesDetail.sync()
+        .then(() => {
+            done();
+        });
+      });
+
+      before((done) => {
+        recipeReview.sync()
+        .then(() => {
+            done();
+        });
+      });
+
+      before((done) => {
+        favorite.sync()
+        .then(() => {
+            done();
+        });
+      });
+
+      before((done) => {
+        user.destroy({
+            where: {}
+        })
+        .then(() => {
+            done();
+        });
+    });
+
       it('user should sign up', (done) => {
         chai.request(server)
             .post('/api/users/signup')
