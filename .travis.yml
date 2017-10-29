@@ -5,7 +5,7 @@ node_js:
 services:
  - postgresql
 before_script:
- - psql -c "CREATE DATABASE recipesdb;" -U postgres
+ - psql -c "CREATE DATABASE travis_ci_test;" -U postgres
 cache:
   directories:
    - node_modules
