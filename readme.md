@@ -1,5 +1,4 @@
-https://travis-ci.org/kenware/more-recipes.svg?branch=testing
-!https://travis-ci.org/kenware/more-recipes.svg?branch=testing!:https://travis-ci.org/kenware/more-recipes
+{<img src="https://travis-ci.org/kenware/more-recipes.svg?branch=testing" alt="Build Status" />}[https://travis-ci.org/kenware/more-recipes]org/kenware/more-recipes
 # more-recipe
 More-recipe: Add your most favorite recipes and also
  view recipes from different background and culture around the world
