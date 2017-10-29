@@ -6,7 +6,7 @@ services:
  - postgresql
 before_script:
  - psql -c "CREATE DATABASE travis_ci_test;" -U postgres
- - sequelize db:migrate
+ - npm run migrate
 cache:
   directories:
    - node_modules
