@@ -8,7 +8,7 @@
     "b": "babel app.js -d app.js",
     "tes": "babel-node ./node_modules/.bin/_mocha",
     "test": "./node_modules/.bin/_mocha --compilers js:babel-register",
-    "coveralls": "istanbul cover ./node_modules/.bin/_mocha --compilers js:babel-register"
+    "coveralls": "istanbul cover _mocha"
   },
   "author": "",
   "license": "ISC",
