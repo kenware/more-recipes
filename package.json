@@ -8,8 +8,9 @@
     "build": "babel ./server -d ./dist",
     "b": "babel app.js -d app.js",
     "test": "mocha",
+    "cover": "istanbul cover ./node_modules/mocha/bin/_mocha",
     "moch": "istanbul cover ./node_modules/mocha/bin/_mocha --report lcovonly -- -R spec && cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js && rm -rf ./coverage",
-    "coverage": "./node_modules/istanbul/lib/cli cover _mocha test/test.js"
+    "coverage": "npm run cover -- --report lcovonly -- -R spec && cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js && rm -rf ./coverage"
   },
   "author": "",
   "license": "ISC",
