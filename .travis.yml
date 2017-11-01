@@ -6,3 +6,5 @@ services:
  - postgresql
 before_script:
  - psql -c "CREATE DATABASE recipesdb;" -U postgres
+after_services:
+ -npm run coveralls
