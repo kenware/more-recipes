@@ -1,5 +1,5 @@
-<<<<<<< HEAD
-https://coveralls.io/repos/github/kenware/more-recipes/badge.svg?branch=master(Coverage Status)!:https://coveralls.io/github/kenware/more-recipes?branch=master
+{<img src="https://coveralls.io/repos/github/kenware/more-recipes/badge.svg?branch=master" alt="Coverage Status" />}[https://coveralls.io/github/kenware/more-recipes?branch=master]
+
 [![Build Status](https://travis-ci.org/kenware/more-recipes.svg?branch=testing)](https://travis-ci.org/kenware/more-recipes)
 =======
 
