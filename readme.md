@@ -1,4 +1,4 @@
-{<img src="https://coveralls.io/repos/github/kenware/more-recipes/badge.svg?branch=master" alt="Coverage Status" />}[https://coveralls.io/github/kenware/more-recipes?branch=master]
+[![Coverage Status](https://coveralls.io/repos/github/kenware/more-recipes/badge.svg)](https://coveralls.io/github/kenware/more-recipes)
 
 [![Build Status](https://travis-ci.org/kenware/more-recipes.svg?branch=tester)](https://travis-ci.org/kenware/more-recipes)
 =======
