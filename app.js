@@ -21,7 +21,7 @@ app.use(bodyParser.json({ type: 'application/json'}));
 let route = require('./dist/route/route.js');
 
 app.use('/api', route);
-app.listen('3000', function(){
+app.listen('', function(){
 	console.log('server is running');
 });
 
