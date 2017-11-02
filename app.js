@@ -16,7 +16,7 @@ app.get('*', (req, res) => res.status(200).send({
   message: 'Welcome to the beginning of nothingness.'
 }));
 
-app.listen('8000', () => {
+app.listen(process.env.PORT || '5000', () => {
 	console.log('server is running');
 });
 
