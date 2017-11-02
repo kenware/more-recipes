@@ -21,9 +21,7 @@ app.use(bodyParser.json({ type: 'application/json'}));
 let route = require('./dist/route/route.js');
 
 app.use('/api', route);
-app.listen('', function(){
-	console.log('server is running');
-});
+
 
 app.get('*', (req, res) => res.status(200).send({
  // message: 'Welcome to the beginning of nothingness.',
