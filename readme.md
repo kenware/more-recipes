@@ -1,4 +1,3 @@
-{<img src="https://coveralls.io/repos/github/kenware/more-recipes/badge.svg?branch=testing" alt="Coverage Status" />}[https://coveralls.io/github/kenware/more-recipes?branch=testing]
 
 # more-recipe
 More-recipe: Add your most favorite recipes and also
