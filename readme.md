@@ -1,5 +1,9 @@
+<<<<<<< HEAD
 https://coveralls.io/repos/github/kenware/more-recipes/badge.svg?branch=master(Coverage Status)!:https://coveralls.io/github/kenware/more-recipes?branch=master
 [![Build Status](https://travis-ci.org/kenware/more-recipes.svg?branch=testing)](https://travis-ci.org/kenware/more-recipes)
+=======
+
+>>>>>>> 82c2f5c3eea64be513d8bcfdf9307c25802961ab
 # more-recipe
 More-recipe: Add your most favorite recipes and also
  view recipes from different background and culture around the world
