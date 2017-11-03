@@ -51,5 +51,8 @@
     "nodemon": "^1.12.1",
     "should": "^7.1.1",
     "supertest": "^1.1.0"
+  },
+  "engines": {
+    "node": "6.11.3"
   }
 }
