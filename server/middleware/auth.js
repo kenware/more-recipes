@@ -9,12 +9,12 @@ const secret = "keeny"
 const verifyToken = (req, res, next) => {
    const token = req.headers.authorization || req.headers['x-access-token'];
    if (!token) {
-     return res.status(401).send({ message: 'Unauthorized Access' });
+     return res.status(401).json('Unauthorized Access');
      }
 
    jwt.verify(token, secret, (err, result) => {
       if (err) {
-        return res.status(401).send({ message: 'Invalid Token' });
+        return res.status(401).json('your session expired, please login! again');
       }
     req.decoded = result;
     next();
@@ -22,36 +22,36 @@ const verifyToken = (req, res, next) => {
  }
 
 const validate = (req, res, next) => {
-   let email = req.body.email + "";
+   let email = req.body.email+"";
    if(!validator.isEmail(email)){
-       return res.status(401).send(res.json('Invalid email address'));
+       return res.status(401).json('Invalid email address');
    };
    if ((req.body.username) == null){
-       return res.status(401).send(res.json('username cannot be empty'));
+       return res.status(401).json('username cannot be empty');
    }
    if ((req.body.username) == ""){
-       return res.status(401).send(res.json('username cannot be empty'));
+       return res.status(401).json('username cannot be empty');
    }
    if ((req.body.username.length) <2){
-       return res.status(401).send(res.json('username must have minimum of two character'));
+       return res.status(401).json('username must have minimum of two character');
    }
     if ((req.body.password) == null){
-       return res.status(401).send(res.json('password cannot be empty'));
+       return res.status(401).json('password cannot be empty');
    }
    if ((req.body.password) == ""){
-       return res.status(401).send(res.json('password cannot be empty'));
+       return res.status(401).json('password cannot be empty');
    }
    if ((req.body.password.length) <2){
-       return res.status(401).send(res.json('password must have minimum of two character'));
+       return res.status(401).json('password must have minimum of two character');
    }
     if ((req.body.fullName) == null){
-       return res.status(401).send(res.json('name cannot be empty'));
+       return res.status(401).json('name cannot be empty');
    }
    if ((req.body.fullName) == ""){
-       return res.status(401).send(res.json('name cannot be empty'));
+       return res.status(401).json('name cannot be empty');
    }
    if ((req.body.fullName.length) <2){
-       return res.status(401).send(res.json('name must have minimum of two character'));
+       return res.status(401).json('name must have minimum of two character');
    }
    user.findOne({ where: {
       email: req.body.email    

@@ -33,14 +33,14 @@ const userSignIn = (req, res) => {
      bcrypt.compare(passwordy, user.password, function(err, match) {
       if (match){
       let token = jwt.sign({id : user.id,username:user.username }, secret, { expiresIn: 86400});
-      return res.json({message:'succesful', token : token});
+      return res.json({message:'succesful', token : token, username:user.username});
        
       }
        return res.json('incorrect password or email');
      });
      
    })
-   .catch(error => res.status(400).send(res.json("incorrect password or email")));
+   .catch(error => res.status(400).json("incorrect password or email"));
   
 
 };
@@ -65,10 +65,17 @@ const favoriteRecipes = (req, res) => {
     .catch(error => res.status(405).send(error));
 };
 
-
+const refresh = (req, res) => {
+    const id = req.decoded.id;
+    const username = req.decoded.username;
+    let token = jwt.sign({id : id,username: username }, secret, { expiresIn: 86400});
+    return res.json({message:'succesful', token : token, username:username});
+     
+};
 
 export default {
   createUser,
   userSignIn,
-  favoriteRecipes
+  favoriteRecipes,
+  refresh
 }

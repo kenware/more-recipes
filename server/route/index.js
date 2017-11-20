@@ -17,6 +17,8 @@ import favorite from '../controllers/favorite';
  router.post('/recipes',auth.verifyToken,recipe.createrecipe);
  //update recipes
  router.put('/recipes/:recipesId',auth.verifyToken,recipe.update);
+ //get a recipes
+ router.get('/recipes/:recipesId',recipe.getOneRecipe);
  //delete recipes
  router.delete('/recipes/:recipesId',auth.verifyToken,recipe.destroy);
  //get  recipes with most upvote
@@ -32,5 +34,7 @@ import favorite from '../controllers/favorite';
  
   //create favorite recipes
  router.post('/recipes/:favorite/favorite',auth.verifyToken,favorite.createfavorite);
+ //get new token on page refresh
+ router.get('/refresh',auth.verifyToken,User.refresh);
  
  export default router;

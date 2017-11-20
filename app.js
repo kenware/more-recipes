@@ -2,17 +2,21 @@ import express from 'express';
 const app = express();
 import bodyParser from 'body-parser';
 import morgan from 'morgan';
-
+const path = require('path');
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
+app.use(morgan(':remote-addr - :remote-user [:date[clf]] ":method :url HTTP/:http-version" :status :res[content-length] :response-time ms'));
+
 
 app.use(bodyParser.json({ type: 'application/json'}));
 import route from './server/route/index.js';
 const { Client } = require('pg');
-
+app.use('/api', route);
+app.use(express.static(path.join(__dirname, 'client/')));
+/*
 const client = new Client({
   connectionString: process.env.DATABASE_URL,
-  ssl: true,
+  //ssl: true,
 });
 
 client.connect();
@@ -24,14 +28,14 @@ client.query('SELECT table_schema,table_name FROM information_schema.tables;', (
   }
   client.end();
 });
-app.use('/api', route);
+*/
 
 
-app.get('*', (req, res) => res.status(200).send({
-  message: 'Welcome to the beginning of nothingness.'
-}));
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname+'/client/public/index.html'));
+});
 
-app.listen(process.env.PORT || '5000', () => {
+app.listen('5000', () => {
 	console.log('server is running');
 });
 export default app;

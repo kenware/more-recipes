@@ -23,8 +23,8 @@ const reviewR = (req, res) => {
         title: req.body.title,
         reviewedBy: req.decoded.username
       })
-      .then(recipeReview => res.status(201).send(recipeReview))
-        .catch(error => res.status(400).send(error));
+      .then(recipeReview => res.status(201).json(recipeReview))
+        .catch(error => res.status(407).send(error));
     })
     .catch(error => res.status(405).send(error));
 }

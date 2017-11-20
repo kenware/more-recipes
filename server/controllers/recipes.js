@@ -93,6 +93,26 @@ const downvote = (req, res) => {
     .catch(error => res.status(405).send(error));
 }
 
+const getOneRecipe = (req, res) => {
+  return recipesDetail
+    .findOne({
+        where: {
+          id: req.params.recipesId
+        },
+      })
+    .then(recipesDetail => {
+      if (!recipesDetail) {
+        return res.status(404).send({
+          message: 'recepes Not Found'
+        });
+      }
+
+      return res.status(200).json(recipesDetail);
+    })
+    .catch(error => res.status(405).send(error));
+}
+
+
 const destroy = (req, res) => {
   recipesDetail
     .findOne({
@@ -145,5 +165,6 @@ export default {
   list,
   upvote,
   downvote,
-  sortBy
+  sortBy,
+  getOneRecipe
 }
