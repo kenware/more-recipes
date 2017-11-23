@@ -15,6 +15,7 @@ class home extends Component {
       <div>
       <div className="container">
       <h1>redux is here</h1>
+      <h3>redux is here to make things easiesr here yho</h3>
       </div>
 
       </div>

@@ -13,9 +13,9 @@ app.use(bodyParser.json({ type: 'application/json'}));
 import route from './server/route/index.js';
 app.use('/api', route);
 // serve static file from react
-//app.use(express.static(path.join(__dirname, 'client/')));
-app.use(express.static(path.resolve(__dirname, '..', 'client')));
-app.use(express.static(path.resolve(__dirname, '..', 'node_modules')));
+app.use(express.static(path.join(__dirname, 'client/')));
+//app.use(express.static(path.resolve(__dirname, 'client')));
+//app.use(express.static(path.resolve(__dirname, 'node_modules')));
 //configure heroku and deploy
 const { Client } = require('pg');
 /*
@@ -36,9 +36,7 @@ client.query('SELECT table_schema,table_name FROM information_schema.tables;', (
 */
 
 
-app.get('*', function (request, response) {
-  response.sendFile(path.resolve(__dirname, '..', 'client', 'index.html'))
-});
+
 
 app.listen('5000', () => {
 	console.log('server is running');
