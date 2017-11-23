@@ -9,10 +9,15 @@ app.use(morgan(':remote-addr - :remote-user [:date[clf]] ":method :url HTTP/:htt
 
 
 app.use(bodyParser.json({ type: 'application/json'}));
+// enabling app to use route
 import route from './server/route/index.js';
-const { Client } = require('pg');
 app.use('/api', route);
-app.use(express.static(path.join(__dirname, 'client/')));
+// serve static file from react
+//app.use(express.static(path.join(__dirname, 'client/')));
+app.use(express.static(path.resolve(__dirname, '..', 'client')));
+app.use(express.static(path.resolve(__dirname, '..', 'node_modules')));
+//configure heroku and deploy
+const { Client } = require('pg');
 /*
 const client = new Client({
   connectionString: process.env.DATABASE_URL,
@@ -31,8 +36,8 @@ client.query('SELECT table_schema,table_name FROM information_schema.tables;', (
 */
 
 
-app.get('*', (req, res) => {
-  res.sendFile(path.join(__dirname+'/client/public/index.html'));
+app.get('*', function (request, response) {
+  response.sendFile(path.resolve(__dirname, '..', 'client', 'index.html'))
 });
 
 app.listen('5000', () => {
