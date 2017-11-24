@@ -15,10 +15,14 @@ module.exports = {
     rules: [{
       test: /\.jsx?$/,
       exclude: /(node_modules|bower_components)/,
+      use: [
+        {
       loader: 'babel-loader',
       options: {
-        presets: ['react', 'es2015']
+        presets: ['react', 'es2015','env']
       }
+    },
+    ],
     },
       {
         test: /\.scss$/,
