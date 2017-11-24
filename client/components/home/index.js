@@ -5,16 +5,20 @@
 //import Task from './Task';
 import React, { Component } from 'react'
 import './index.scss';
-
+import Header from '../App/common/header';
 
 
 class Home extends Component {
   render() {
     return (
-      <div >
-        Welcome to React!
+      <div className='Home'>
+       <Header.nav />
+       <div >
+          Welcome to React!
+       </div>
+       <Header.footer />
       </div>
-    )
+    );
   }
 }
 export default Home;

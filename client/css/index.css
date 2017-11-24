@@ -1,0 +1,11 @@
+#top-back{
+background-color:rgb(20,20,20);
+
+}
+#socialmedia {
+  height: 80px;
+  bottom: 0;
+  width: 100%;
+  font-size: 30px;
+  z-index: 1;
+}
