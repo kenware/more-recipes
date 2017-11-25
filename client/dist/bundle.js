@@ -13726,17 +13726,7 @@ var Home = function (_Component) {
   _createClass(Home, [{
     key: 'render',
     value: function render() {
-      return _react2.default.createElement(
-        'div',
-        { className: 'Home' },
-        _react2.default.createElement(_header2.default.nav, null),
-        _react2.default.createElement(
-          'div',
-          null,
-          'Welcome to React!'
-        ),
-        _react2.default.createElement(_header2.default.footer, null)
-      );
+      return _react2.default.createElement(_header2.default.nav, null);
     }
   }]);
 
@@ -13820,7 +13810,7 @@ var nav = function nav() {
             { 'class': 'nav-item active' },
             _react2.default.createElement(
               _reactRouter.Link,
-              { 'class': 'nav-link' },
+              { to: '/', 'class': 'nav-link' },
               'Home',
               _react2.default.createElement(
                 'span',
@@ -13834,7 +13824,7 @@ var nav = function nav() {
             { 'class': 'nav-item' },
             _react2.default.createElement(
               _reactRouter.Link,
-              { 'class': 'nav-link' },
+              { to: '/register', 'class': 'nav-link' },
               'SignUp'
             )
           ),
@@ -13843,7 +13833,7 @@ var nav = function nav() {
             { 'class': 'nav-item' },
             _react2.default.createElement(
               _reactRouter.Link,
-              { 'class': 'nav-link' },
+              { to: '/login', 'class': 'nav-link' },
               'Login '
             )
           ),
@@ -14017,7 +14007,7 @@ exports = module.exports = __webpack_require__(122)(undefined);
 
 
 // module
-exports.push([module.i, "#app {\n  margin-top: 40px;\n  margin-left: 200px; }\n", ""]);
+exports.push([module.i, "", ""]);
 
 // exports
 
