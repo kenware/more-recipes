@@ -1,0 +1,2 @@
+
+export const LOAD_RECIPE_SUCCESS = 'LOAD_RECIPE_SUCCESS';
