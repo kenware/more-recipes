@@ -1,7 +1,8 @@
+import 'babel-polyfill';
 import React from 'react';
-import ReactDOM from 'react-dom';
+import { render } from 'react-dom';
 import Home from './components/home/index';
-import '../node_modules/bootstrap/dist/css/bootstrap.min.css';  
+//import '../node_modules/bootstrap/dist/css/bootstrap.min.css';  
 import { Router, browserHistory } from 'react-router';  
 import routes from './routes';
 import configureStore from './redux/store';
@@ -13,8 +14,8 @@ store.dispatch(loadRecipes());
 //import {Provider} from 'react-redux';
 //import store from './redux/store';
 //const root = document.querySelector('#app')
-ReactDOM.render(
- <Provider store={store}>
+render(
+ <Provider store={ store }>
   <Router history={browserHistory} routes={routes} />
  </Provider>
 ,document.getElementById('root'));
