@@ -6323,6 +6323,8 @@ function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj;
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
@@ -6364,17 +6366,234 @@ var Home = function (_Component) {
         _react2.default.createElement(_header2.default.nav, null),
         _react2.default.createElement(
           'div',
-          { className: 'col-md-8' },
+          _defineProperty({ className: 'row', id: 'top-back' }, 'id', 'bg'),
+          _react2.default.createElement('div', { className: 'col-1' }),
           _react2.default.createElement(
-            'ul',
-            { className: 'list-group' },
-            recipes.map(function (recipe) {
-              return _react2.default.createElement(
-                'li',
-                { className: 'list-group-item', key: recipe.id },
-                recipe.title
-              );
-            })
+            'div',
+            { className: 'col-10' },
+            _react2.default.createElement('img', { src: 'image/ac.jpg', className: 'img-fluid rounded-circle', id: 'img' })
+          ),
+          _react2.default.createElement('div', { className: 'col-1' })
+        ),
+        _react2.default.createElement(
+          'div',
+          { className: 'container' },
+          _react2.default.createElement(
+            'div',
+            { className: 'row', id: 'bh' },
+            _react2.default.createElement(
+              'div',
+              { className: 'col-sm-12 col-md-4' },
+              _react2.default.createElement(
+                'div',
+                { className: 'card my-4' },
+                _react2.default.createElement(
+                  'h5',
+                  { className: 'card-header' },
+                  'Search recipes'
+                ),
+                _react2.default.createElement(
+                  'div',
+                  { className: 'card-body' },
+                  _react2.default.createElement(
+                    'div',
+                    { className: 'input-group' },
+                    _react2.default.createElement('input', { type: 'text', 'class': 'form-control', placeholder: 'enter keyword' }),
+                    _react2.default.createElement(
+                      'span',
+                      { className: 'input-group-btn' },
+                      _react2.default.createElement(
+                        'button',
+                        { className: 'btn btn-secondary', type: 'button' },
+                        'Search'
+                      )
+                    )
+                  )
+                )
+              )
+            ),
+            _react2.default.createElement(
+              'div',
+              { className: 'col-sm-12 col-md-4' },
+              _react2.default.createElement(
+                'div',
+                { className: 'card my-4' },
+                _react2.default.createElement(
+                  'div',
+                  { className: 'card-body' },
+                  _react2.default.createElement(
+                    'div',
+                    { className: 'row' },
+                    _react2.default.createElement(
+                      'ul',
+                      { className: 'list-unstyled mb-0' },
+                      _react2.default.createElement(
+                        'li',
+                        null,
+                        _react2.default.createElement(
+                          _reactRouter.Link,
+                          { to: '/' },
+                          'Home'
+                        )
+                      ),
+                      _react2.default.createElement(
+                        'li',
+                        null,
+                        _react2.default.createElement(
+                          'a',
+                          { href: 'home.html' },
+                          'Logout'
+                        )
+                      ),
+                      _react2.default.createElement(
+                        'li',
+                        null,
+                        _react2.default.createElement(
+                          'a',
+                          { href: 'profile.html' },
+                          'Profile'
+                        )
+                      ),
+                      _react2.default.createElement(
+                        'li',
+                        null,
+                        _react2.default.createElement(
+                          'a',
+                          { href: 'dashbored.html' },
+                          'Add or modify'
+                        )
+                      )
+                    )
+                  )
+                )
+              )
+            ),
+            _react2.default.createElement(
+              'div',
+              { className: 'col-sm-12 col-md-4' },
+              _react2.default.createElement(
+                'div',
+                { className: 'card my-4' },
+                _react2.default.createElement(
+                  'div',
+                  { className: 'card-body' },
+                  _react2.default.createElement(
+                    'div',
+                    { className: 'row' },
+                    _react2.default.createElement(
+                      'ul',
+                      { className: 'list-unstyled mb-0' },
+                      _react2.default.createElement(
+                        'li',
+                        null,
+                        _react2.default.createElement(
+                          _reactRouter.Link,
+                          { to: '/' },
+                          'Home'
+                        )
+                      ),
+                      _react2.default.createElement(
+                        'li',
+                        null,
+                        _react2.default.createElement(
+                          'a',
+                          { href: 'home.html' },
+                          'Logout'
+                        )
+                      ),
+                      _react2.default.createElement(
+                        'li',
+                        null,
+                        _react2.default.createElement(
+                          'a',
+                          { href: 'profile.html' },
+                          'Profile'
+                        )
+                      ),
+                      _react2.default.createElement(
+                        'li',
+                        null,
+                        _react2.default.createElement(
+                          'a',
+                          { href: 'dashbored.html' },
+                          'Add or modify'
+                        )
+                      )
+                    )
+                  )
+                )
+              )
+            )
+          ),
+          _react2.default.createElement(
+            'div',
+            { className: 'row', id: 'bg' },
+            _react2.default.createElement(
+              'div',
+              { className: 'col-sm-12' },
+              _react2.default.createElement(
+                'h2',
+                { className: 'my-4 text-center', align: 'center' },
+                _react2.default.createElement(
+                  'font',
+                  { color: 'black' },
+                  ' All Available Recipes'
+                )
+              )
+            )
+          ),
+          _react2.default.createElement(
+            'div',
+            { className: 'row' },
+            _react2.default.createElement('div', { className: 'col-md-12 col-lg-1', id: 'bg' }),
+            _react2.default.createElement(
+              'div',
+              { className: 'col-md-12 col-lg-10' },
+              _react2.default.createElement(
+                'div',
+                { className: 'row' },
+                recipes.map(function (recipe) {
+                  return _react2.default.createElement(
+                    'div',
+                    { key: recipe.id, 'class': 'col-sm-12 col-md-6 col-lg-4' },
+                    _react2.default.createElement(
+                      'div',
+                      { className: 'card border-secondary mb-2' },
+                      _react2.default.createElement(
+                        'div',
+                        { className: 'card-header' },
+                        _react2.default.createElement(
+                          'h3',
+                          { className: 'card-title' },
+                          _react2.default.createElement(
+                            'font',
+                            { color: 'lightseagreen' },
+                            recipe.title
+                          )
+                        )
+                      ),
+                      _react2.default.createElement(
+                        'div',
+                        { className: 'card-body' },
+                        _react2.default.createElement('img', { className: 'card-img-top rounded-circle', src: 'image/a.jpg',
+                          alt: 'Recipe Image' }),
+                        _react2.default.createElement('p', { className: 'card-text' }),
+                        _react2.default.createElement(
+                          'button',
+                          { className: 'btn btn-primary', style: { color: 'white' } },
+                          _react2.default.createElement(
+                            _reactRouter.Link,
+                            { to: '/detail/' + recipe.id, style: { color: 'white' } },
+                            'Read More \u2192'
+                          )
+                        )
+                      )
+                    )
+                  );
+                })
+              )
+            ),
+            _react2.default.createElement('div', { className: 'col-md-12 col-lg-1', id: 'bg' })
           )
         ),
         _react2.default.createElement(_header2.default.footer, null)
