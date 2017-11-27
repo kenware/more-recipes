@@ -9,7 +9,7 @@ import configureStore from './redux/store';
 import { Provider } from 'react-redux';
 import {loadRecipes} from './redux/Action/action';
 const store = configureStore();
-store.dispatch(loadRecipes());
+//store.dispatch(loadRecipes());
 //import 'react-boostrap'
 //import {Provider} from 'react-redux';
 //import store from './redux/store';

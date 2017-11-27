@@ -7,7 +7,7 @@
 //import 'bootstrap/dist/css/bootstrap-theme.css';
 import { PropTypes } from 'react';
 import { Link, IndexLink } from 'react-router';
-import  * as actions from '../../redux/Action/action';
+import  * as actions from '../../redux/Action/action.js';
 import React, { Component } from 'react'
 import './index.scss';
 import Header from '../App/common/header';
