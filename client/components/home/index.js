@@ -13,7 +13,8 @@ import './index.scss';
 import Header from '../App/common/header';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import RecipeList from './homeList';
+//import RecipeList from './homeList';
+
 class Home extends Component {
   componentWillMount() {
     if (this.props.recipes[0].id == '') {
@@ -22,14 +23,18 @@ class Home extends Component {
   }
   
   render() {
-    const recipes = this.props.recipes;
+    const recipes = this.props.recipes
     return (
       
       <div>
        <Header.nav />
        <div className="col-md-8">
         
-        <RecipeList recipes = {recipes} />
+       <ul className="list-group">
+       { recipes.map(recipe => 
+          <li className="list-group-item" key={recipe.id}>{recipe.title}</li>
+       )}
+     </ul>
       </div>
       
        <Header.footer />
@@ -37,9 +42,8 @@ class Home extends Component {
     );
   }
 }
-Home.propTypes = {
-  recipes: PropTypes.array.isRequired
-};
+
+
 
 function mapStateToProps(state, ownProps) {  
   if (state.recipes.length > 0) {

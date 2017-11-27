@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import './index.scss';
 import Header from '../App/common/header';
 
-class Home extends Component {
+class Detail extends Component {
   render() {
     return (
       <div>
@@ -15,4 +15,4 @@ class Home extends Component {
     );
   }
 }
-export default Home;
+export default Detail;

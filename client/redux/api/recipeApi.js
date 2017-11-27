@@ -6,6 +6,6 @@ class recipeApi {
       }).catch(error => {
         return error;
       });
-    }
+    };
 }
    export default recipeApi; 
