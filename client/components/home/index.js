@@ -6,14 +6,14 @@
 
 //import 'bootstrap/dist/css/bootstrap-theme.css';
 import { PropTypes } from 'react';
-import { Link, IndexLink } from 'react-router';
+import { Link  } from 'react-router-dom';
 import  * as actions from '../../redux/Action/action.js';
 import React, { Component } from 'react'
 import './index.scss';
 import Header from '../App/common/header';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-//import RecipeList from './homeList';
+//import './Navsticky.js';
 
 class Home extends Component {
   componentWillMount() {
@@ -27,16 +27,18 @@ class Home extends Component {
     return (
       
       <div>
-       <Header.nav />
+        <div>
+        </div>
        <div className="row" id="top-back" id="bg">
-       <div className="col-1">
+       <div className="col-3">
        </div>
-       <div className="col-10">  
+       <div className="col-6">  
          <img src="image/ac.jpg" className="img-fluid rounded-circle" id="img"/>
          </div>
-       <div className="col-1">
+       <div className="col-3">
        </div>
       </div>
+      <Header.nav />
     <div className="container">
       <div className="row" id="bh">
        <div className="col-sm-12 col-md-4">
@@ -121,10 +123,10 @@ class Home extends Component {
              <h3 className="card-title"><font color="lightseagreen">{ recipe.title }</font></h3>
              </div>
               <div className="card-body">
-               <img className="card-img-top rounded-circle" src="image/a.jpg"
+               <img className="card-img-top rounded-circle" src="image/ac.jpg"
                 alt="Recipe Image"/>
                <p className="card-text"></p>
-               <button className="btn btn-primary" style={{color: 'white'}}><Link to={`/detail/${recipe.id}`} style={{color: 'white'}}>Read More &rarr;</Link></button>
+               <Link to={`/recipes/${recipe.id}`} style={{color: 'white'}}><button className="btn btn-primary" style={{color: 'white'}}>Read More &rarr;</button></Link>
               </div>
             </div>
           </div> 

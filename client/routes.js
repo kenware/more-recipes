@@ -1,11 +1,20 @@
 import React from 'react';  
-import { Route, IndexRoute } from 'react-router';  
+//import { Route, IndexRoute } from 'react-router';  
 import Home from './components/home/index';  
 import Detail from './components/detail/index';  
+import { BrowserRouter as Router, Route, Switch, Redirect } from 'react-router-dom'
 
-export default ( 
-  <Route> 
-  <Route path="/" component={ Home } />
-  <Route path="/detail" component={ Detail } />
-  </Route>
-);
+const Routes = () =>(
+<Router>
+   <div className="primary-layout">
+    <main>
+      <Switch>
+        <Route path="/api/recipes" exact component={ Home } />
+        <Route path="/#/recipes/:recipeId"  component={ Detail } />
+        <Redirect to="/#/recipes" />
+      </Switch>
+    </main>
+  </div>  
+   </Router>
+)
+export default Routes
