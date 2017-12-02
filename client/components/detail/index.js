@@ -9,12 +9,13 @@ import { PropTypes } from 'react';
 import  * as actions from '../../redux/Action/action.js';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
+import wrapReactLifecycleMethodsWithTryCatch from 'react-component-errors';
 
+//@wrapReactLifecycleMethodsWithTryCatch 
 class Detail extends Component {
 
 componentWillMount() {
-  
-    
+ this.props.actions.loadRecipe(this.props.match.params.recipeId);
   }
 
   
@@ -53,14 +54,7 @@ const sendReview = (e)=>{
 
 const getVote = (vote) => {
     
-      fetch('/api/recipes/'+this.props.match.params.recipeId + '/' + vote, 
-      {
-        method:'PUT',
-        headers:{'authorization':token()}
-        
-      })
-      .then(res => res.json())
-      .then(vote => this.setState({ vote }));
+     this.props.actions.getVotes(this.props.match.params.recipeId,vote)
   }
 
 
@@ -78,13 +72,13 @@ const getVote = (vote) => {
           <h2 className="my-4" align="center">Details of a recipe
           </h2>
           <div className="card mb-4">
-            
+           
             <div className="card-body">
         <h2 className="card-title"> this.props.recipes.title  </h2>
         
               <p className="card-text text-justify">
-               content 
-              
+               content
+               {this.props.recipe.title}
            </p>            
           </div>
       <div className="card-footer text-muted">
@@ -94,11 +88,11 @@ const getVote = (vote) => {
           <button class="btn btn-secondary warning" id="up"
              onClick={ () => { getVote("upvote") } }>upvote</button>
           <input className="btn btn-secondary" type="button"
-             style={{background:'white',color:'black'}} value="2" id="upvote"/>
+             style={{background:'white',color:'black'}} value={this.props.recipe.upvote} id="upvote"/>
           <button className="btn btn-secondary" type="button" id="down"
              onClick={ () => { getVote("downvote") } }>downvote</button>
           <input className="btn btn-secondary" type="button" style={{background:'white',color:'black'}}
-           value='4'id="downvote"/>
+           value={this.props.recipe.downvote} id="downvote"/>
         
            
       </div>
@@ -191,19 +185,21 @@ const getVote = (vote) => {
     );
   }
 }
-function mapStateToProps(state, ownProps) {  
-  if (state.recipes.length > 0) {
-    state.recipes.map(recipe =>{
-        if(recipe.id == ownProps.params.recipeId){
-          return {
-            recipe: recipe
-          };
-        }
-    }) 
+function getRecipe(recipes, id){
+  let recipe = recipes.find(recipe=>recipe.id == id)
+  Object.assign({},recipe);
+  return recipe;
+}
+function mapStateToProps(state, ownProps) { 
+  //let idi = ownProps.params.recipeId 
+  if (state.recipes) {
+     return{
+       recipe:state.recipes
+     } 
    
   } else {
     return {
-      recipe: [{id: '', title: 'ken', breed: '', temperament: '', weight: '', hobbies: []}]
+      recipes: {id: '', title: 'ken', breed: ''}
     }
   }
 

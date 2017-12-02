@@ -21,6 +21,9 @@ class Home extends Component {
       this.props.actions.loadRecipes();
     }
   }
+  componentDidMount(){
+
+  }
   
   render() {
     const recipes = this.props.recipes
@@ -144,8 +147,6 @@ class Home extends Component {
     );
   }
 }
-
-
 
 function mapStateToProps(state, ownProps) {  
   if (state.recipes.length > 0) {

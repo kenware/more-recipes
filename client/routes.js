@@ -9,12 +9,26 @@ const Routes = () =>(
    <div className="primary-layout">
     <main>
       <Switch>
-        <Route path="/api/recipes" exact component={ Home } />
-        <Route path="/#/recipes/:recipeId"  component={ Detail } />
-        <Redirect to="/#/recipes" />
+        <Route exact path="/recipes"  component={ Home } />
+        <Route path="/recipes/:recipeId"  component={ Detail } />
+        <Redirect to="/recipes" />
       </Switch>
     </main>
   </div>  
    </Router>
 )
 export default Routes
+
+/*
+export default (
+  <Route path="/" component={App}>
+    <IndexRoute component={HomePage} />
+    
+    <Route path="/cats" component={CatsPage} onEnter={requireAuth}>
+      <Route path="/cats/new" component={NewCatPage} />
+      <Route path="/cats/:id" component={CatPage} />
+    </Route>
+    <Route path="/about" component={AboutPage} />
+  </Route>
+);
+*/
