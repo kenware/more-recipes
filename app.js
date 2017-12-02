@@ -6,8 +6,6 @@ const path = require('path');
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(morgan(':remote-addr - :remote-user [:date[clf]] ":method :url HTTP/:http-version" :status :res[content-length] :response-time ms'));
-import { BrowserRouter as Router, Route, Switch, Redirect } from 'react-router-dom'
-import React from 'react';
 
 app.use(bodyParser.json({ type: 'application/json'}));
 import route from './server/route/index.js';
@@ -35,14 +33,9 @@ client.query('SELECT table_schema,table_name FROM information_schema.tables;', (
   client.end();
 });
 */
-import routes from './client/routes'
 
 app.get('*', (req, res) => {
-  Router.run(routes, req.path, function (Handler, state) {
-  var element = React.createElement(Handler);
-  var html = React.renderToString(element);
-  res.render('main', { content: html });
-});
+  
 });
 app.listen('5000', () => {
 	console.log('server is running');

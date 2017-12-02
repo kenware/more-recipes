@@ -27742,8 +27742,6 @@ var _react = __webpack_require__(38);
 
 var _react2 = _interopRequireDefault(_react);
 
-__webpack_require__(489);
-
 var _header = __webpack_require__(137);
 
 var _header2 = _interopRequireDefault(_header);
@@ -27771,6 +27769,8 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+//import './detail.scss';
+
 //import token from '../auth.js';
 //import  up from 'react-icons/lib/fa/level-down';
 //import nave from '../app/nav';
@@ -34470,20 +34470,7 @@ module.exports = shouldUseNative() ? Object.assign : function (target, source) {
 
 
 /***/ }),
-/* 421 */
-/***/ (function(module, exports, __webpack_require__) {
-
-exports = module.exports = __webpack_require__(115)(undefined);
-// imports
-
-
-// module
-exports.push([module.i, "#vote-button #btn {\n  float: left; }\n", ""]);
-
-// exports
-
-
-/***/ }),
+/* 421 */,
 /* 422 */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -40113,32 +40100,7 @@ module.exports = function (css) {
 
 
 /***/ }),
-/* 489 */
-/***/ (function(module, exports, __webpack_require__) {
-
-// style-loader: Adds some css to the DOM by adding a <style> tag
-
-// load the styles
-var content = __webpack_require__(421);
-if(typeof content === 'string') content = [[module.i, content, '']];
-// add the styles to the DOM
-var update = __webpack_require__(128)(content, {});
-if(content.locals) module.exports = content.locals;
-// Hot Module Replacement
-if(false) {
-	// When the styles change, update the <style> tags
-	if(!content.locals) {
-		module.hot.accept("!!../../../node_modules/css-loader/index.js!../../../node_modules/sass-loader/lib/loader.js!./detail.scss", function() {
-			var newContent = require("!!../../../node_modules/css-loader/index.js!../../../node_modules/sass-loader/lib/loader.js!./detail.scss");
-			if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
-			update(newContent);
-		});
-	}
-	// When the module is disposed, remove the <style> tags
-	module.hot.dispose(function() { update(); });
-}
-
-/***/ }),
+/* 489 */,
 /* 490 */
 /***/ (function(module, exports, __webpack_require__) {
 

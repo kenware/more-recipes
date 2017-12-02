@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import './detail.scss';
+//import './detail.scss';
 import Header from '../App/common/header';
 import { Link } from 'react-router-dom';
 //import token from '../auth.js';
