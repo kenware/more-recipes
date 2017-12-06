@@ -21,14 +21,11 @@ export default Routes
 
 /*
 export default (
-  <Route path="/" component={App}>
-    <IndexRoute component={HomePage} />
-    
-    <Route path="/cats" component={CatsPage} onEnter={requireAuth}>
-      <Route path="/cats/new" component={NewCatPage} />
-      <Route path="/cats/:id" component={CatPage} />
+  <Route >
+    <Route path="/recipes" component={Home} >
+       <Route path="/recipes/:recipeId" component={Detail} />
     </Route>
-    <Route path="/about" component={AboutPage} />
+    
   </Route>
 );
 */

@@ -7,6 +7,7 @@
 //import 'bootstrap/dist/css/bootstrap-theme.css';
 import { PropTypes } from 'react';
 import { Link  } from 'react-router-dom';
+//import { Link } from 'react-router';
 import  * as actions from '../../redux/Action/action.js';
 import React, { Component } from 'react'
 import './index.scss';
@@ -22,7 +23,16 @@ class Home extends Component {
     }
   }
   componentDidMount(){
-
+    var navpos = $("#navbar").offset().top;
+    $(window).scroll(function(){
+      //echo("here");
+      var windpos = $(window).scrollTop();
+      if (windpos>navpos){
+        $("#navbar").addClass("fixed-top");
+      }else{
+        $("#navbar").removeClass("fixed-top");
+      }
+    })
   }
   
   render() {
@@ -32,13 +42,14 @@ class Home extends Component {
       <div>
         <div>
         </div>
-       <div className="row" id="top-back" id="bg">
-       <div className="col-3">
+       <div className="row bg-dark" id="top-back">
+       <div className="col-4">
+       
        </div>
        <div className="col-6">  
-         <img src="image/ac.jpg" className="img-fluid rounded-circle" id="img"/>
-         </div>
-       <div className="col-3">
+         <img src="image/g.jpg" className="img-fluid rounded-circle" id="img" class="img-fluid rounded-circle App-logo"/>
+       </div>
+       <div className="col-2">
        </div>
       </div>
       <Header.nav />
@@ -105,7 +116,7 @@ class Home extends Component {
     </div>
     </div>
       </div>
-      <div className="row" id="bg">
+      <div className="row bg" id="bg">
       <div className="col-sm-12">
       <h2 className="my-4 text-center" align="center">
        <font color="black"> All Available Recipes</font>
@@ -113,7 +124,7 @@ class Home extends Component {
       </div>
       </div>
       <div className="row">
-      <div className="col-md-12 col-lg-1" id="bg">
+      <div className="col-md-12 col-lg-1" id="bg" >
 
          </div>
         <div className="col-md-12 col-lg-10">
@@ -141,7 +152,8 @@ class Home extends Component {
         </div>
       </div>
     </div>
-      
+    <div className="child">
+     </div> 
        <Header.footer />
       </div>
     );

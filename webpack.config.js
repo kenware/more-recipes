@@ -1,11 +1,13 @@
 let path = require('path');
 let webpack = require('webpack');
 let LiveReloadPlugin = require('webpack-livereload-plugin');
+
+
 module.exports = {
   entry: './client/index.js',
   output: {
     filename: 'bundle.js',
-    path: path.resolve(__dirname, 'client/dist')
+    path: path.join(__dirname, 'client/dist')
   },
   context: __dirname,
   resolve: {
@@ -38,6 +40,17 @@ module.exports = {
           'style-loader',
           'css-loader',
           'sass-loader'
+        ]
+      },
+      {
+        test: /\.(jpe?g|png|jpg|gif|svg)$/,
+        use: [
+          {
+            loader: 'file-loader',
+            options: {
+              name: 'image/[name].[ext]'
+            }  
+          }
         ]
       }]
   },

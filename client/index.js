@@ -3,8 +3,8 @@ import React from 'react';
 import { render } from 'react-dom';
 import Home from './components/home/index';
 //import './components/home/Navsticky';
-import '../node_modules/bootstrap/dist/css/bootstrap.min.css';  
-//import { Router, browserHistory } from 'react-router';  
+//import '../node_modules/bootstrap/dist/css/bootstrap.min.css';  
+import { Router, browserHistory } from 'react-router';  
 import Routes from './routes';
 import configureStore from './redux/store';
 import { Provider } from 'react-redux';
@@ -17,6 +17,6 @@ const store = configureStore();
 //const root = document.querySelector('#app')
 render(
  <Provider store={ store }>
-  <Routes />
+  <Routes /*history={browserHistory}  routes={routes}*/ />
  </Provider>
 ,document.getElementById('root'));

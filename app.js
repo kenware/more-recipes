@@ -10,13 +10,14 @@ app.use(morgan(':remote-addr - :remote-user [:date[clf]] ":method :url HTTP/:htt
 app.use(bodyParser.json({ type: 'application/json'}));
 import route from './server/route/index.js';
 const { Client } = require('pg');
-app.use('/api', route);
-app.use(express.static(path.join(__dirname, 'client/')));
+app.use(express.static(path.join(__dirname, '/client')));
 const volleyball = require('volleyball');
 app.use(volleyball);
+app.use('/api', route);
+
 //serve up static files
-//app.use(express.static(path.resolve(__dirname, '..', 'client')));
-app.use(express.static(path.resolve(__dirname, '..', 'node_modules')));
+//app.use(express.static(path.resolve(__dirname, './', 'client')));
+//app.use(express.static(path.resolve(__dirname, './', 'node_modules')));
 /*
 const client = new Client({
   connectionString: process.env.DATABASE_URL,
@@ -35,9 +36,14 @@ client.query('SELECT table_schema,table_name FROM information_schema.tables;', (
 */
 
 app.get('*', (req, res) => {
-  
+  res.sendFile(path.join(__dirname, './client/index.html'));
 });
-app.listen('5000', () => {
-	console.log('server is running');
+app.listen('5000', (err) => {
+  console.log("server is running");
+  /*if (err) {
+    console.log(err);
+  } else {
+    open(`http://localhost:5000`);
+  }*/
 });
 export default app;

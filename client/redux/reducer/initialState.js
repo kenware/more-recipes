@@ -1,4 +1,6 @@
 export default {  
     recipes: [],
-    hobbies: []
+    hobbies: [],
+    message:[],
+    reviews: []
   }

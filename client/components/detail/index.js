@@ -1,7 +1,8 @@
 import React, { Component } from 'react'
-//import './detail.scss';
+import './detail.scss';
 import Header from '../App/common/header';
 import { Link } from 'react-router-dom';
+//import { Link } from 'react-router';
 //import token from '../auth.js';
 //import  up from 'react-icons/lib/fa/level-down';
 //import nave from '../app/nav';
@@ -13,15 +14,28 @@ import wrapReactLifecycleMethodsWithTryCatch from 'react-component-errors';
 
 //@wrapReactLifecycleMethodsWithTryCatch 
 class Detail extends Component {
+  constructor(props){
+    super(props);
+    this.state = {
+      cssupvote:"btn btn-info",
+      cssdownvote:"btn btn-info",
+      message:"",
+      voteAlert: "show",
+      reviewAlert: "show"
 
-componentWillMount() {
- this.props.actions.loadRecipe(this.props.match.params.recipeId);
+    }
+    this.onChange = this.onChange.bind(this);
+    this.onReview = this.onReview.bind(this);
+  
   }
 
-  
+componentWillMount() {
 
-render() {
- const onChange=(e) => {
+ this.props.actions.loadRecipe(this.props.match.params.recipeId);
+ this.props.actions.getAllReviews(this.props.match.params.recipeId);
+  }
+
+  onChange(e){
     const state = this.state;
     state[e.target.name] = e.target.value;
    this.setState(state);
@@ -30,33 +44,26 @@ render() {
 
 
 
-const sendReview = (e)=>{
+onReview(e) {
    e.preventDefault();
+   const id = this.props.match.params.recipeId;
    const message = this.state.message;
-   fetch('/api/recipes/' + this.props.match.params.recipeId + '/reviews', 
-      {
-        method:'POST',
-        headers:{'authorization':token(),'Content-Type':'application/json'},
-        body:JSON.stringify({title:'review',reviews:message})
-      })
-      .then(res => res.json())
-      .then(reviews => {
-        const reviewmessage = 'review submitted';
-        this.setState({ reviewmessage })}
-        );
-
+   const title = this.props.recipe.title;
+   this.props.actions.sendReview(id,title,message)
 }
 
 
-   
-
-
-
+render() {
 const getVote = (vote) => {
-    
+  if(vote == "upvote"){
+    const cssupvote = "btn btn-warning";
+    this.setState({cssupvote})
+  }else{
+    const cssdownvote = "btn btn-warning";
+    this.setState({cssdownvote})
+  } 
      this.props.actions.getVotes(this.props.match.params.recipeId,vote)
   }
-
 
 
 
@@ -85,18 +92,29 @@ const getVote = (vote) => {
               Posted on Sept 23, 2017 by
               <h4>@kelvin<up /></h4>
         
-          <button class="btn btn-secondary warning" id="up"
+          <button class={this.state.cssupvote} id="up"
              onClick={ () => { getVote("upvote") } }>upvote</button>
           <input className="btn btn-secondary" type="button"
              style={{background:'white',color:'black'}} value={this.props.recipe.upvote} id="upvote"/>
-          <button className="btn btn-secondary" type="button" id="down"
+          <button className={this.state.cssdownvote} type="button" id="down"
              onClick={ () => { getVote("downvote") } }>downvote</button>
           <input className="btn btn-secondary" type="button" style={{background:'white',color:'black'}}
            value={this.props.recipe.downvote} id="downvote"/>
-        
+           
            
       </div>
-          </div>
+      <div class="alert alert-warning alert-dismissible" role="alert" id={`vote`+this.props.message.vote}>
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                  <strong>
+                  <span><font color='red'> 
+                  {this.props.message.voteError }! <br/>Please
+                     <Link to="/login"> Login </Link>
+                  to be able to upvote/downvote
+                   </font>
+                   </span>
+                  </strong>
+              </div>
+    </div>
 
         </div>
     <div className="col-md-3">
@@ -152,32 +170,47 @@ const getVote = (vote) => {
           <div className="card my-4" >
             <h5 className="card-header">Provide reviews</h5>
             <div className="card-body" style={{background: 'azure'}}>
-                 <form >      
+              <form onSubmit={this.onReview}>      
                 <fieldset className="form-group">
                  <label for="message">Message</label>
                  <textarea className="form-control" id="message" name="message" rows="10" onChange ={this.onChange}> </textarea>
                  </fieldset>          
                  <button type="submit"  class="btn btn-default" style={{background:'lightseagreen', color:'white'}}>Review</button>
               </form>
-              <span><font color='green'> this.state.reviewmessage </font></span>
-              <span><font color='red'> this.state.recipe.message  </font></span>
+              <div class="alert alert-warning alert-dismissible" role="alert" id={`vote`+this.props.message.error}>
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                  <strong>
+                    <span><font color='red'> 
+                    {this.props.message.error }! <br/>Please
+                       <Link to="/login"> Login </Link>
+                    to be able to provide review
+                     </font>
+                     </span>
+                  </strong>
+              </div>
+              <div class="alert alert-warning alert-dismissible" role="alert" id={`vote`+this.props.message.success}>
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                  <strong>
+                    <span><font color='green'> {this.props.message.success} !</font></span>
+                    
+                  </strong>
+              </div>
             </div>
           </div>
-      <h1 className="my-4" align="center">1 Review</h1>
+      <h1 className="my-4" align="center">{this.props.reviews.length} Review</h1>
+      { this.props.reviews.map(review =>
       <div className="card my-4">           
             <div className="card-body">
-              <p className="card-text text-justify">Salad rice is very delicious and sumptous.I love
-        Salad rice and i can eat it for days.The recipes of salad rice include
-        rice, meat, vegetables, onions, pepper, okro,tomatoes,groundnut oil,vegetable oil
-        Preparation of salad involvesw the frying of tomatoes first with groundnut oil and 
-        adding various ingredient such as pepper, okro.
-        </p>
+              <p className="card-text text-justify">
+                    { review.reviews}
+             </p>
             </div>
       <div className="card-footer text-muted">
-              Reviewed on Sept 24, 2017 by
-              <a href="#">@kelvin</a>
+              Reviewed on: {review.createdAt}<br/>
+              By: {review.reviewedBy}
       </div>
           </div>
+        )}
         </div>
     </div>
      </div> 
@@ -194,7 +227,9 @@ function mapStateToProps(state, ownProps) {
   //let idi = ownProps.params.recipeId 
   if (state.recipes) {
      return{
-       recipe:state.recipes
+       recipe:state.recipes,
+       message:state.message,
+       reviews:state.reviews
      } 
    
   } else {

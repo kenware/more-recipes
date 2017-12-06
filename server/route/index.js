@@ -27,6 +27,8 @@ import favorite from '../controllers/favorite';
  router.get('/recipes',recipe.list);
  //review a recipes
  router.post('/recipes/:recipesId/reviews',auth.verifyToken,review.reviewR);
+ //review a recipes
+ router.get('/recipes/:recipesId/getreviews',review.getReview);
  //upvote a recipes
  router.put('/recipes/:recipesId/upvote',auth.verifyToken,recipe.upvote);
  //downvote a recipes
