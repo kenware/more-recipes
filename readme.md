@@ -21,10 +21,13 @@ More-recipe: Add your most favorite recipes and also
 # <a name="installations">Installations
 * Create a folder 
 * Enter the folder director from the command line and initialize git using "git init" command in the command line
-* clone the the repositary using "git clone https://github.com/kelvinsucess/more-recipe.git " command
+* clone the the repositary using "git clone https://github.com/kenware/more-recipes.git " command
+* type 'npm install' command on the root directory of the project to install dependency
+* npm start
 # <a name="test"></a>Test
 * After installations
-* Open index.html file and navigate through the attractive User interphases/ templates
+* navigate to 127.0.0.1://5000/recipes to view project live
+* You must have posgres installed
 # <a name="functions"></a>Functions
 * The project provides an interphase to Add a recipes
 * Modify a recipe
