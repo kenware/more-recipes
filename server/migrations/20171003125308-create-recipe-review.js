@@ -14,11 +14,17 @@ module.exports = {
       },
       reviews: {
         allowNull: false,
-        type: Sequelize.STRING
+        type: Sequelize.TEXT
       },
       reviewedBy: {
         allowNull: false,
         type: Sequelize.STRING
+      },
+      upvote: {
+        type: Sequelize.INTEGER
+      },
+      downvote: {
+        type: Sequelize.INTEGER
       },
       createdAt: {
         allowNull: false,

@@ -1,23 +1,26 @@
 
   
-  .App-logo {
+ @media only screen and (max-width: 35.9em) { 
+  .img-flud{
+       height: 15rem;
+       width: 15rem;
+   }
+  
+ 
+}
+@media only screen and (min-width: 35.9em) {
+  .img-flud{
+    height: 12rem;
+    width: 12rem;
+}
+
+}
+
+
+
+  #App-logo {
     animation: App-logo-spin infinite 20s linear;
-    height: 250px;
-  }
-  
-  .App-header {
-    background-color: #222;
-    height: 150px;
-    padding: 20px;
-    color:white;
-  }
-  
-  .App-title {
-    font-size: 1.5em;
-  }
-  
-  .App-intro {
-    font-size: large;
+   
   }
   
   @keyframes App-logo-spin {
@@ -29,9 +32,18 @@
   float: left;
   
   }
-#bg{
-  background-image: url("../../image/ac.jpg")
-}
+
 #bh{
   background-image: url("../../image/ad.jpg")
+}
+.carousel-img{
+  width:30rem;
+  height: 20rem
+}
+.bg-container{
+ background-color: aquamarine;
+  
+}
+#show{
+  display:none;
 }

@@ -1,10 +1,7 @@
 'use strict';
 module.exports = (sequelize, DataTypes) => {
   var favorite = sequelize.define('favorite', {
-    title: DataTypes.STRING,
-    content: DataTypes.STRING,
-    ingredients: DataTypes.STRING,
-    category: DataTypes.STRING
+    recipeId: DataTypes.INTEGER
   });
   favorite.associate = (models) => {
     favorite.belongsTo(models.user, {

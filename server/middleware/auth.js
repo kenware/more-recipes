@@ -1,6 +1,7 @@
 
 import model from '../models';
 const user = model.user;
+const recipesDetail =model.recipesDetail;
 import validator from 'validator';
 import jwt from 'jsonwebtoken';
 import bcrypt from 'bcryptjs';
@@ -78,9 +79,26 @@ const validate = (req, res, next) => {
    
  }
 
+ const verifyUpdate = (req, res,next) => {
+    return recipesDetail
+      .findOne({
+          where: {
+            UserId: req.decoded.id,
+            id: req.params.recipesId
+          },
+        })
+      .then(recipesDetail => {
+        if (!recipesDetail) {
+          return res.status(404).json('recepes Not Found');
+        }
+        next();
+    })
+}
+
 
 
  export default {
   verifyToken,
-  validate
+  validate,
+  verifyUpdate
  }

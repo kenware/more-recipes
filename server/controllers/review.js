@@ -46,7 +46,10 @@ const getReview = (req, res) => {
         .findAll({
           where:{
         recipesDetailId : req.params.recipesId
-          }
+          },
+          order:[
+            [`id`,`DESC`]
+            ]
       })
       .then(reviews => res.status(201).json(reviews))
         .catch(error => res.status(407).send(error));

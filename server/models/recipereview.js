@@ -6,12 +6,18 @@ module.exports = (sequelize, DataTypes) => {
       allowNull: false
     },
     reviews: { 
-      type: DataTypes.STRING,
+      type: DataTypes.TEXT,
       allowNull: false
     },
     reviewedBy: { 
       type: DataTypes.STRING,
       allowNull: false
+    },
+    upvote: {
+      type: DataTypes.INTEGER
+    },
+    downvote: {
+      type: DataTypes.INTEGER
     },
   });
   

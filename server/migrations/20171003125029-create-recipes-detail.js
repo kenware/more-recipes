@@ -14,17 +14,18 @@ module.exports = {
       },
       content: {
         allowNull: false,
-        type: Sequelize.STRING
+        type: Sequelize.TEXT
       },
       ingredients: {
         allowNull: false,
+        type: Sequelize.TEXT
+      },
+      image: {
         type: Sequelize.STRING
       },
       upvote: {type: Sequelize.INTEGER
               },
       downvote: {type: Sequelize.INTEGER
-              },
-      category: {type: Sequelize.STRING
               },
       createdAt: {
         allowNull: false,

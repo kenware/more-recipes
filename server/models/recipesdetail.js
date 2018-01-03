@@ -7,14 +7,14 @@ module.exports = (sequelize, DataTypes) => {
     },
 
     content: {
-      type: DataTypes.STRING,
+      type: DataTypes.TEXT,
       allowNull: false
     },
     ingredients: { 
-      type: DataTypes.STRING,
+      type: DataTypes.TEXT,
       allowNull: false
     },
-    category: {
+    image: {
       type: DataTypes.STRING
     },
     upvote: {

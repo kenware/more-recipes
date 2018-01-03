@@ -18,13 +18,8 @@ const  recipesDetail = model.recipesDetail;
       }
       return favorite
        .create({
-         title: recipesDetail.title,
-         content:     recipesDetail.content,
-         ingredients: recipesDetail.ingredients,
-         category :   recipesDetail.category,
-         UserId :     req.decoded.id,
-         upvote:      recipesDetail.upvote,
-          downvote:   recipesDetail.downvote,
+         recipeId: recipesDetail.id,
+         UserId :     req.decoded.id
        })
       .then(favorite => res.status(201).send(favorite))
       .catch(error => res.status(400).send(error));

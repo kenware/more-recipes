@@ -11,6 +11,7 @@ const recipesDetail = model.recipesDetail;
 const  recipeReview = model.recipeReview;
 const  favorite = model.favorite;
 chai.use(chaiHttp);
+import FormData from 'form-data';
 
 //existing user should not sign up
 describe('/POST api/users/signup', () => {
@@ -150,10 +151,14 @@ let id = 0;
 
  
   it('it should POST recipe', (done) => {
+      const payload = new FormData();
+      payload.append('content', "oil egg")
+      //payload.append('file', [])
         chai.request(server)
             .post('/api/recipes')
             .set('authorization', token)
-            .send({})    
+            .field('content', "oil egg")
+            .send(payload)    
             .end((err, res) => {
                 //res.should.have.status(201);
                 res.body.should.be.a('object');
@@ -164,16 +169,31 @@ let id = 0;
             });
   });
   it('it should POST recipe', (done) => {
-        chai.request(server)
+      let payload={title:'rice n okpa moimoi',
+      content:'oil egg',ingredients:'oil orobo'}
+     /*let payload = new FormData();
+     payload.append('title','rice n okpa moimoi')
+     payload.append('content', 'oil egg')
+     payload.append('ingredients','oil orobo')
+     payload.append('upvote', 0)
+     payload.append('downvote', 0)
+     //payload.append('file', '')
+     //payload.append('file', '')
+    let file = [];
+    for(let x=0;x<file.length;x++){
+    payload.append('file',file[x]);}
+    */
+     chai.request(server)
             .post('/api/recipes')
             .set('authorization', token)
-            .send({
-              title: "rice n okpa moimoi",
-              content : "oil egg",
-              ingredients: "oil orobo",
-              upvote: 0,
-              downvote: 0
-             })    
+            
+            .field('Content-Type', 'multipart/form-data')
+            .field('title','rice n okpa moimoi')
+            .field('content','oil egg')
+            .field('ingredients','oil orobo')
+          
+            .attach('file', "test/a.jpg")
+            .send(payload)    
             .end((err, res) => {
                 //res.should.have.status(201);
                 res.body.should.be.a('object');
@@ -191,12 +211,15 @@ let id = 0;
         chai.request(server)
             .put('/api/recipes/' + id)
             .set('authorization', token)
+            .field('Content-Type', 'multipart/form-data')
+            .field('title','rice n okpa moimoi')
+            .field('content','oil egg')
+            .field('ingredients','oil orobo')
+            .attach('file', "test/a.jpg")
             .send({
               title: "rice n okpa moimoi",
               content : "oil egg",
-              ingredients: "oil orobo",
-              upvote: 0,
-              downvote: 0
+              ingredients: "oil orobo"
              })    
             .end((err, res) => {
                 //res.should.have.status(201);
@@ -216,11 +239,10 @@ let id = 0;
             .end((err, res) => {
                 //res.should.have.status(201);
                 res.body.should.be.a('object');
-                res.body.should.have.property('title').eql("rice n okpa moimoi");
-                res.body.should.have.property('content').eql("oil egg");
-                res.body.should.have.property('ingredients').eql("oil orobo");
+                res.body.should.have.property('recipeId').eql(id);
+                
                 //res.body.should.have.property('token');
-                //res.body.should.be.eql(false);
+                res.status.should.be.eql(201);
                 done();
             });
     });
@@ -230,11 +252,9 @@ let id = 0;
             .set('authorization', token)    
             .end((err, res) => {
                 //res.should.have.status(201);
-                res.body.should.be.a('object');
-                res.body.should.have.property('title').eql("rice n okpa moimoi");
-                res.body.should.have.property('content').eql("oil egg");
-                res.body.should.have.property('ingredients').eql("oil orobo");
-                res.body.should.have.property('upvote').eql(1);
+                res.body.should.be.a('string');
+                res.body.should.be.eql('You cant upvote recipe you added');
+               
                 //res.body.should.have.property('token');
                 //res.body.should.be.eql(false);
                 done();
@@ -246,11 +266,9 @@ let id = 0;
             .set('authorization', token)    
             .end((err, res) => {
                 //res.should.have.status(201);
-                res.body.should.be.a('object');
-                res.body.should.have.property('title').eql("rice n okpa moimoi");
-                res.body.should.have.property('content').eql("oil egg");
-                res.body.should.have.property('ingredients').eql("oil orobo");
-                res.body.should.have.property('downvote').eql(1);
+                res.body.should.be.a('string');
+                res.body.should.be.eql('You cant downvote recipe you added');
+               
                 //res.body.should.have.property('token');
                 //res.body.should.be.eql(false);
                 done();

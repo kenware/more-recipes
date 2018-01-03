@@ -10,7 +10,8 @@ import { PropTypes } from 'react';
 import  * as actions from '../../redux/Action/action.js';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import wrapReactLifecycleMethodsWithTryCatch from 'react-component-errors';
+import Popover from 'react-simple-popover';
+import { Markup } from 'interweave';
 
 //@wrapReactLifecycleMethodsWithTryCatch 
 class Detail extends Component {
@@ -21,7 +22,10 @@ class Detail extends Component {
       cssdownvote:"btn btn-info",
       message:"",
       voteAlert: "show",
-      reviewAlert: "show"
+      reviewAlert: "show",
+      open:false,
+      reviews:null,
+      user:''
 
     }
     this.onChange = this.onChange.bind(this);
@@ -33,7 +37,39 @@ componentWillMount() {
 
  this.props.actions.loadRecipe(this.props.match.params.recipeId);
  this.props.actions.getAllReviews(this.props.match.params.recipeId);
+ this.props.actions.users();
+ 
   }
+  componentDidMount(){
+    var navpos = $("#navbar").offset().top;
+    $(window).scroll(function(){
+      //echo("here");
+      var windpos = $(window).scrollTop();
+      if (windpos>navpos){
+        $("#navbar").addClass("fixed-top");
+      }else{
+        $("#navbar").removeClass("fixed-top");
+      }
+    })
+  }
+
+  componentWillReceiveProps(newProps){
+    if(newProps.message.reviews!=this.state.reviews){
+      this.props.reviews.push(newProps.message.reviews);
+      this.setState({reviews:newProps.message.reviews})
+    }
+    if(newProps.users){
+      for (let user of newProps.users){
+        if(user.id==this.props.recipe.UserId){
+          this.setState({user:user})
+        }
+      }
+    }
+   
+
+
+  }
+
 
   onChange(e){
     const state = this.state;
@@ -52,6 +88,13 @@ onReview(e) {
    this.props.actions.sendReview(id,title,message)
 }
 
+handleClick(e) {
+  this.setState({open: !this.state.open});
+}
+
+handleClose(e) {
+  this.setState({open: false});
+}
 
 render() {
 const getVote = (vote) => {
@@ -68,117 +111,142 @@ const getVote = (vote) => {
 
 
     return (
-      <div className="detail">
-      <Header.nav />
-         <div className="container">
-            <h2 className="my-4" align="center"> <font color="red"> this.state.recipe.message 
-            </font></h2>
-           <div className="row">
-          <div className="col-md-9">
-
-          <h2 className="my-4" align="center">Details of a recipe
-          </h2>
-          <div className="card mb-4">
-           
-            <div className="card-body">
-        <h2 className="card-title"> this.props.recipes.title  </h2>
-        
-              <p className="card-text text-justify">
-               content
-               {this.props.recipe.title}
-           </p>            
-          </div>
-      <div className="card-footer text-muted">
-              Posted on Sept 23, 2017 by
-              <h4>@kelvin<up /></h4>
-        
-          <button class={this.state.cssupvote} id="up"
-             onClick={ () => { getVote("upvote") } }>upvote</button>
-          <input className="btn btn-secondary" type="button"
-             style={{background:'white',color:'black'}} value={this.props.recipe.upvote} id="upvote"/>
-          <button className={this.state.cssdownvote} type="button" id="down"
-             onClick={ () => { getVote("downvote") } }>downvote</button>
-          <input className="btn btn-secondary" type="button" style={{background:'white',color:'black'}}
-           value={this.props.recipe.downvote} id="downvote"/>
-           
-           
+  <div className="detail">
+    <div className="row bg-dark" id="top-back">
+      <div className="col-3">
+       {this.state.url}
       </div>
-      <div class="alert alert-warning alert-dismissible" role="alert" id={`vote`+this.props.message.vote}>
-                <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                  <strong>
-                  <span><font color='red'> 
-                  {this.props.message.voteError }! <br/>Please
-                     <Link to="/login"> Login </Link>
-                  to be able to upvote/downvote
-                   </font>
-                   </span>
-                  </strong>
-              </div>
+      <div className="col-7 tex-center"> 
+        <img src={`upload/${this.props.recipe.image}`} alt="New York" className="rounded-circle" id="App-logo" className="rounded-circle" style={{height:"17rem",width:"17rem"}} />
+      </div>
+      <div className="col-2">
+      </div>
     </div>
 
-        </div>
-    <div className="col-md-3">
-          <div className="card my-4">
-            <h5 className="card-header">Popular Links</h5>
+      <Header.nav />
+    <div className="container">
+      <div className="row">
+        <div className="col-md-8">
+          <h2 className="my-4 text-center text-primary">Details of a recipe
+          </h2>
+          <div className="card mb-4">
             <div className="card-body">
-              <div className="row">      
-                  <ul className="list-unstyled mb-0">
-                    <li>
-                      <a href="#">Salad recipes</a>
-                    </li>
-                    <li>
-                      <a href="#">Rice recipes</a>
-                    </li>
-                    <li>
-                      <a href="#">All recipes</a>
-                    </li>
-                     <li>
-                      <a href="#">Ogbono recipes</a>
-                    </li>
-                  </ul>               
-              </div>
+             <h2 className="card-title text-center text-secondary">{this.props.recipe.title}  </h2>
+              <p className="card-text text-justify">
+               <Markup content={this.props.recipe.content}
+                tagName="span" />
+               <h5>Ingredients</h5>
+               {this.props.recipe.ingredients}
+              </p>            
             </div>
-          </div>
-          <div className="card my-4">
-            <h5 className="card-header">Links</h5>
-            <div className="card-body">
-              <div className="row">      
-                  <ul className="list-unstyled mb-0">
-                    <li>
-                      <Link to={'/'}>Home</Link>
-                    </li>
-                    <li>
-                      <a href="home.html">Logout</a>
-                    </li>
-                    <li>
-                      <a href="profile.html">Profile</a>
-                    </li>
-                    <li>
-                      <a href="dashbored.html">Add or modify</a>
-                    </li>
-                    <li>
-                      <a href="dashbored.html">Delete recipes</a>
-                    </li>
-                  </ul>               
-              </div>
+            <div className="card-footer text-muted">
+              Posted on Sept 23, 2017 by
+              <h4 className="text-primary">{this.state.user.username}</h4>
+              <button type="button" className={this.state.cssupvote} id="up"
+              onClick={ () => { getVote("upvote") } }>upvote&nbsp;<i className="fa fa-thumbs-up" aria-hidden="true">&nbsp;{this.props.recipe.upvote}</i></button>&nbsp;
+ 
+              <button type="button" className={this.state.cssdownvote} type="button" id="down"
+              onClick={ () => { getVote("downvote") } }>downvote&nbsp;<i className="fa fa-thumbs-down" aria-hidden="true"></i>&nbsp;{this.props.recipe.downvote}</button>&nbsp;
+           
+          
             </div>
-          </div>
+               <div className="alert alert-warning alert-dismissible" role="alert" id={`vote`+this.props.message.vote}>
+                <button type="button" className="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                  <strong>
+                   <span>
+                    <font color='red'> 
+                     {this.props.message.voteError }! <br/>Please
+                     <Link to="/login"> Login </Link>
+                      to be able to upvote/downvote
+                    </font>
+                   </span>
+                  </strong>
+               </div>
          </div>
+
+        </div>
+        <div className="rightbar col-xs-3 col-sm-4 ">
+        <br/><br/>
+        <div className="dropdown card-title-btn-container ">
+          <h3 className="card-title">Links</h3>
+          <button className="btn btn-sm btn-subtle dropdown-toggle float-right" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><em className="fa fa-cog"></em></button>
+          <div className="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton"><a className="dropdown-item" href="#"><em className="fa fa-search mr-1"></em> More info</a>
+            <a className="dropdown-item" href="#"><em className="fa fa-thumb-tack mr-1"></em> Pin Window</a>
+            <a className="dropdown-item" href="#"><em className="fa fa-remove mr-1"></em> Close Window</a></div>
+        </div>
+        <h6 className="card-subtitle mb-2 text-muted">Important Links</h6>
+        <ul className="timeline">
+          <li>
+            <div className="timeline-badge"><em className="fa fa-camera"></em></div>
+            <div className="timeline-panel bg-light">
+              <div className="timeline-heading">
+                <h5 className="timeline-title mt-2">Frofile</h5>
+              </div>
+              <div className="timeline-body">
+              <ul>
+              <li><Link to="/profile">My profile</Link></li>
+              <li><h6><Link to="/profile">Change profile photo</Link></h6></li>
+              <li><h6><Link to="/profile">Edit profile</Link></h6></li>
+              <li><h6><Link to="/profile">Change Password</Link></h6></li>
+             </ul>
+              </div>
+            </div>
+          </li>
+          <li>
+            <div className="timeline-badge primary"><em className="fa fa-link"></em></div>
+            <div className="timeline-panel bg-light">
+              <div className="timeline-heading">
+                <h5 className="timeline-title mt-2">My Recipes</h5>
+              </div>
+              <div className="timeline-body">
+               <p>
+                <ul>
+                <li><Link to="/dashbord/add-recipe">Add new Recipe</Link></li>
+                <li><Link to="/dashbord/favorite">All recipes</Link></li>
+                <li><Link to="/dashbord/favorite">My favorite recipes</Link></li>
+                <li><Link to="/dashbord/add-recipe">Add new favorite recipe</Link></li>
+                <li><Link to="/dashbord/my-recipe">add favorite recipe from my recipes</Link></li>
+               </ul>
+              </p>
+              </div>
+             </div>
+           </li>           
+           <li>
+             <div className="timeline-badge"><em className="fa fa-paperclip"></em></div>
+             <div className="timeline-panel bg-light">
+               <div className="timeline-heading">
+                 <h5 className="timeline-title mt-2">Vote</h5>
+               </div>
+               <div className="timeline-body">
+                 <p>
+                 <ul>
+                <li><Link to="/dashbord/add-recipe">Most upvoted recipes</Link></li>
+                <li>Recently reviewed</li>
+                <li><Link to="/dashbord/favorite">Top reviewed recipes</Link></li>
+                <li>top upvoted reviews</li>
+               </ul>
+                 </p>
+               </div>
+             </div>
+           </li>              
+         </ul>
+       </div>
       </div>
       <div className="row">
-      <div className="col-md-9">
+      <div className="col-2"></div>
+      <div className="col-md-8 text-center">
           <div className="card my-4" >
             <h5 className="card-header">Provide reviews</h5>
-            <div className="card-body" style={{background: 'azure'}}>
+            <div className="card-body" style={{background: 'aliceblue'}}>
               <form onSubmit={this.onReview}>      
                 <fieldset className="form-group">
                  <label for="message">Message</label>
                  <textarea className="form-control" id="message" name="message" rows="10" onChange ={this.onChange}> </textarea>
                  </fieldset>          
-                 <button type="submit"  class="btn btn-default" style={{background:'lightseagreen', color:'white'}}>Review</button>
+                 <button type="submit"  className="btn btn-default" style={{background:'lightseagreen', color:'white'}}>Review</button>
               </form>
               <div class="alert alert-warning alert-dismissible" role="alert" id={`vote`+this.props.message.error}>
-                <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <button type="button" className="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                   <strong>
                     <span><font color='red'> 
                     {this.props.message.error }! <br/>Please
@@ -189,7 +257,7 @@ const getVote = (vote) => {
                   </strong>
               </div>
               <div class="alert alert-warning alert-dismissible" role="alert" id={`vote`+this.props.message.success}>
-                <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <button type="button" className="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                   <strong>
                     <span><font color='green'> {this.props.message.success} !</font></span>
                     
@@ -197,7 +265,7 @@ const getVote = (vote) => {
               </div>
             </div>
           </div>
-      <h1 className="my-4" align="center">{this.props.reviews.length} Review</h1>
+      <h1 className="my-4 text-center" >{this.props.reviews.length} Review</h1>
       { this.props.reviews.map(review =>
       <div className="card my-4">           
             <div className="card-body">
@@ -212,24 +280,22 @@ const getVote = (vote) => {
           </div>
         )}
         </div>
+        <div className="col-2"></div>
     </div>
      </div> 
     </div>
     );
   }
 }
-function getRecipe(recipes, id){
-  let recipe = recipes.find(recipe=>recipe.id == id)
-  Object.assign({},recipe);
-  return recipe;
-}
+
 function mapStateToProps(state, ownProps) { 
   //let idi = ownProps.params.recipeId 
   if (state.recipes) {
      return{
        recipe:state.recipes,
        message:state.message,
-       reviews:state.reviews
+       reviews:state.reviews,
+       users:state.users
      } 
    
   } else {

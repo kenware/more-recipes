@@ -1,6 +1,10 @@
 export default {  
     recipes: [],
-    hobbies: [],
     message:[],
-    reviews: []
+    reviews: [],
+    paginate:[],
+    appMessage:[],
+    favorite:[],
+    users:[],
+    user:[]
   }
