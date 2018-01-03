@@ -1,7 +1,7 @@
-{<img src="https://coveralls.io/repos/github/kenware/more-recipes/badge.svg?branch=tester" alt="Coverage Status" />}[https://coveralls.io/github/kenware/more-recipes?branch=tester]
+{<img src="https://coveralls.io/repos/github/kenware/more-recipes/badge.svg?branch=react-redux-app" alt="Coverage Status" />}[https://coveralls.io/github/kenware/more-recipes?branch=tester]
 
-
-[![Build Status](https://travis-ci.org/kenware/more-recipes.svg?branch=tester)](https://travis-ci.org/kenware/more-recipes)
+*Travis-cli badge
+[![Build Status](https://travis-ci.org/kenware/more-recipes.svg?branch=react-redux-app)](https://travis-ci.org/kenware/more-recipes)
 =======
 
 >>>>>>> 82c2f5c3eea64be513d8bcfdf9307c25802961ab
