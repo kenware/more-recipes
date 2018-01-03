@@ -38,7 +38,7 @@ client.query('SELECT table_schema,table_name FROM information_schema.tables;', (
 app.get('*', (req, res) => {
   res.sendFile(path.join(__dirname, './client/index.html'));
 });
-app.listen('5000'||process.env.PORT, (err) => {
+app.listen(process.env.PORT || '5000', (err) => {
   console.log("server is running");
   /*if (err) {
     console.log(err);

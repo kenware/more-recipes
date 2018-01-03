@@ -1,8 +1,8 @@
 * Coveralls
-<img src="https://coveralls.io/repos/github/kenware/more-recipes/badge.svg?branch=react-redux-app" alt="Coverage Status" />
+* <img src="https://coveralls.io/repos/github/kenware/more-recipes/badge.svg?branch=react-redux-app" alt="Coverage Status" />
 
 * Travis-cli badge
-[![Build Status](https://travis-ci.org/kenware/more-recipes.svg?branch=react-redux-app)](https://travis-ci.org/kenware/more-recipes)
+* [![Build Status](https://travis-ci.org/kenware/more-recipes.svg?branch=react-redux-app)](https://travis-ci.org/kenware/more-recipes)
 =======
 
 >>>>>>> 82c2f5c3eea64be513d8bcfdf9307c25802961ab
