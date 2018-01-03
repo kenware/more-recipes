@@ -19,7 +19,7 @@ app.use('/api', route);
 //app.use(express.static(path.resolve(__dirname, './', 'client')));
 //app.use(express.static(path.resolve(__dirname, './', 'node_modules')));
 
-const client = new Client({
+/*const client = new Client({
   connectionString: process.env.DATABASE_URL,
   //ssl: true,
 });
@@ -34,7 +34,7 @@ client.query('SELECT table_schema,table_name FROM information_schema.tables;', (
   client.end();
 });
 
-
+*/
 app.get('*', (req, res) => {
   res.sendFile(path.join(__dirname, './client/index.html'));
 });

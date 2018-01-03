@@ -84,7 +84,7 @@ const handleClose = (value) => {
        <div className="row">
         <nav className="sidebar navbar-dark bg-dark col-sm-1 icon-nav" id={this.state.firstSideBar}>
          <div>
-          <a className="btn" onClick={() => toggleSideBar("firstSideBar")} className="btn btn-default" id="menu-toggle"><em className="fa fa-bars"></em></a>
+          <button className="btn bg-dark" onClick={() => toggleSideBar("firstSideBar")}  id="menu-toggle"><em className="fa fa-bars bg-light"></em></button>
            <h1 className="site-title"><a href="index.html"><em className="fa fa-home"></em></a></h1>
            <ul className="nav sidebar-nav">
             <li className="nav-item">
@@ -176,7 +176,7 @@ const handleClose = (value) => {
                 onMouseEnter={()=>handleClick("favorite")}
               
                 >
-               <em className="fa fa-bar-chart"></em>
+               <em className="fa fa-bar-chart text-primary"></em>
               </a>
                <Popover              
                 placement='right'
@@ -215,23 +215,23 @@ const handleClose = (value) => {
                 </Popover>
                 </Link>
             </li>
-            
-            <li className="nav-item"><Link to="/recipes" className="nav-link"><em className="fa fa-hand-o-up"></em></Link></li>
-            
-          </ul>
-          <a href="#" className="logout-button">
-           <em className="fa fa-power-off"></em>
-          </a><br/>
-          <a className="btn btn-default" onClick={() => toggleSideBar("firstSideBar")}>
-            <h3 className="btn" id="first-sidebar" ><em className="fa fa-angle-double-right"></em></h3>
-          </a>
+            <li className="nav-item"><Link to="/recipes" className="nav-link">
+              <em className="fa fa-hand-o-up"></em></Link>
+            </li>
+            <li className="nav-item"> <button type="btn" onClick={this.signOut} className="btn bg-dark nav-link text-primary"><em className="fa fa-power-off"></em></button></li>
+            </ul>
+          
+           <br/>
+          <button className="btn bg-dark" onClick={() => toggleSideBar("firstSideBar")}>
+            <h3 className="btn" id="first-sidebar" ><em className="fa fa-angle-double-right bg-light"></em></h3>
+          </button>
          </div>
         </nav> 
         <nav id = {this.state.secondSideBar} className="sidebar navbar-dark bg-dark col-sm-3 word-nav">
          <div>
-          <a className="btn" onClick={() => toggleSideBar("secondSideBar")} className="btn btn-default" id="menu-toggle">
-           <em className="fa fa-bars"></em>
-          </a>
+          <button className="btn bt-default bg-dark" onClick={() => toggleSideBar("secondSideBar")} id="menu-toggle">
+           <em className="bg-light fa fa-bars"></em>
+          </button>
           <h3 className="site-title"><Link to="/recipes"><em className="fa fa-home"></em>More-recipes</Link></h3>
           <ul className="nav sidebar-nav">
             <li className="nav-item"><Link className="nav-link active" to="/dashbord"><em className="fa fa-dashboard"></em> Dashboard <span className="sr-only">(current)</span></Link></li>
@@ -250,9 +250,9 @@ const handleClose = (value) => {
             <li className="nav-item">
               <Link className="nav-link" to="/profile"><em className="fa fa-user-circle mr-1"></em>Profile</Link></li>
 
-            <li className="nav-item"> <a type="btn" onClick={this.signOut} className="nav-link text-primary"><em className="fa fa-power-off"></em> Signout</a></li>
+            <li className="nav-item"> <button type="btn" onClick={this.signOut} className="btn bg-dark nav-link text-primary"><em className="fa fa-power-off"></em> Signout</button></li>
           </ul>
-          <a className="btn" onClick={() => toggleSideBar("secondSideBar")} className="btn btn-default" id="menu-toggle"><em className="fa fa-bars"></em></a>
+          <button className="btn bg-dark" onClick={() => toggleSideBar("secondSideBar")} id="menu-toggle"><em className="fa fa-bars bg-light"></em></button>
          </div>
         </nav>
        <div className="col-sm-3 mock" id={this.state.secondSideBar}></div>
