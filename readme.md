@@ -1,6 +1,7 @@
-{<img src="https://coveralls.io/repos/github/kenware/more-recipes/badge.svg?branch=react-redux-app" alt="Coverage Status" />}[https://coveralls.io/github/kenware/more-recipes?branch=tester]
+* Coveralls
+<img src="https://coveralls.io/repos/github/kenware/more-recipes/badge.svg?branch=react-redux-app" alt="Coverage Status" />
 
-*Travis-cli badge
+* Travis-cli badge
 [![Build Status](https://travis-ci.org/kenware/more-recipes.svg?branch=react-redux-app)](https://travis-ci.org/kenware/more-recipes)
 =======
 
