@@ -185,7 +185,7 @@ export const login = (email,password) => {
     .then(res => res.json())
     .then(user => {
      if(typeof user == 'string'){
-        return dispatch(getMessage({message:user}));
+        return dispatch(getMessage({loginMessage:user}));
       }else{      
         localStorage.setItem('token',user.token);
         localStorage.setItem('username',user.username);
@@ -239,10 +239,10 @@ export const creatRecipe = (payload) => {
     .then(res => res.json())
     .then(recipes => {
       if(typeof recipes == 'string'){
-        return dispatch(getMessage({error:recipes,recipe:"show"}));
+        return dispatch(getMessage({createRecipeError:recipes,recipe:"show"}));
       }else{
        return dispatch(getMessage({
-         success:"recipe successfully created!",recipe:"show"
+         createRecipeSuccess:"recipe successfully created!",recipe:"show"
         }));
       }
     }
@@ -341,7 +341,11 @@ export const updateRecipe = (payload,id) => {
 }
 
 export const auth = () => { 
-  return function(dispatch) { 
+  return function(dispatch) {
+   if(token()==null){
+     dispatch(appMessage({appMessage:"Please login!"}));
+     return history.push("/login")
+   } 
    fetch('/api/refresh',{
     headers:{'authorization':token()}
    })

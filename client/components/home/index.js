@@ -245,8 +245,17 @@ search(e){
                 alt="Recipe Image"/></div>
                <p className="card-text">
                  <Markup content={ trim(`${recipe.content}`)+`...<a href="/recipes/${recipe.id}">continue</a>` }
-                 tagName="span" />
+                 tagName="span" /><br />
+                 <i className="fa fa-star text-info" aria-hidden="true"></i>
+                 <i className="fa fa-star text-info" aria-hidden="true"></i>
+                 <i className="fa fa-star text-info" aria-hidden="true"></i>
+                 <i className="fa fa-star text-info" aria-hidden="true"></i>
+                 <button className="btn btn-outline-success btn-sm">
+                 <i className="fa fa-thumbs-up text-primary" aria-hidden="true"></i>&nbsp;
+                 {recipe.upvote}
+                 </button>
                </p>
+               
               </div>
             </div>
           </div> 

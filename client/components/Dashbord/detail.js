@@ -18,16 +18,22 @@ class Detail extends Component {
   constructor(props){
     super(props);
     this.state = {
+      upvote:'upvote',
+      downvote:'downvote',
+      reviewButton:'review',
       cssupvote:"btn btn-info",
       cssdownvote:"btn btn-info",
+      inform:false,
       message:"",
-      voteAlert: "show",
-      reviewAlert: "show",
+      voteError: "show",
+      reviewError: "show",
+      reviewSuccess:"show",
       open:false,
       edit:"",
+      delete:'',
       user:'',
-      users:'',
-      reviews:null
+      users:''
+    
    
 
     }
@@ -48,10 +54,6 @@ componentWillMount() {
   }
 
   componentWillReceiveProps(newProps){
-    if(newProps.message.reviews!=this.state.reviews){
-      this.props.reviews.push(newProps.message.reviews);
-      this.setState({reviews:newProps.message.reviews})
-    }
     if(newProps.users){
       for (let user of newProps.users){
         if(user.id==this.props.recipe.UserId){
@@ -60,7 +62,17 @@ componentWillMount() {
       }
     }
    
-
+    if(newProps.message.voteError && this.state.inform){
+      this.setState({upvote:'upvote',downvote:'downvote',voteError:""})
+     
+     }
+      if(newProps.message.success && this.state.inform){
+      this.setState({reviewSuccess:"",reviewButton:'review'})
+      this.props.reviews.push(newProps.message.reviews);
+     }
+     if(newProps.message.error && this.state.inform){
+      this.setState({reviewError:"",reviewButton:'review'})
+      }
 
   }
 
@@ -76,6 +88,7 @@ componentWillMount() {
 
 onReview(e) {
    e.preventDefault();
+   this.setState({reviewButton:'sending...',inform:true})
    const id = this.props.match.params.recipeId;
    const message = this.state.message;
    const title = this.props.recipe.title;
@@ -95,15 +108,23 @@ const getVote = (vote) => {
   if(vote == "upvote"){
     const cssupvote = "btn btn-warning";
     this.setState({cssupvote})
+    this.setState({upvote:'upvoting...'})
   }else{
     const cssdownvote = "btn btn-warning";
     this.setState({cssdownvote})
+    this.setState({downvote:'downvoting...'})
   } 
      this.props.actions.getVotes(this.props.match.params.recipeId,vote)
+     this.setState({inform:true})
   }
 
  const deleteRecipe=(id)=>{
-    this.props.actions.deleteRecipe(id)
+  const userId=localStorage.getItem("id");  
+    if(userId==id){
+      this.props.actions.deleteRecipe(id)
+    }else{
+      this.setState({delete:"you cannot delete recipe you did not add"})
+    }
     }
  const editRecipe=(id)=>{
      const userId=localStorage.getItem("id");
@@ -142,10 +163,10 @@ const getVote = (vote) => {
      <div className="btn-toolbar" role="toolbar" aria-label="Toolbar with button groups">
        <div className="btn-group mr-2" role="group" aria-label="First group">
           <button type="button" className={this.state.cssupvote} id="up"
-             onClick={ () => { getVote("upvote") } }>upvote&nbsp;<i className="fa fa-thumbs-up" aria-hidden="true">&nbsp;{this.props.recipe.upvote}</i></button>&nbsp;
+             onClick={ () => { getVote("upvote") } }>{this.state.upvote}&nbsp;<i className="fa fa-thumbs-up" aria-hidden="true">&nbsp;{this.props.recipe.upvote}</i></button>&nbsp;
 
           <button type="button" className={this.state.cssdownvote} type="button" id="down"
-             onClick={ () => { getVote("downvote") } }>downvote&nbsp;<i className="fa fa-thumbs-down" aria-hidden="true"></i>&nbsp;{this.props.recipe.downvote}</button>&nbsp;
+             onClick={ () => { getVote("downvote") } }>{this.state.downvote}&nbsp;<i className="fa fa-thumbs-down" aria-hidden="true"></i>&nbsp;{this.props.recipe.downvote}</button>&nbsp;
         
           <button type="button" onClick={ () => { editRecipe(`${this.props.recipe.UserId}`) } } className="btn btn-info" id="up"
            ><i className="fa fa-pencil" aria-hidden="true"></i>&nbsp;Edit</button>&nbsp;
@@ -153,7 +174,7 @@ const getVote = (vote) => {
          
        </div>
       </div>
-      <div> <font color="red">  {this.state.edit}</font></div>
+      <div> <font color="red">  {this.state.edit} &nbsp;{this.state.delete}</font></div>
 <div className="modal fade" id="myModal">
   <div className="modal-dialog">
     <div className="modal-content">
@@ -174,7 +195,7 @@ const getVote = (vote) => {
     </div>
   </div>
 </div>
-      <div className="alert alert-warning alert-dismissible" role="alert" id={`vote`+this.props.message.voteError}>
+      <div className="alert alert-warning alert-dismissible" role="alert" id={this.state.voteError}>
                 <button type="button" className="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                   <strong>
                   <span><font color='red'> 
@@ -198,9 +219,9 @@ const getVote = (vote) => {
                  <label for="message">Message</label>
                  <textarea className="form-control" id="message" name="message" rows="10" onChange ={this.onChange}> </textarea>
                  </fieldset>          
-                 <button type="submit"  className="btn btn-default" style={{background:'lightseagreen', color:'white'}}>Review</button>
+                 <button type="submit"  className="btn btn-default" style={{background:'lightseagreen', color:'white'}}>{this.state.reviewButton}</button>
               </form>
-              <div class="alert alert-warning alert-dismissible" role="alert" id={`vote`+this.props.message.error}>
+              <div class="alert alert-warning alert-dismissible" role="alert" id={this.state.reviewError}>
                 <button type="button" className="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                   <strong>
                     <span><font color='red'> 
@@ -211,7 +232,7 @@ const getVote = (vote) => {
                      </span>
                   </strong>
               </div>
-              <div class="alert alert-warning alert-dismissible" role="alert" id={`vote`+this.props.message.success}>
+              <div class="alert alert-warning alert-dismissible" role="alert" id={this.state.reviewSuccess}>
                 <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                   <strong>
                     <span><font color='green'> {this.props.message.success} !</font></span>
@@ -220,7 +241,7 @@ const getVote = (vote) => {
               </div>
             </div>
           </div>
-      <h1 className="my-4" align="center">{this.props.reviews.length} Review</h1>
+      <h1 className="my-4" align="center">{this.props.reviews.length} Reviews</h1>
       { this.props.reviews.map(review =>
       <div className="card my-4">           
             <div className="card-body">

@@ -18,14 +18,18 @@ class Detail extends Component {
   constructor(props){
     super(props);
     this.state = {
+      upvote:'upvote',
+      downvote:'downvote',
+      reviewButton:'review',
       cssupvote:"btn btn-info",
       cssdownvote:"btn btn-info",
       message:"",
-      voteAlert: "show",
-      reviewAlert: "show",
+      inform:false,
+      reviewError:"inform",
+      reviewSuccess:"inform",
       open:false,
-      reviews:null,
-      user:''
+      user:'',
+      voteError:"inform"
 
     }
     this.onChange = this.onChange.bind(this);
@@ -54,10 +58,6 @@ componentWillMount() {
   }
 
   componentWillReceiveProps(newProps){
-    if(newProps.message.reviews!=this.state.reviews){
-      this.props.reviews.push(newProps.message.reviews);
-      this.setState({reviews:newProps.message.reviews})
-    }
     if(newProps.users){
       for (let user of newProps.users){
         if(user.id==this.props.recipe.UserId){
@@ -66,11 +66,17 @@ componentWillMount() {
       }
     }
    
-
-
+    if(newProps.message.voteError && this.state.inform){
+      this.setState({upvote:'upvote',downvote:'downvote',voteError:""})
+     
+     }else if(newProps.message.success && this.state.inform){
+      this.setState({reviewSuccess:"",reviewButton:'review'})
+      this.props.reviews.push(newProps.message.reviews);
+     }else if(newProps.message.error && this.state.inform){
+      this.setState({reviewError:"",reviewButton:'review'})
+      }
   }
-
-
+  
   onChange(e){
     const state = this.state;
     state[e.target.name] = e.target.value;
@@ -82,6 +88,7 @@ componentWillMount() {
 
 onReview(e) {
    e.preventDefault();
+   this.setState({reviewButton:'sending...',inform:true})
    const id = this.props.match.params.recipeId;
    const message = this.state.message;
    const title = this.props.recipe.title;
@@ -100,12 +107,14 @@ render() {
 const getVote = (vote) => {
   if(vote == "upvote"){
     const cssupvote = "btn btn-warning";
-    this.setState({cssupvote})
+    this.setState({cssupvote,upvote:'upvoting...'})
   }else{
     const cssdownvote = "btn btn-warning";
-    this.setState({cssdownvote})
+    this.setState({cssdownvote,downvote:'downvoting...'})
   } 
+     
      this.props.actions.getVotes(this.props.match.params.recipeId,vote)
+     this.setState({inform:true})
   }
 
 
@@ -143,21 +152,19 @@ const getVote = (vote) => {
               Posted on Sept 23, 2017 by
               <h4 className="text-primary">{this.state.user.username}</h4>
               <button type="button" className={this.state.cssupvote} id="up"
-              onClick={ () => { getVote("upvote") } }>upvote&nbsp;<i className="fa fa-thumbs-up" aria-hidden="true">&nbsp;{this.props.recipe.upvote}</i></button>&nbsp;
+              onClick={ () => { getVote("upvote") } }>{this.state.upvote}&nbsp;<i className="fa fa-thumbs-up" aria-hidden="true">&nbsp;{this.props.recipe.upvote}</i></button>&nbsp;
  
               <button type="button" className={this.state.cssdownvote} type="button" id="down"
-              onClick={ () => { getVote("downvote") } }>downvote&nbsp;<i className="fa fa-thumbs-down" aria-hidden="true"></i>&nbsp;{this.props.recipe.downvote}</button>&nbsp;
+              onClick={ () => { getVote("downvote") } }>{this.state.downvote}&nbsp;<i className="fa fa-thumbs-down" aria-hidden="true"></i>&nbsp;{this.props.recipe.downvote}</button>&nbsp;
            
           
             </div>
-               <div className="alert alert-warning alert-dismissible" role="alert" id={`vote`+this.props.message.vote}>
+               <div className="alert alert-warning alert-dismissible" role="alert" id={this.state.voteError}>
                 <button type="button" className="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                   <strong>
                    <span>
                     <font color='red'> 
-                     {this.props.message.voteError }! <br/>Please
-                     <Link to="/login"> Login </Link>
-                      to be able to upvote/downvote
+                     {this.props.message.voteError }!
                     </font>
                    </span>
                   </strong>
@@ -243,9 +250,9 @@ const getVote = (vote) => {
                  <label for="message">Message</label>
                  <textarea className="form-control" id="message" name="message" rows="10" onChange ={this.onChange}> </textarea>
                  </fieldset>          
-                 <button type="submit"  className="btn btn-default" style={{background:'lightseagreen', color:'white'}}>Review</button>
+                 <button type="submit"  className="btn btn-default" style={{background:'lightseagreen', color:'white'}}>{this.state.reviewButton}</button>
               </form>
-              <div class="alert alert-warning alert-dismissible" role="alert" id={`vote`+this.props.message.error}>
+              <div class="alert alert-warning alert-dismissible" role="alert" id={this.state.reviewError}>
                 <button type="button" className="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                   <strong>
                     <span><font color='red'> 
@@ -256,7 +263,7 @@ const getVote = (vote) => {
                      </span>
                   </strong>
               </div>
-              <div class="alert alert-warning alert-dismissible" role="alert" id={`vote`+this.props.message.success}>
+              <div class="alert alert-warning alert-dismissible" role="alert" id={this.state.reviewSuccess}>
                 <button type="button" className="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                   <strong>
                     <span><font color='green'> {this.props.message.success} !</font></span>
@@ -290,19 +297,13 @@ const getVote = (vote) => {
 
 function mapStateToProps(state, ownProps) { 
   //let idi = ownProps.params.recipeId 
-  if (state.recipes) {
+  
      return{
        recipe:state.recipes,
        message:state.message,
        reviews:state.reviews,
        users:state.users
      } 
-   
-  } else {
-    return {
-      recipes: {id: '', title: 'ken', breed: ''}
-    }
-  }
 
 }
 function mapDispatchToProps(dispatch) {

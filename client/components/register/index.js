@@ -30,7 +30,7 @@ this.state = {
 
 componentWillReceiveProps(newProps){
     if(newProps.message.regMessage){
-        this.setState({register:"Register"})
+        this.setState({register:"Register",inform:""})
     }
 }
 
@@ -97,7 +97,7 @@ render() {
                     <div className="card border-secondary">
                         <div className="card-header">
                             <h4 className="mb-0 my-2 text-center">Enter your Details to Sign Up</h4>
-                             <div className="alert alert-warning alert-dismissible" role="alert" id={"show"+this.props.message.regMessage }>
+                             <div className="alert alert-warning alert-dismissible" role="alert" id={this.state.inform }>
                                 <button type="button" className="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                                    <strong>{ this.props.message.regMessage }!</strong>
                                        </div>
@@ -107,7 +107,7 @@ render() {
                         <div className="card-body">
                             <form className="form" role="form" autocomplete="off" onSubmit={ this.register }>
                                 <div className="form-group">
-                                    <label for="inputName">{ this.props.message.message }FullName</label>
+                                    <label for="inputName">FullName</label>
                                     <input type="text" name="name" onChange={ this.onChange } className="form-control" id="inputName" placeholder="full name"/>
                                 </div>
                                 <div className="form-group">

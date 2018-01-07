@@ -8,6 +8,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { appMessage } from '../../redux/Action/action.js';
 
+
 class Login extends Component {
 constructor(props){
     super(props);
@@ -16,7 +17,8 @@ constructor(props){
     password:'',
     navigate: false,
     inform:'inform',
-    login:"Login"
+    login:"Login",
+
   }
   this.onChange = this.onChange.bind(this);
   this.login = this.login.bind(this);
@@ -24,8 +26,8 @@ constructor(props){
 }
 
 componentWillReceiveProps(newProps){
-    if(newProps.message.message){
-        this.setState({login:"Login"})
+    if(newProps.message.loginMessage){
+        this.setState({login:"Login",inform:""})
     }
 }
 
@@ -75,15 +77,15 @@ render() {
                         <button type="button" className="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                         <strong>{this.props.appMessage.appMessage}!</strong>
                             </div>
-                    <div className="alert alert-warning alert-dismissible" role="alert" id={`show` + this.props.message.message }>
+                    <div className="alert alert-warning alert-dismissible" role="alert" id={this.state.inform}>
                       <button type="button" className="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                      <strong>{this.props.message.message}!</strong>
+                      <strong>{this.props.message.loginMessage}!</strong>
                    </div>
                 </div>
                 <div className="card-body">
                     <form className="form" role="form" autocomplete="off" onSubmit={ this.login }>
                         <div className="form-group">
-                            <label for="inputEmail3">{this.props.message.message}Email</label>
+                            <label for="inputEmail3">Email</label>
                             <input type="email" onChange={ this.onChange } name="email" className="form-control" id="inputEmail3" placeholder="email@gmail.com" required=""/>
                         </div>
                         <div className="form-group">

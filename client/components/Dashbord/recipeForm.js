@@ -19,7 +19,10 @@ this.state = {
   val:"",
   ingredients:"",
   continue:false,
-  show:"show"
+  show:"show",
+  submit:'Submit',
+  inform:false,
+  message:'show'
   }
   this.onChange = this.onChange.bind(this);
   this.change = this.change.bind(this);
@@ -27,7 +30,11 @@ this.state = {
   this.onCancel = this.onCancel.bind(this)
 }
 
- 
+componentWillReceiveProps(newProps){
+  if((newProps.message.createRecipeSuccess || newProps.message.createRecipeError) && this.state.inform){
+    this.setState({submit:'Submit',message:''})
+  }
+}
 change(e){
   const state = this.state;
   state[e.target.name] = e.target.value;
@@ -43,7 +50,7 @@ change(e){
     }
     onSubmit(e){
       e.preventDefault();
-      this.setState({show:"show"})
+      this.setState({show:"show",inform:true})
        const description = this.state.value.toString('html');
       //this.setState({val:description})
        const title = this.state.title;
@@ -63,6 +70,7 @@ change(e){
         this.setState({continue:false})
         return this.setState({val:"Proper description of recipe greater than "+ description.length +" is required"})
        }
+       this.setState({submit:'Sending..'})
       for(let x=0;x<file.length;x++){
       payload.append('file',file[x]);}
        
@@ -150,8 +158,17 @@ render() {
                   />
                   
                  </fieldset>          
-                 <button type="submit" className="btn btn-warning">Submit</button>
-                 <font color="green"> {this.props.message.success} </font>
+                 <button type="submit" className="btn btn-warning">{this.state.submit}</button>
+                 <div className="alert alert-warning alert-dismissible" role="alert" id={this.state.message}>
+                   <button type="button" className="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                     <strong>
+                      <span><font color='red'> 
+                      {this.props.message.createRecipeError}&nbsp;
+                      {this.props.message.createRecipeSuccess}
+                       </font>
+                      </span>
+                    </strong>
+                   </div>
               </form>
             </div>
           </div>
