@@ -17,7 +17,7 @@ const recipesDetail = model.recipesDetail;
         username: req.body.username,
         password: hash,
         email :   req.body.email,
-        image:"pf.jpeg"
+        image:"http://res.cloudinary.com/more-recipes/image/upload/v1515499058/img-upload/file-1515499056661-user.png.png"
       })
       .then(user => res.status(201).send(user))
       .catch(error => res.status(400).send(error));
@@ -118,7 +118,7 @@ const userUpdate = (req, res) => {
       }
       
       if(req.files.length!==0){
-         filename = req.files[0].filename;
+         filename = req.files[0].url;
          
       }else{
          filename = req.body.filename;

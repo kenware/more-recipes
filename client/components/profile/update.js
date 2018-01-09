@@ -19,7 +19,9 @@ this.state = {
   photo:'',
   fullName:'',
   user:"",
-  update:"Update Profile"
+  update:"Update Profile",
+  inform:"show",
+  display:false
   }
   this.onChange = this.onChange.bind(this);
   this.onSubmit = this.onSubmit.bind(this)
@@ -35,10 +37,10 @@ componentWillReceiveProps(newProps){
       fullName:newProps.user.fullName
     })
   }
-  if(newProps.message.update ){
+  if(newProps.message.update && this.state.display){
     
         this.setState({
-          update:"Update Profile"
+          update:"Update Profile",inform:""
         })
       }
 }
@@ -61,7 +63,7 @@ onDrop(file) {
 
     onSubmit(e){
       e.preventDefault();
-      this.setState({update:"updating...."})
+      this.setState({update:"updating....",display:true})
        const fullName = this.state.fullName;
        const payload = new FormData();
        let file = this.state.file
@@ -117,14 +119,14 @@ render() {
                 <div className="col text-primary" style={{marginLeft:"1rem"}}>
                 <Dropzone
                onDrop={this.onDrop.bind(this)}
-               accept="image/jpeg,image/jpg,image/tiff,image/gif"
+               accept="image/*"
                ref="dropzone"     
                multiple={false}>
                Drag and drop or click to select an image to upload.
              </Dropzone>
               </div>
               <div className="col-4">
-                <img src={`upload/${this.state.photo}`} className="img-fluid" />
+                <img src={this.state.photo} className="img-fluid" />
                 {this.state.file.map(fil=><img src={fil.preview} className="img-fluid"/>)}
               </div>            
            </div>
@@ -132,7 +134,7 @@ render() {
 			   <button type="submit" onClick={this.onSubmit} className="btn btn-info">
 			   {this.state.update}</button>
 			  </form>
-        <div className="alert alert-warning alert-dismissible" role="alert" id={"show"+this.props.message.update }>
+        <div className="alert alert-warning alert-dismissible" role="alert" id={this.state.inform }>
           <button type="button" className="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
           <strong>{ this.props.message.update }!</strong>
         </div>

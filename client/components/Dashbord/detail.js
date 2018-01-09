@@ -121,14 +121,14 @@ const getVote = (vote) => {
  const deleteRecipe=(id)=>{
   const userId=localStorage.getItem("id");  
     if(userId==id){
-      this.props.actions.deleteRecipe(id)
+      this.props.actions.deleteRecipe(this.props.match.params.recipeId)
     }else{
       this.setState({delete:"you cannot delete recipe you did not add"})
     }
     }
  const editRecipe=(id)=>{
      const userId=localStorage.getItem("id");
-     console.log(userId)
+     //console.log(userId)
      if(userId==id){
        return history.push("/dashbord/edit/"+this.props.match.params.recipeId);
      }else{
@@ -148,6 +148,8 @@ const getVote = (vote) => {
            
             <div className="card-body">
         <h2 className="card-title">{this.props.recipe.title}  </h2>
+        <div className="text-center"><img className="img-fluid rounded-circle " src={this.props.recipe.image}
+                alt="Recipe Image"/></div>
         
               <p className="card-text text-justify">
                <h5>{this.state.check}content</h5>
@@ -188,7 +190,7 @@ const getVote = (vote) => {
       </div>
       <div className="modal-footer">
       <button className="delete btn btn-info" type="button" data-dismiss="modal"
-      onClick={ () => { deleteRecipe(`${this.props.recipe.id}`) } }><i className="fa fa-trash-o" aria-hidden="true"></i>&nbsp;Delete</button>
+      onClick={ () => { deleteRecipe(`${this.props.recipe.UserId}`)} }><i className="fa fa-trash-o" aria-hidden="true"></i>&nbsp;Delete</button>
         <button type="button" className="btn btn-info" data-dismiss="modal">Cancel</button>
       </div>
 

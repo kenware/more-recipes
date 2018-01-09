@@ -5,11 +5,19 @@ import auth from '../middleware/auth';
 import review from '../controllers/review';
 import favorite from '../controllers/favorite';
 import multer from 'multer';
-const storage = multer.diskStorage({
-    destination: function (req, file, cb) {
-      cb(null, 'client/upload')
-    },
-    filename: function (req, file, cb) {
+import cloudinary from 'cloudinary';
+import cloudinaryStorage from 'multer-storage-cloudinary';
+
+cloudinary.config({ 
+  cloud_name: 'more-recipes', 
+  api_key: '127278553653283', 
+  api_secret: 'XUBlnwpJ2dbSHJzPZu-vTWxgob4' 
+});
+
+const storage = cloudinaryStorage({
+  cloudinary: cloudinary,
+  folder: 'img-upload',
+  filename: function (req, file, cb) {
       cb(null, file.fieldname + '-' + Date.now()+'-'+file.originalname)
     }
   })

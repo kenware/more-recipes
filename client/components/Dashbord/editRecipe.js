@@ -21,7 +21,8 @@ this.state = {
   image:"",
   recipes:null,
   submit:"submit",
-  message:null
+  message:"show",
+  inform:false
   }
   this.onChange = this.onChange.bind(this);
   this.change = this.change.bind(this);
@@ -45,8 +46,8 @@ componentWillReceiveProps(newProps){
     })
   }
 
-  if(newProps.message!=this.state.message){
-    this.setState({submit:"submit",message:newProps.message})
+  if(newProps.message && this.state.inform){
+    this.setState({submit:"submit",message:""})
   }
 }
  
@@ -65,7 +66,7 @@ change(e){
     }
     onSubmit(e){
       e.preventDefault();
-      this.setState({submit:"submiting...."})
+      this.setState({submit:"submiting....",inform:true})
        const description = this.state.value.toString('html');
       //this.setState({val:description})
        const title = this.state.title;
@@ -135,7 +136,7 @@ render() {
               </Dropzone>
                </div>
                <div className="col">
-               <img src={`upload/${this.state.image}`} className="img-fluid"/>
+               <img src={this.state.image} className="img-fluid"/>
                  {file.map(fil=><img src={fil.preview} className="img-fluid"/>)}
                </div>            
             </div>
@@ -152,11 +153,12 @@ render() {
                   
                  </fieldset>          
                  <button type="submit" className="btn btn-warning">{this.state.submit}</button>
-                 <div className="alert alert-warning alert-dismissible" role="alert" id={`show`+this.props.message.updateSuccess}>
+                 <div className="alert alert-warning alert-dismissible" role="alert" id={this.state.message}>
                    <button type="button" className="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                     <strong>
                     <span><font color='red'> 
                     {this.props.message.updateSuccess }!
+                    &nbsp;  {this.props.message.updateMessage }!
                     </font>
                     </span>
                     </strong>

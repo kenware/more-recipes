@@ -136,7 +136,7 @@ render() {
                  <label for="image">Photo of recipe(Optional)</label>
                  <Dropzone
                 onDrop={this.onDrop.bind(this)}
-                accept="image/jpeg,image/jpg,image/tiff,image/gif"
+                accept="image/jpeg,image/jpg,image/tiff,image/gif,image/png"
                 ref="dropzone"     
                 multiple={false}>
                 Drag and drop or click to select an image to upload.

@@ -235,13 +235,13 @@ search(e){
         <br/>
          <div className="row">
           { recipes.map(recipe =>
-           <div key={recipe.id}   className="col-sm-12 col-md-6 col-lg-4 ">
-            <div className="card border-secondary mb-2 justify" style={{height:"25rem"}}>
+           <div key={recipe.id}   className="col-sm-12 col-md-6 col-lg-4 " >
+            <div className="card border-secondary mb-2 justify" style={{height:"25rem"}} >
              <div className="card-header">
              <h6 className="card-title"><font color="lightseagreen"><Link to={`/recipes/${recipe.id}`}>{ recipe.title }</Link></font></h6>
              </div>
               <div className="card-body justify">
-               <div className="text-center"><img className="img-flud rounded-circle card-img-top " src={`upload/${recipe.image}`}
+               <div className="text-center"><img className="img-flud rounded-circle card-img-top " src={recipe.image}
                 alt="Recipe Image"/></div>
                <p className="card-text">
                  <Markup content={ trim(`${recipe.content}`)+`...<a href="/recipes/${recipe.id}">continue</a>` }

@@ -4,11 +4,12 @@ const  recipesDetail = model.recipesDetail;
 const Op = Sequelize.Op;
   const createrecipe = (req, res) => {
     let filename;
+    console.log(req.files)
     if(req.files.length!==0){
-       filename = req.files[0].filename;
+       filename = req.files[0].url;
        
     }else{
-       filename = "g.jpg";
+       filename = "http://res.cloudinary.com/more-recipes/image/upload/v1515492424/img-upload/file-1515492419229-images4.jpg.jpg";
        
     }
       
@@ -47,7 +48,7 @@ const update = (req, res) => {
       }
       
       if(req.files.length!==0){
-         filename = req.files[0].filename;
+         filename = req.files[0].url;
          
       }else{
          filename = req.body.filename;

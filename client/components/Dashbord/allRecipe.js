@@ -66,7 +66,7 @@ render() {
                                {recipe.createdAt}
                             </div>
                             <div className="col-2 date">
-                            <a href={`upload/${recipe.image}`}><img className="img-fluid rounded-circle card-img-top " src={`upload/${recipe.image}`}/></a>
+                            <a href={recipe.image}><img className="img-fluid rounded-circle card-img-top " src={recipe.image}/></a>
                             </div>
                             <div className="col-5">
                                 <h4><Link to={`/dashbord/detail/${recipe.id}`}>recipe.title</Link></h4>

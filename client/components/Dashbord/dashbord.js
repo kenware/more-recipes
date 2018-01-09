@@ -264,7 +264,7 @@ const handleClose = (value) => {
            </div>
            <div className="dropdown user-dropdown col-md-6 col-lg-4 text-center text-md-right">
              <a className="btn btn-stripped dropdown-toggle" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-              <div><img src={"upload/"+this.props.user.image} alt="profile photo" className="rounded-circle float-left profile-photo" width="50" height="auto"/></div>
+              <div><img src={this.props.user.image} alt="profile photo" className="rounded-circle float-left profile-photo" width="50" height="auto"/></div>
              
                   
                   <h6 className="text-muted">{this.props.user.username}</h6>

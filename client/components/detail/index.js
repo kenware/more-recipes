@@ -126,7 +126,7 @@ const getVote = (vote) => {
        {this.state.url}
       </div>
       <div className="col-7 tex-center"> 
-        <img src={`upload/${this.props.recipe.image}`} alt="New York" className="rounded-circle" id="App-logo" className="rounded-circle" style={{height:"17rem",width:"17rem"}} />
+        <img src={this.props.recipe.image} alt="New York" className="rounded-circle" id="App-logo" className="rounded-circle" style={{height:"17rem",width:"17rem"}} />
       </div>
       <div className="col-2">
       </div>
