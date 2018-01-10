@@ -209,9 +209,9 @@ search(e){
       <h2 className="my-4 text-center" align="center">
         All Available Recipes
       </h2>
-      <div className="content emptyPhoto" id={this.state.show}>
+      <div className="content landing" id={this.state.show}>
         <div className="modal-header">
-          <h4 className="modal-title text-danger">warning</h4>
+          <h4 className="modal-title text-danger">Info!</h4>
           <button type="button" onClick={ this.onCancel }  className="close" data-dismiss="modal">&times;</button>
         </div>
         <div className="modal-body text-danger text-center">

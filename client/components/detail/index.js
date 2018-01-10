@@ -131,8 +131,9 @@ const getVote = (vote) => {
       <div className="col-2">
       </div>
     </div>
-
+  
       <Header.nav />
+ 
     <div className="container">
       <div className="row">
         <div className="col-md-8">
@@ -172,7 +173,7 @@ const getVote = (vote) => {
          </div>
 
         </div>
-        <div className="rightbar col-xs-3 col-sm-4 ">
+        <div className="rightbar col-xs-4 col-sm-4 ">
         <br/><br/>
         <div className="dropdown card-title-btn-container ">
           <h3 className="card-title">Links</h3>
