@@ -7,7 +7,7 @@ app.use(bodyparser.json({type:'application/json'}));
 app.use(bodyparser.urlencoded({extended:true}));
 app.use(morgan('default'));
 import route from './serve/route';
-app.use('api',route);
+app.use('/api',route);
 app.get('*',(req,res)=>{
    return res.json({message:'welcome to home page'});
 })
