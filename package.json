@@ -8,6 +8,7 @@
     "build-production": "webpack -p",
     "build-development": "webpack -w",
     "gulp": "gulp watch",
+    "swipe": "nodemon ./swipe.js --exec babel-node",
     "start": "nodemon ./app.js --exec babel-node",
     "coverage": "babel-node ./node_modules/istanbul/lib/cli cover node_modules/mocha/bin/_mocha",
     "test": "npm run coverage -- --report lcovonly -- -R spec && cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js && rm -rf ./coverage",
