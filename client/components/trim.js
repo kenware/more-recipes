@@ -1,17 +1,17 @@
 
 const trim=(n)=>{
-    if (n.length<100) {
-          return n
+    if (n.length<60) {
+          return n;
       }
     let result = "";
       for (let i of n){
        
         result = result + i;
        
-       if(result.length==100) {
+       if(result.length==60) {
            break;
           }
    }
-   return result;
+   return result+'...';
   }
 export default trim;

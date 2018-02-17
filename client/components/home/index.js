@@ -13,6 +13,11 @@ import { Markup } from 'interweave';
 import trim from '../trim';
 import ReactEasyPaginate from 'react-easy-paginate';
 import 'react-easy-paginate/dist/react-easy-paginate.css';
+import SmoothScrollbar from 'smooth-scrollbar';
+//import OverscrollPlugin from 'smooth-scrollbar/plugins/overflow';
+import Scrollbar from 'react-smooth-scrollbar';
+ 
+//SmoothScrollbar.use(OverscrollPlugin);
 const limit = 6;
 class Home extends Component {
   constructor(props){
@@ -47,9 +52,9 @@ componentDidMount(){
 		//echo("here");
 		var windpos = $(window).scrollTop();
 		if (windpos>navpos){
-			$("#navbar").addClass("fixed-top");
+			$("#navbar").addclassName("fixed-top");
 		}else{
-			$("#navbar").removeClass("fixed-top");
+			$("#navbar").removeclassName("fixed-top");
 		}
 	})
  }
@@ -82,60 +87,78 @@ search(e){
     const recipes = this.props.paginate;
   
         return (
-     
-      <div>
         
-        <div>
-        </div>
-       <div className="row bg-dark" id="top-back">
-       <div className="col-3">
+          <div>
        {this.state.url}
-       </div>
-       <div className="col-7"> 
-         
 <div id="demo" className="carousel slide" data-ride="carousel">
+
   <ul className="carousel-indicators">
     <li data-target="#demo" data-slide-to="0" className="active"></li>
     <li data-target="#demo" data-slide-to="1"></li>
     <li data-target="#demo" data-slide-to="2"></li>
   </ul>
   <div className="carousel-inner">
-    <div className="carousel-item active">
+    <div className="carousel-item active" style={{backgroundImage: "url(image/l.jpg)"}}>
+    <div className="mbr-overlay">
+                </div>
+    
     <img src="image/l.png" alt="New York" className="carousel-img"/>
-      <div className="carousel-caption">
-        <h3>Get Your Favorite Recipe</h3>
-        <p>Get recipes that improve your health</p>
+     
+      <div className="carousel-caption justify">
+       <div className="col-12">
+        <h3 className="lead display-3">Get Your Favorite Recipe</h3>
+        <p className="lead display-5">Get recipes that improve your health</p>
+        </div>
       </div>   
     </div>
-    <div className="carousel-item">
+  <div className="carousel-item" style={{backgroundImage: "url(image/m.jpg)"}}>
+    <div className="mbr-overlay">
+                </div>
+    <img src="image/m.jpg" alt="New York" className="carousel-img"/>
+    
+    
+      <div className="carousel-caption justify">
+      <div className="col-12">
+        <h3 className="lead display-3">Health is wealth</h3>
+        <p className="lead display-5">This is amazing!</p>
+        </div>
+      </div>   
+    </div>
+    <div className="carousel-item"style={{backgroundImage: "url(images/v.jpg)"}}>
+    <div className="mbr-overlay">
+                </div>
     <img src="image/v.jpg" alt="New York" className="carousel-img"/>
-      <div className="carousel-caption">
-        <h3>Health is wealth</h3>
-        <p>This is amazing!</p>
-      </div>   
-    </div>
-    <div className="carousel-item">
-      <img src="image/m.jpg" alt="New York" className="carousel-img"/>
-      <div className="carousel-caption">
-        <h3>I love Peach</h3>
-        <p>We love the Big Apple!</p>
+     
+    
+      <div className="carousel-caption text-center justify">
+      <div className="col-12">
+        <h3 className="lead display-3">I love Peach</h3>
+        <p className="lead display-5">We love the Big Apple!</p>
+        </div>
       </div>   
     </div>
   </div>
-  <a className="carousel-control-prev" href="#demo" data-slide="prev">
-    <span className="carousel-control-prev-icon bg-dark"></span>
+  <a className="carousel-control carousel-control-prev"
+   role="button" href="#demo" data-slide="prev">
+    <span className="fa fa-arrow-circle-left fa-5x"></span>
   </a>
   <a className="carousel-control-next" href="#demo" data-slide="next">
-    <span className="carousel-control-next-icon"></span>
+    <span className="fa fa-arrow-circle-right fa-5x"></span>
   </a>
 </div>
-       </div>
-       <div className="col-2">
-       </div>
-      </div>
-      <Header.nav />
-  <div className="bg-container">
+<Header.nav /> 
     <div className="container bg-container">
+     <div className="row">
+     { this.props.recipes.map(recipe =>
+      <div key={recipe.id} className="col-2 p-3 bg-light" style={{background:''}}>
+      <div id='upvoted-image'>
+        <img src={recipe.image} className="rounded-circle img-fluid h-100 w-100"/>
+      
+      </div>
+      <p className="justify display-5 text-center">{recipe.title}</p>
+      </div>
+     )}
+     </div>
       <div className="row" id="">
        <div className="col-sm-12 col-md-4">
         <div className="card my-4">
@@ -227,25 +250,23 @@ search(e){
       </div>
       </div>
       </div>
-      <div className="row" id="bg">
-      <div className="col-md-12 col-md-1" >
-
-         </div>
-        <div className="col-md-12 col-md-10">
+      <div className="row">
         <br/>
-         <div className="row">
           { recipes.map(recipe =>
-           <div key={recipe.id}   className="col-sm-12 col-md-6 col-lg-4 " >
-            <div className="card border-secondary mb-2 justify" style={{height:"25rem"}} >
+           <div key={recipe.id}  id="bg-al" className="card p-4 col-12 col-sm-6 col-md-6 col-lg-4 col-xl-3 " >
+             <div className="card-wrapper">
              <div className="card-header">
-             <h6 className="card-title"><font color="lightseagreen"><Link to={`/recipes/${recipe.id}`}>{ recipe.title }</Link></font></h6>
+             
              </div>
-              <div className="card-body justify">
-               <div className="text-center"><img className="img-flud rounded-circle card-img-top " src={recipe.image}
-                alt="Recipe Image"/></div>
-               <p className="card-text">
-                 <Markup content={ trim(`${recipe.content}`)+`...<a href="/recipes/${recipe.id}">continue</a>` }
-                 tagName="span" /><br />
+               <div className="ml-auto card-img" style={{height:"14rem"}}><img className="img-fluid rounded card-img-top h-100 w-100" src={recipe.image}
+                alt="Recipe Image"/>
+               </div>
+                <h4 className="card-title card-title pb-3 mbr-fonts-style display-7 text-sucess" >
+             <Link to={`/recipes/${recipe.id}`}>{ recipe.title }</Link></h4>
+             <div className="card-box justify">
+                <p className="justify mbr-text mbr-fonts-style display-7">
+                 <Markup content={ trim(`${recipe.content}`)} />
+                </p>
                  <i className="fa fa-star text-info" aria-hidden="true"></i>
                  <i className="fa fa-star text-info" aria-hidden="true"></i>
                  <i className="fa fa-star text-info" aria-hidden="true"></i>
@@ -254,35 +275,38 @@ search(e){
                  <i className="fa fa-thumbs-up text-primary" aria-hidden="true"></i>&nbsp;
                  {recipe.upvote}
                  </button>
-               </p>
+              
                
               </div>
-            </div>
+     
+
+                </div>
           </div> 
+          
           )}
+              <div className="card p-3 col-12 col-md-6 col-lg-4">
+
+            </div>
          </div>
          <br/>
-        </div>
-        <div className="col-md-12 col-md-1" id="bg">
-
-        </div>
-      </div>
       <div className="row">
     <div id="react-easy-paginate" className="col-12 text-center">
           <ReactEasyPaginate pageTotal={Math.floor(this.props.recipes.length / limit) + 1} rangeDisplayed={4} onClick={this.handlePaginateClick} />
         </div>
      </div> 
-    </div>
-   </div> 
+    </div> 
        <Header.footer />
-      </div>
+    </div>   
+      
     );
   }
 }
 
 function mapStateToProps(state, ownProps) { 
+ const upvoted = state.recipes.sort((a,b)=>b.upvote-a.upvote);
+ const recipes = upvoted.slice(0,6);
     return {
-      recipes: state.recipes,
+      recipes: recipes,
       paginate:state.paginate
     };
   

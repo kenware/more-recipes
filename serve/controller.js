@@ -5,11 +5,11 @@ class controller{
    }
    getRecipe(req,res){
     //this.recipe.push(req.body);
-    return res.recipe;
+    return res.json(recipe);
    }
 addRecipe(req,res){
- this.recipe.push(req.body);
- return res.body;
+ recipe.push(req.body);
+ return res.json(recipe);
 }
  }
  export default controller;

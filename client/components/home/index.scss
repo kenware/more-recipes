@@ -1,24 +1,32 @@
 
   
 @media screen and (min-width: 30.9em) and (max-width: 35.9em) { 
-  .img-flud{
+  .ig-flud{
        height: 14rem;
        width: 14rem;
    }
+   #upvoted-image{
+     height: 4rem;
+   }
 }
 @media screen and (min-width: 10.9em) and (max-width: 30.9em) { 
-    .img-flud{
+    .ig-flud{
          height: 6rem;
          width: 3rem;
      } 
+     #upvoted-image{
+      height: 2rem;
+    }
  
 }
 @media only screen and (min-width: 35.9em) {
-  .img-flud{
+  .ig-flud{
     height: 8rem;
     width: 8rem;
 }
-
+#upvoted-image{
+  height: 8rem;
+}
 }
 
 
@@ -42,8 +50,8 @@
   background-image: url("../../image/ad.jpg")
 }
 .carousel-img{
-  width:30rem;
-  height: 20rem
+  height: 70vh;
+  width:100%;
 }
 .bg-container{
  background-color: aquamarine;
@@ -68,4 +76,30 @@
   overflow-y: auto; /* Scrollable contents if viewport is shorter than content. */
   
   background-color: rgb(12, 9, 9);
+}
+#bg-all{
+  background-color: gray;
+}
+.mbr-overlay {
+  background-color: #000;
+  bottom: 0;
+  left: 0;
+  opacity: .5;
+  position: absolute;
+  right: 0;
+  top: 0;
+  z-index: 10;
+}
+.carousel-caption{
+  top: 50%;
+  right: 0;
+  bottom: auto;
+  left: 0;
+  display: flex;
+  align-items: center;
+  -webkit-transform: translateY(-50%);
+  transform: translateY(-50%);
+}
+.container{
+  min-width: 100%;
 }
