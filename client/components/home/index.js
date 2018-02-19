@@ -13,9 +13,7 @@ import { Markup } from 'interweave';
 import trim from '../trim';
 import ReactEasyPaginate from 'react-easy-paginate';
 import 'react-easy-paginate/dist/react-easy-paginate.css';
-import SmoothScrollbar from 'smooth-scrollbar';
-//import OverscrollPlugin from 'smooth-scrollbar/plugins/overflow';
-import Scrollbar from 'react-smooth-scrollbar';
+import ParallaxComponent from 'react-parallax-component';
  
 //SmoothScrollbar.use(OverscrollPlugin);
 const limit = 6;
@@ -46,18 +44,19 @@ class Home extends Component {
     
 
   }
-componentDidMount(){
-  var navpos = $("#navbar").offset().top;
-	$(window).scroll(function(){
-		//echo("here");
-		var windpos = $(window).scrollTop();
-		if (windpos>navpos){
-			$("#navbar").addclassName("fixed-top");
-		}else{
-			$("#navbar").removeclassName("fixed-top");
-		}
-	})
- }
+  componentDidMount(){
+    var navpos = $("#navbar").offset().top;
+    $(window).scroll(function(){
+      //echo("here");
+      var windpos = $(window).scrollTop();
+      if (windpos>navpos){
+        $("#navbar").addClass("fixed-top");
+      }else{
+        $("#navbar").removeClass("fixed-top");
+      }
+    })
+  }
+
 
 handlePaginateClick(pageNum) {
   this.props.actions.loadRecipes('id','DESC',pageNum,limit,'none');
@@ -87,7 +86,7 @@ search(e){
     const recipes = this.props.paginate;
   
         return (
-        
+         
           <div>
        {this.state.url}
 <div id="demo" className="carousel slide" data-ride="carousel">
@@ -98,11 +97,11 @@ search(e){
     <li data-target="#demo" data-slide-to="2"></li>
   </ul>
   <div className="carousel-inner">
-    <div className="carousel-item active" style={{backgroundImage: "url(image/l.jpg)"}}>
+    <div className="carousel-item one active">
     <div className="mbr-overlay">
                 </div>
     
-    <img src="image/l.png" alt="New York" className="carousel-img"/>
+    
      
       <div className="carousel-caption justify">
        <div className="col-12">
@@ -111,10 +110,10 @@ search(e){
         </div>
       </div>   
     </div>
-  <div className="carousel-item" style={{backgroundImage: "url(image/m.jpg)"}}>
+  <div className="carousel-item two" >
     <div className="mbr-overlay">
                 </div>
-    <img src="image/m.jpg" alt="New York" className="carousel-img"/>
+    
     
     
       <div className="carousel-caption justify">
@@ -124,10 +123,10 @@ search(e){
         </div>
       </div>   
     </div>
-    <div className="carousel-item"style={{backgroundImage: "url(images/v.jpg)"}}>
+    <div className="carousel-item three">
     <div className="mbr-overlay">
                 </div>
-    <img src="image/v.jpg" alt="New York" className="carousel-img"/>
+
      
     
       <div className="carousel-caption text-center justify">
@@ -146,19 +145,60 @@ search(e){
     <span className="fa fa-arrow-circle-right fa-5x"></span>
   </a>
 </div>
-<Header.nav /> 
+<div>
+
+  <Header.nav /> 
+
+
+</div>
     <div className="container bg-container">
      <div className="row">
+      <h3 className="text-center col-12">Most Loved Recipes</h3>
      { this.props.recipes.map(recipe =>
-      <div key={recipe.id} className="col-2 p-3 bg-light" style={{background:''}}>
-      <div id='upvoted-image'>
-        <img src={recipe.image} className="rounded-circle img-fluid h-100 w-100"/>
+      <div key={recipe.id} className="col-6 col-sm-4 col-lg-2 p-2 bg-light" style={{background:''}}>
+      <div className="card rounded ">
+      
+      <div className="card-header card-img text-center">
+  
+        <img src={recipe.image} id='upvoted-image' className="rounded-circle img-fluid"/>
+       </div>
+       
+       <div className="card-body">
+       <p className="justify display-5 text-center"><Markup content={ trim.trim2(`${recipe.title.toUpperCase()}`)} /></p>
+         <div className="row text-center">
+         <div className="col-12">
+         <i className="fa fa-star text-info" aria-hidden="true"></i>
+        
+         <i className="fa fa-star text-info" aria-hidden="true"></i>
+        
+         <i className="fa fa-star text-info" aria-hidden="true"></i>
+        
+         <i className="fa fa-heart text-warning p-3 display-5"></i>
+         </div>
+         <div className="col-12">
+         <button className="btn btn-outline-success btn-sm">
+         <i className="fa fa-thumbs-up text-primary" aria-hidden="true"></i>&nbsp;
+         {recipe.upvote}
+         </button>
+         <button className="btn btn-outline-success btn-sm">
+         <i className="fa fa-thumbs-down text-primary" aria-hidden="true"></i>&nbsp;
+         {recipe.downvote}
+         </button>
+         </div>
+         </div>
+       
+       </div>
+      </div>
       
       </div>
-      <p className="justify display-5 text-center">{recipe.title}</p>
-      </div>
      )}
+     
      </div>
+     <div className="row">
+
+  
+
+</div>
       <div className="row" id="">
        <div className="col-sm-12 col-md-4">
         <div className="card my-4">
@@ -255,17 +295,19 @@ search(e){
           { recipes.map(recipe =>
            <div key={recipe.id}  id="bg-al" className="card p-4 col-12 col-sm-6 col-md-6 col-lg-4 col-xl-3 " >
              <div className="card-wrapper">
-             <div className="card-header">
              
-             </div>
+             
+            
                <div className="ml-auto card-img" style={{height:"14rem"}}><img className="img-fluid rounded card-img-top h-100 w-100" src={recipe.image}
                 alt="Recipe Image"/>
                </div>
-                <h4 className="card-title card-title pb-3 mbr-fonts-style display-7 text-sucess" >
+               <div className="card-header">
+                <h4 className="lead card-title text-sucess" >
              <Link to={`/recipes/${recipe.id}`}>{ recipe.title }</Link></h4>
+             </div>
              <div className="card-box justify">
                 <p className="justify mbr-text mbr-fonts-style display-7">
-                 <Markup content={ trim(`${recipe.content}`)} />
+                 <Markup content={ trim.trim(`${recipe.content}`)} />
                 </p>
                  <i className="fa fa-star text-info" aria-hidden="true"></i>
                  <i className="fa fa-star text-info" aria-hidden="true"></i>
@@ -284,20 +326,94 @@ search(e){
           </div> 
           
           )}
-              <div className="card p-3 col-12 col-md-6 col-lg-4">
-
-            </div>
-         </div>
-         <br/>
-      <div className="row">
+             
+         </div><br/>
+         <div className="row">
     <div id="react-easy-paginate" className="col-12 text-center">
           <ReactEasyPaginate pageTotal={Math.floor(this.props.recipes.length / limit) + 1} rangeDisplayed={4} onClick={this.handlePaginateClick} />
         </div>
-     </div> 
+     </div>
+         <div class="container-fluid">
+         <div className="mbr-overla"
+          style={{opacity: '0.2',backgroundColor: "rgb(35, 35, 35)",position: 'absolute',zIndex:10}}>
+         </div>
+        <div className="row parallax"
+         style={{ paddingTop: '90px',paddingBottom: '90px'}}>
+        
+            <div className="col-12 col-sm-6 col-md-4 col-lg-4 para p-3">
+                <div className="card-img text-center">
+                    <span className="fa fa-dashboard display-4"></span>
+                </div>
+                <div className="card-box text-center text-white">
+                    <h4 className="card-title display-7">
+                        Dashboard
+                    </h4>
+                    <p className="justify display-7">
+                       Go to your dashboard to add recipe, 
+                       delete recipe and perform wonderful and
+                       awsome functionalites.
+                       You can prepare any 
+                    recipe without stress or having to travel there.
+                    </p>
+                    <div className=" text-center rounded">
+                        <Link to="/dashboard" href="" className="btn btn-warning btn-lg display-3 parallax-btn">
+                            More
+                        </Link>
+                    </div>
+                </div>
+            </div>
+            <div className=" col-12 col-sm-6 col-md-4 col-lg-4 para p-3">
+                <div className="card-img text-center">
+                    <span className="fa fa-dashboard display-4"></span>
+                </div>
+                <div className="card-box text-center text-white">
+                    <h4 className="card-title display-7">
+                        Unlimited Sites
+                    </h4>
+                    <p className="justify display-7">
+                    Go to your dashboard to add recipe, 
+                    delete recipe and perform wonderful and
+                    awsome functionalites.You can prepare any 
+                    recipe without stress or having to travel there.
+                 </p>
+                 <div className=" text-center rounded">
+                     <Link to="/dashboard" href="" className="btn btn-warning btn-lg display-3 parallax-btn">
+                         More
+                     </Link>
+                    </div>
+                </div>
+            </div>
+            <div className=" col-12 col-sm-6 ml-auto col-md-4 col-lg-4 para p-3">
+                <div className="card-img text-center">
+                    <span className="fa fa-dashboard display-4"></span>
+                </div>
+                <div className="card-box text-center text-white">
+                    <h4 className="card-title display-7">
+                        Unlimited Sites
+                    </h4>
+                    <p className="justify display-7">
+                    Go to your dashboard to add recipe, 
+                    delete recipe and perform wonderful and
+                    awsome functionalites.You can prepare any 
+                    recipe without stress or having to travel there.
+                 </p>
+                 <div className=" text-center rounded">
+                     <Link to="/dashboard" className="btn btn-warning btn-lg display-3 parallax-btn">
+                         More
+                     </Link>
+                    </div>
+                </div>
+            </div>
+            <div className="col-12 col-sm-3"></div>
+          </div></div>
+
+
+         <br/>
+ 
     </div> 
        <Header.footer />
     </div>   
-      
+    
     );
   }
 }

@@ -14,4 +14,20 @@ const trim=(n)=>{
    }
    return result+'...';
   }
-export default trim;
+
+  const trim2=(n)=>{
+    if (n.length<10) {
+          n=n+' . More is on the way';
+      }
+    let result = "";
+      for (let i of n){
+       
+        result = result + i;
+       
+       if(result.length==10) {
+           break;
+          }
+   }
+   return result+'...';
+  }
+export default {trim,trim2};

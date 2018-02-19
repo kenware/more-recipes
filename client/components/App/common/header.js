@@ -137,7 +137,7 @@ const nav=() =>{
 return (
 <nav className="navbar navbar-expand-lg navbar-dark bg-dark py-3" id="navbar" >
  <div className="container">
-   <a className="navbar-brand h-75 w-75" href="#">More-recipe</a>
+   <a className="navbar-brand" href="#">More-recipe</a>
    <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
      <span className="navbar-toggler-icon"></span>
    </button>
@@ -157,14 +157,14 @@ return (
        <li className="nav-item">
          <Link to={ '/login'} className="nav-link">Login </Link>
        </li>
+ <li className="nav-item">
+         <Link to="/dashbord" className="nav-link"><em className="fa fa-dashboard mr-l"></em></Link>
+       </li>
        <li className="nav-item">
-         <Link to="/profile" className="nav-link" >profile</Link>
+         <Link to="/profile" className="nav-link" ><em className="fa fa-user-circle mr-1"></em></Link>
        </li>
  <li className="nav-item">
-         <Link to="/dashbord" className="nav-link">Dashbored</Link>
-       </li>
- <li className="nav-item">
-         <Link to="/dashbord/favorite" className="nav-link" >Favorites</Link>
+         <Link to="/dashbord/favorite" className="nav-link" ><em className="fa fa-heart text-warning display-6"></em></Link>
        </li>
      </ul>
    </div>
