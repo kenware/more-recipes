@@ -13,7 +13,8 @@ import { Markup } from 'interweave';
 import trim from '../trim';
 import ReactEasyPaginate from 'react-easy-paginate';
 import 'react-easy-paginate/dist/react-easy-paginate.css';
-import ParallaxComponent from 'react-parallax-component';
+
+import ReactCardFlip from 'react-card-flip';
  
 //SmoothScrollbar.use(OverscrollPlugin);
 const limit = 6;
@@ -25,12 +26,15 @@ class Home extends Component {
       url:<s/>,
       r:"",
       show:"",
-      search:" "
+      search:" ",
+     
+      
       }
       this.handlePaginateClick = this.handlePaginateClick.bind(this);
       this.onCancel = this.onCancel.bind(this)
       this.onChange = this.onChange.bind(this)
       this.search = this.search.bind(this)
+     
   }
 
   componentWillMount() {
@@ -57,7 +61,7 @@ class Home extends Component {
     })
   }
 
-
+ 
 handlePaginateClick(pageNum) {
   this.props.actions.loadRecipes('id','DESC',pageNum,limit,'none');
   //this.getData(offset, limit);
@@ -84,7 +88,18 @@ search(e){
 
   render() {
     const recipes = this.props.paginate;
-  
+  const  handleClick=(e)=>{
+    const state = this.state
+   state[e]=true
+   this.setState({state})
+  }
+   const  handleClose=(e)=>{
+    const state = this.state
+   state[e]=false
+   this.setState({state})
+     //this.setState({ isFlipped: !this.state.isFlipped });
+     
+    }
         return (
          
           <div>
@@ -356,7 +371,7 @@ search(e){
                     recipe without stress or having to travel there.
                     </p>
                     <div className=" text-center rounded">
-                        <Link to="/dashboard" href="" className="btn btn-warning btn-lg display-3 parallax-btn">
+                        <Link to="/dashbord" href="" className="btn btn-warning btn-lg display-3 parallax-btn">
                             More
                         </Link>
                     </div>
@@ -368,7 +383,7 @@ search(e){
                 </div>
                 <div className="card-box text-center text-white">
                     <h4 className="card-title display-7">
-                        Unlimited Sites
+                        Add REcipes
                     </h4>
                     <p className="justify display-7">
                     Go to your dashboard to add recipe, 
@@ -406,14 +421,51 @@ search(e){
             </div>
             <div className="col-12 col-sm-3"></div>
           </div></div>
-
-
-         <br/>
- 
+     <br/>
+    <div class="container">
+     <div className="row">
+     { this.props.recipes.map(recipe =>
+     <div className="col-12 col-sm-4 col-xl-2 p-3" key={recipe.id}>
+       <div  style={{height:"20rem"}} className=" bg-info carousel slide">
+     <ReactCardFlip isFlipped={this.state[recipe.id]}>
+        <div key="front" className="carousel-inner"  
+        onMouseEnter={()=>handleClick(recipe.id)}
+        style={{height:"20rem"}}>
+        
+         <div className="mbr-overlay"
+        style={{opacity: '0.2'}}>
+         </div >
+      
+         <img src={recipe.image} className="h-100 w-100"/>
+       <div className="carousel-caption">
+        <p className="text-white display-4 py-2"> 
+        {recipe.title}
+          </p>
+        </div>
+         
+        </div>
+      
+        <div key="back" onMouseLeave={()=>handleClose(recipe.id)}
+        className="bg-info carousel-inner"
+        style={{height:"20rem"}}>
+        <h4 className="display-6 text-center text-white">{recipe.title}</h4>
+        
+        <p className="justify text-white p-3">
+        <Markup content={ trim.trim3(`${recipe.content}`)} />
+          </p>
+        </div>
+      </ReactCardFlip>
+       </div>
+     </div>
+     )}
+    </div>
+    
+   </div> 
+    <br/>
     </div> 
        <Header.footer />
     </div>   
-    
+     
     );
   }
 }

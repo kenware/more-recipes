@@ -30,4 +30,20 @@ const trim=(n)=>{
    }
    return result+'...';
   }
-export default {trim,trim2};
+  const trim3=(n)=>{
+    if (n.length<200) {
+          n=n+'...';
+          return n
+      }
+    let result = "";
+      for (let i of n){
+       
+        result = result + i;
+       
+       if(result.length==200) {
+           break;
+          }
+   }
+   return result+'...';
+  }
+export default {trim,trim2,trim3};
