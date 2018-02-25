@@ -175,8 +175,9 @@ search(e){
       
       <div className="card-header card-img text-center">
   
-        <img src={recipe.image} id='upvoted-image' className="rounded-circle img-fluid"/>
-       </div>
+      <Link to={`/recipes/${recipe.id}`}> <img src={recipe.image} id='upvoted-image' className="rounded-circle img-fluid"/>
+      </Link>
+     </div>
        
        <div className="card-body">
        <p className="justify display-5 text-center"><Markup content={ trim.trim2(`${recipe.title.toUpperCase()}`)} /></p>
@@ -188,7 +189,8 @@ search(e){
         
          <i className="fa fa-star text-info" aria-hidden="true"></i>
         
-         <i className="fa fa-heart text-warning p-3 display-5"></i>
+         <Link to={`/recipes/${recipe.id}`}><i className="fa fa-heart text-warning p-3 display-5"></i>
+         </Link>
          </div>
          <div className="col-12">
          <button className="btn btn-outline-success btn-sm">
@@ -313,8 +315,11 @@ search(e){
              
              
             
-               <div className="ml-auto card-img" style={{height:"14rem"}}><img className="img-fluid rounded card-img-top h-100 w-100" src={recipe.image}
+               <div className="ml-auto card-img" style={{height:"14rem"}}>
+               <Link to={`/recipes/${recipe.id}`}>
+               <img className="img-fluid rounded card-img-top h-100 w-100" src={recipe.image}
                 alt="Recipe Image"/>
+                 </Link>
                </div>
                <div className="card-header">
                 <h4 className="lead card-title text-sucess" >
@@ -383,7 +388,7 @@ search(e){
                 </div>
                 <div className="card-box text-center text-white">
                     <h4 className="card-title display-7">
-                        Add REcipes
+                        Add Recipes
                     </h4>
                     <p className="justify display-7">
                     Go to your dashboard to add recipe, 
@@ -400,11 +405,11 @@ search(e){
             </div>
             <div className=" col-12 col-sm-6 ml-auto col-md-4 col-lg-4 para p-3">
                 <div className="card-img text-center">
-                    <span className="fa fa-dashboard display-4"></span>
+                    <span className="fa fa-heart display-4"></span>
                 </div>
                 <div className="card-box text-center text-white">
                     <h4 className="card-title display-7">
-                        Unlimited Sites
+                        Favorite Recipes
                     </h4>
                     <p className="justify display-7">
                     Go to your dashboard to add recipe, 
@@ -413,7 +418,7 @@ search(e){
                     recipe without stress or having to travel there.
                  </p>
                  <div className=" text-center rounded">
-                     <Link to="/dashboard" className="btn btn-warning btn-lg display-3 parallax-btn">
+                     <Link to="/dashbord/favorite" className="btn btn-warning btn-lg display-3 parallax-btn">
                          More
                      </Link>
                     </div>

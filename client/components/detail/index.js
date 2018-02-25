@@ -12,7 +12,8 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import Popover from 'react-simple-popover';
 import { Markup } from 'interweave';
-
+import trim from '../trim';
+import ReactCardFlip from 'react-card-flip';
 //@wrapReactLifecycleMethodsWithTryCatch 
 class Detail extends Component {
   constructor(props){
@@ -38,8 +39,9 @@ class Detail extends Component {
   }
 
 componentWillMount() {
-
- this.props.actions.loadRecipe(this.props.match.params.recipeId);
+  if(this.props.recipes[0].title==' '){
+  this.props.actions.loadRecipes('id','DESC',0,6,'none');
+}
  this.props.actions.getAllReviews(this.props.match.params.recipeId);
  this.props.actions.users();
  
@@ -58,13 +60,7 @@ componentWillMount() {
   }
 
   componentWillReceiveProps(newProps){
-    if(newProps.users){
-      for (let user of newProps.users){
-        if(user.id==this.props.recipe.UserId){
-          this.setState({user:user})
-        }
-      }
-    }
+    
    
     if(newProps.message.voteError && this.state.inform){
       this.setState({upvote:'upvote',downvote:'downvote',voteError:""})
@@ -91,7 +87,7 @@ onReview(e) {
    this.setState({reviewButton:'sending...',inform:true})
    const id = this.props.match.params.recipeId;
    const message = this.state.message;
-   const title = this.props.recipe.title;
+   const title = 'recipe.title';
    this.props.actions.sendReview(id,title,message)
 }
 
@@ -116,8 +112,19 @@ const getVote = (vote) => {
      this.props.actions.getVotes(this.props.match.params.recipeId,vote)
      this.setState({inform:true})
   }
-
-
+  const  handleClick=(e)=>{
+    const state = this.state
+   state[e]=true
+   this.setState({state})
+  }
+   const  handleClose=(e)=>{
+    const state = this.state
+   state[e]=false
+   this.setState({state})
+     //this.setState({ isFlipped: !this.state.isFlipped });
+     
+    }
+let recipe = this.props.recipes.filter(recipe=>recipe.id==this.props.match.params.recipeId)[0]
 
     return (
   <div className="detail">
@@ -126,7 +133,7 @@ const getVote = (vote) => {
        {this.state.url}
       </div>
       <div className="col-7 tex-center"> 
-        <img src={this.props.recipe.image} alt="New York" className="rounded-circle" id="App-logo" className="rounded-circle" style={{height:"17rem",width:"17rem"}} />
+        <img src={recipe.image} alt="New York" className="rounded-circle" id="App-logo" className="rounded-circle" style={{height:"17rem",width:"17rem"}} />
       </div>
       <div className="col-2">
       </div>
@@ -134,29 +141,74 @@ const getVote = (vote) => {
   
       <Header.nav />
  
-    <div className="container">
+    <div className="container-fluid">
+    <div className="row">
+      <h3 className="text-center col-12">Most Loved Recipes</h3>
+     { this.props.mostLoved.map(recipe =>
+      <div key={recipe.id} className="col-6 col-sm-4 col-lg-2 p-2 bg-light" style={{background:''}}>
+      <div className="card rounded ">
+      
+      <div className="card-header card-img text-center" style={{height:'13rem'}}>
+  
+      <Link to={`/recipes/${recipe.id}`}> <img src={recipe.image}  className=" img-fluid h-100 w-100"/>
+      </Link>
+     </div>
+       
+       <div className="card-body">
+         <div className="row text-center">
+         <div className="col-12">
+         <i className="fa fa-star text-info" aria-hidden="true"></i>
+        
+         <i className="fa fa-star text-info" aria-hidden="true"></i>
+        
+         <i className="fa fa-star text-info" aria-hidden="true"></i>
+        
+         <Link to={`/recipes/${recipe.id}`}><i className="fa fa-heart text-warning p-3 display-5"></i>
+         </Link>
+         </div>
+         <div className="col-12">
+         <button className="btn btn-outline-success btn-sm">
+         <i className="fa fa-thumbs-up text-primary" aria-hidden="true"></i>&nbsp;
+         {recipe.upvote}
+         </button>
+         <button className="btn btn-outline-success btn-sm">
+         <i className="fa fa-thumbs-down text-primary" aria-hidden="true"></i>&nbsp;
+         {recipe.downvote}
+         </button>
+         </div>
+         </div>
+       
+       </div>
+      </div>
+      
+      </div>
+     )}
+     
+     </div>
+
       <div className="row">
         <div className="col-md-8">
-          <h2 className="my-4 text-center text-primary">Details of a recipe
-          </h2>
+        <br/>
           <div className="card mb-4">
             <div className="card-body">
-             <h2 className="card-title text-center text-secondary">{this.props.recipe.title}  </h2>
+            <div className="text-center card-img"><img className="img-fluid " src={recipe.image}
+                alt="Recipe Image"/></div>
+             <h2 className="card-title text-center text-secondary">{recipe.title}  </h2>
               <p className="card-text text-justify">
-               <Markup content={this.props.recipe.content}
+               <Markup content={recipe.content}
                 tagName="span" />
                <h5>Ingredients</h5>
-               {this.props.recipe.ingredients}
+               {recipe.ingredients}
               </p>            
             </div>
             <div className="card-footer text-muted">
               Posted on Sept 23, 2017 by
-              <h4 className="text-primary">{this.state.user.username}</h4>
+              <h4 className="text-primary">{this.state.user}</h4>
               <button type="button" className={this.state.cssupvote} id="up"
-              onClick={ () => { getVote("upvote") } }>{this.state.upvote}&nbsp;<i className="fa fa-thumbs-up" aria-hidden="true">&nbsp;{this.props.recipe.upvote}</i></button>&nbsp;
+              onClick={ () => { getVote("upvote") } }>{this.state.upvote}&nbsp;<i className="fa fa-thumbs-up" aria-hidden="true">&nbsp;{recipe.upvote}</i></button>&nbsp;
  
               <button type="button" className={this.state.cssdownvote} type="button" id="down"
-              onClick={ () => { getVote("downvote") } }>{this.state.downvote}&nbsp;<i className="fa fa-thumbs-down" aria-hidden="true"></i>&nbsp;{this.props.recipe.downvote}</button>&nbsp;
+              onClick={ () => { getVote("downvote") } }>{this.state.downvote}&nbsp;<i className="fa fa-thumbs-down" aria-hidden="true"></i>&nbsp;{recipe.downvote}</button>&nbsp;
            
           
             </div>
@@ -290,7 +342,47 @@ const getVote = (vote) => {
         </div>
         <div className="col-2"></div>
     </div>
+    <div class="container">
+     <div className="row">
+     { this.props.mostLoved.map(recipe =>
+     <div className="col-12 col-sm-4 col-xl-2 p-3" key={recipe.id}>
+       <div  style={{height:"20rem"}} className=" bg-info carousel slide">
+     <ReactCardFlip isFlipped={this.state[recipe.id]}>
+        <div key="front" className="carousel-inner"  
+        onMouseEnter={()=>handleClick(recipe.id)}
+        style={{height:"20rem"}}>
+        
+         <div className="mbr-overlay"
+        style={{opacity: '0.2'}}>
+         </div >
+      
+         <img src={recipe.image} className="h-100 w-100"/>
+       <div className="carousel-caption">
+        <p className="text-white display-4 py-2"> 
+        {recipe.title}
+          </p>
+        </div>
+         
+        </div>
+      
+        <div key="back" onMouseLeave={()=>handleClose(recipe.id)}
+        className="bg-info carousel-inner"
+        style={{height:"20rem"}}>
+        <h4 className="display-6 text-center text-white">{recipe.title}</h4>
+        
+        <p className="justify text-white p-3">
+        <Markup content={ trim.trim3(`${recipe.content}`)} />
+          </p>
+        </div>
+      </ReactCardFlip>
+       </div>
+     </div>
+     )}
+    </div>
+    
+   </div> 
      </div> 
+     <Header.footer />
     </div>
     );
   }
@@ -298,14 +390,26 @@ const getVote = (vote) => {
 
 function mapStateToProps(state, ownProps) { 
   //let idi = ownProps.params.recipeId 
-  
+  if(state.recipes.length>1){
+  const upvoted = state.recipes.sort((a,b)=>b.upvote-a.upvote);
+  const recipes = upvoted.slice(0,6);
      return{
-       recipe:state.recipes,
+       mostLoved:recipes,
+       recipes:state.recipes,
        message:state.message,
        reviews:state.reviews,
        users:state.users
      } 
-
+    }else{
+      let recipes=[{id:28,title:' ',image:' ', ingredients:'jj',content:"kk"}]
+      return{
+        mostLoved:recipes,
+        recipes:recipes,
+        message:state.message,
+        reviews:state.reviews,
+        users:state.users
+      } 
+    }
 }
 function mapDispatchToProps(dispatch) {
   return {actions: bindActionCreators(actions, dispatch)}
