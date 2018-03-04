@@ -15,7 +15,7 @@ const verifyToken = (req, res, next) => {
 
    jwt.verify(token, secret, (err, result) => {
       if (err) {
-        return res.status(401).json('your session expired, please login again!');
+        return res.status(401).json('Please login!');
       }
     req.decoded = result;
     next();

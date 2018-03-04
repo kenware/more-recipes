@@ -63,7 +63,7 @@ class Home extends Component {
 
  
 handlePaginateClick(pageNum) {
-  this.props.actions.loadRecipes('id','DESC',pageNum,limit,'none');
+  this.props.actions.loadPagination(pageNum,limit,this.props.allRecipes);
   //this.getData(offset, limit);
  this.setState({url: <Redirect to={`/recipes/page/`+pageNum}/>})
  console.log(this.props.recipes)
@@ -479,6 +479,7 @@ function mapStateToProps(state, ownProps) {
  const upvoted = state.recipes.sort((a,b)=>b.upvote-a.upvote);
  const recipes = upvoted.slice(0,6);
     return {
+      allRecipes:state.recipes,
       recipes: recipes,
       paginate:state.paginate
     };

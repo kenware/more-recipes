@@ -251,7 +251,7 @@ const nav2=() =>{
              <Link to="/dashbord/favorite" className="nav-link" >Favorites</Link>
            </li>
            <li className="nav-item">
-             <button type="btn" onClick={()=> signOut()}className="btn bg-dark nav-link">signout</button>
+             <a onClick={()=> signOut()} className=" bg-dark nav-link">signout</a>
            </li>
          </ul>
        </div>

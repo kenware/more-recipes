@@ -60,6 +60,17 @@ export const loadRecipes = (sort,order,page,limit,search) => {
     
    } 
 }
+
+export const loadPagination = (page,limit,recipes) => { 
+  return function(dispatch) { 
+    const offset = (page-1)*limit;
+    const total = offset+limit;
+    //const recipe = recipes;
+    const recipesSlice = recipes.slice(offset, total);
+     dispatch(loadPaginate(recipesSlice));
+   
+  } 
+}
 export const loadRecipe = (id) => { 
   return function(dispatch) { 
    fetch('/api/recipes/'+ id)
@@ -119,6 +130,7 @@ export const updateProfile = (payload) => {
 
 export const getVotes = (id,vote) => { 
   return function(dispatch) { 
+    
    fetch('/api/recipes/'+ id + '/'+ vote,{
     method:'PUT',
     headers:{'authorization':token()}
@@ -128,15 +140,19 @@ export const getVotes = (id,vote) => {
     if(typeof recipes == 'string'){
       return dispatch(getMessage({voteError:recipes,vote:"show"}));
     }else{
-     return dispatch(getVoteSuccess(recipes));
+ 
+     return dispatch(loadRecipes('id','DESC',0,6,'none'));
     }
    });
-   
+  
   } 
 }
 
 export const sendReview = (id,title,message) => { 
   return function(dispatch) { 
+   if(message.length<1||message==undefined){
+      return dispatch(getMessage({error:"Message field canoot be empty",review:"show"}));
+    } 
     fetch('/api/recipes/' + id + '/reviews', 
     {
       method:'POST',

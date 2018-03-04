@@ -66,7 +66,7 @@ render() {
                     <td>{recipe.upvote}</td>
                     <td><Link to={`/dashbord/detail/${recipe.id}`}>{recipe.title}</Link></td>
                     
-                    <td><Markup content={ trim(`${recipe.content}`) + '...'}
+                    <td><Markup content={ trim.trim2(`${recipe.content}`) + '...'}
                                  />
                     </td>
                     <td><Link to={`/dashbord/detail/${recipe.id}`}> view/delete/add favorite </Link></td>

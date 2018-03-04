@@ -63,7 +63,7 @@ render() {
                             <div className="col-5">
                                 <h4><Link to={`/dashbord/detail/${recipe.id}`}>{recipe.title}</Link></h4>
                                 <p className="card-text">
-                                <Markup content={ trim(`${recipe.content}`) + '...'}
+                                <Markup content={ trim.trim(`${recipe.content}`) + '...'}
                                  />
                               <Link to={`/dashbord/detail/${recipe.id}`}>View &rarr; </Link></p>
                             </div>

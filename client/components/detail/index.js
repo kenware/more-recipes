@@ -25,6 +25,7 @@ class Detail extends Component {
       cssupvote:"btn btn-info",
       cssdownvote:"btn btn-info",
       message:"",
+      messages:"",
       inform:false,
       reviewError:"inform",
       reviewSuccess:"inform",
@@ -39,7 +40,7 @@ class Detail extends Component {
   }
 
 componentWillMount() {
-  if(this.props.recipes[0].title==' '){
+  if(this.props.recipe.title==' '){
   this.props.actions.loadRecipes('id','DESC',0,6,'none');
 }
  this.props.actions.getAllReviews(this.props.match.params.recipeId);
@@ -70,7 +71,19 @@ componentWillMount() {
       this.props.reviews.push(newProps.message.reviews);
      }else if(newProps.message.error && this.state.inform){
       this.setState({reviewError:"",reviewButton:'review'})
+      }else if(newProps && this.state.inform){
+        this.setState({upvote:'upvote',downvote:'downvote'})
       }
+      if(newProps.recipe){
+        if(newProps.recipe.title==' '){
+          const user = {username:'',image:''}
+          this.setState({user})
+        }else{
+        const id = newProps.recipe.UserId
+        const user = newProps.user.find(recipe=>recipe.id==id)
+        this.setState({user})
+        }
+    }
   }
   
   onChange(e){
@@ -87,7 +100,12 @@ onReview(e) {
    this.setState({reviewButton:'sending...',inform:true})
    const id = this.props.match.params.recipeId;
    const message = this.state.message;
-   const title = 'recipe.title';
+   
+   const title = this.props.recipe.title;
+   if(message.length<2){
+    this.setState({reviewError:"",reviewButton:'review',messages: 'message cannot be empty'})
+    return
+   }
    this.props.actions.sendReview(id,title,message)
 }
 
@@ -108,9 +126,9 @@ const getVote = (vote) => {
     const cssdownvote = "btn btn-warning";
     this.setState({cssdownvote,downvote:'downvoting...'})
   } 
-     
+    this.setState({inform:true})
      this.props.actions.getVotes(this.props.match.params.recipeId,vote)
-     this.setState({inform:true})
+    
   }
   const  handleClick=(e)=>{
     const state = this.state
@@ -124,7 +142,7 @@ const getVote = (vote) => {
      //this.setState({ isFlipped: !this.state.isFlipped });
      
     }
-let recipe = this.props.recipes.filter(recipe=>recipe.id==this.props.match.params.recipeId)[0]
+let recipe =this.props.recipe
 
     return (
   <div className="detail">
@@ -141,46 +159,50 @@ let recipe = this.props.recipes.filter(recipe=>recipe.id==this.props.match.param
   
       <Header.nav />
  
-    <div className="container-fluid">
+    <div className="container">
     <div className="row">
-      <h3 className="text-center col-12">Most Loved Recipes</h3>
+    <h3 className="text-center col-12">Most Loved Recipes</h3>
      { this.props.mostLoved.map(recipe =>
-      <div key={recipe.id} className="col-6 col-sm-4 col-lg-2 p-2 bg-light" style={{background:''}}>
-      <div className="card rounded ">
-      
-      <div className="card-header card-img text-center" style={{height:'13rem'}}>
-  
-      <Link to={`/recipes/${recipe.id}`}> <img src={recipe.image}  className=" img-fluid h-100 w-100"/>
-      </Link>
-     </div>
+      <div key={recipe.id} className="col-6 col-sm-4 col-lg-2 p-3" style={{background:''}}>
+        <div>
+       <Link to={`/recipes/${recipe.id}`}>
        
-       <div className="card-body">
-         <div className="row text-center">
+      <div className="text-center" style={{height:'13rem'}}>
+      
+       <img src={recipe.image}  className=" img-fluid h-100 w-100"/>
+       <div className="mbr-overlay"
+       style={{opacity:'0.25'}}>
+         </div >
+      <div className="carousel-caption">
+        <p className="text-white display-5 py-2"> 
+        {recipe.title}
+          </p>
+          <div className="row text-center text-white">
          <div className="col-12">
-         <i className="fa fa-star text-info" aria-hidden="true"></i>
+         <i className="fa fa-star text-warning" aria-hidden="true"></i>
         
-         <i className="fa fa-star text-info" aria-hidden="true"></i>
+         <i className="fa fa-star text-warning" aria-hidden="true"></i>
         
-         <i className="fa fa-star text-info" aria-hidden="true"></i>
+         <i className="fa fa-star text-warning" aria-hidden="true"></i>
         
          <Link to={`/recipes/${recipe.id}`}><i className="fa fa-heart text-warning p-3 display-5"></i>
          </Link>
          </div>
          <div className="col-12">
-         <button className="btn btn-outline-success btn-sm">
-         <i className="fa fa-thumbs-up text-primary" aria-hidden="true"></i>&nbsp;
+         <button className="btn btn-outline-success btn-sm text-white">
+         <i className="fa fa-thumbs-up text-white" aria-hidden="true"></i>&nbsp;
          {recipe.upvote}
          </button>
-         <button className="btn btn-outline-success btn-sm">
-         <i className="fa fa-thumbs-down text-primary" aria-hidden="true"></i>&nbsp;
+         <button className="btn btn-outline-success btn-sm text-white">
+         <i className="fa fa-thumbs-down text-white" aria-hidden="true"></i>&nbsp;
          {recipe.downvote}
          </button>
          </div>
          </div>
-       
-       </div>
+        </div>
       </div>
-      
+      </Link>
+      </div>
       </div>
      )}
      
@@ -202,8 +224,9 @@ let recipe = this.props.recipes.filter(recipe=>recipe.id==this.props.match.param
               </p>            
             </div>
             <div className="card-footer text-muted">
-              Posted on Sept 23, 2017 by
-              <h4 className="text-primary">{this.state.user}</h4>
+              Posted on { recipe.createdAt}<br/><img src={this.state.user.image}
+               className="rounded-circle" height="50px" width="50px"/>
+              <h4 className="text-primary">{ this.state.user.username}</h4>
               <button type="button" className={this.state.cssupvote} id="up"
               onClick={ () => { getVote("upvote") } }>{this.state.upvote}&nbsp;<i className="fa fa-thumbs-up" aria-hidden="true">&nbsp;{recipe.upvote}</i></button>&nbsp;
  
@@ -304,14 +327,16 @@ let recipe = this.props.recipes.filter(recipe=>recipe.id==this.props.match.param
                  <textarea className="form-control" id="message" name="message" rows="10" onChange ={this.onChange}> </textarea>
                  </fieldset>          
                  <button type="submit"  className="btn btn-default" style={{background:'lightseagreen', color:'white'}}>{this.state.reviewButton}</button>
+                 
               </form>
               <div class="alert alert-warning alert-dismissible" role="alert" id={this.state.reviewError}>
                 <button type="button" className="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                   <strong>
                     <span><font color='red'> 
-                    {this.props.message.error }! <br/>Please
-                       <Link to="/login"> Login </Link>
-                    to be able to provide review
+                    {this.props.message.error? <span> {this.props.message.error} ! 
+                       <Link to="/login"> here </Link></span>:
+                       <span>{this.state.messages}</span>
+                       }
                      </font>
                      </span>
                   </strong>
@@ -325,7 +350,7 @@ let recipe = this.props.recipes.filter(recipe=>recipe.id==this.props.match.param
               </div>
             </div>
           </div>
-      <h1 className="my-4 text-center" >{this.props.reviews.length} Review</h1>
+      <h1 className="my-4 text-center" >{this.props.reviews.length}&nbsp;{this.props.reviews.length>1 ?'Reviews':'Review'}</h1>
       { this.props.reviews.map(review =>
       <div className="card my-4">           
             <div className="card-body">
@@ -388,26 +413,43 @@ let recipe = this.props.recipes.filter(recipe=>recipe.id==this.props.match.param
   }
 }
 
+const users=(users,recipes)=>{
+  for(let user of users){
+    for(let i=0; i<recipes.length; i++){
+      if(user.id==recipes[i].UserId){
+        return user
+      }
+        }
+      }
+}
+
 function mapStateToProps(state, ownProps) { 
-  //let idi = ownProps.params.recipeId 
-  if(state.recipes.length>1){
-  const upvoted = state.recipes.sort((a,b)=>b.upvote-a.upvote);
+ 
+  if(state.recipes.length>0){
+   const upvoted = state.recipes.sort((a,b)=>b.upvote-a.upvote);
   const recipes = upvoted.slice(0,6);
+  const recipe = state.recipes.find(recipe=>recipe.id==ownProps.match.params.recipeId)
+  //const userId = recipe.UserId
+  //const user = state.users.filter(user=>user.id==userId)[0]
+  
      return{
        mostLoved:recipes,
-       recipes:state.recipes,
+       recipe:recipe,
        message:state.message,
        reviews:state.reviews,
-       users:state.users
+       user:state.users
      } 
     }else{
-      let recipes=[{id:28,title:' ',image:' ', ingredients:'jj',content:"kk"}]
+      let recipes={id:28,title:' ',image:' ', ingredients:'jj',content:"kk"}
+      let recip=[{id:28,title:' ',image:' ', ingredients:'jj',content:"kk"}]
+      //const user =user(state.users,state.recipes)
+     
       return{
-        mostLoved:recipes,
-        recipes:recipes,
+        mostLoved:recip,
+        recipe:recipes,
         message:state.message,
         reviews:state.reviews,
-        users:state.users
+        user:state.users
       } 
     }
 }
