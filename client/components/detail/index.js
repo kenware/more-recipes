@@ -97,7 +97,9 @@ componentWillMount() {
 
 onReview(e) {
    e.preventDefault();
-   this.setState({reviewButton:'sending...',inform:true})
+   this.setState({
+     reviewButton:(<div><i className="fa fa-spinner fa-spin fa-2x fa-fw" aria-hidden="true"></i>sending...</div>),
+     inform:true})
    const id = this.props.match.params.recipeId;
    const message = this.state.message;
    
@@ -121,10 +123,11 @@ render() {
 const getVote = (vote) => {
   if(vote == "upvote"){
     const cssupvote = "btn btn-warning";
-    this.setState({cssupvote,upvote:'upvoting...'})
+    this.setState({cssupvote,upvote:(<div><i className="fa fa-spinner fa-spin fa-2x fa-fw" aria-hidden="true"></i>downvoting...</div>)})
   }else{
     const cssdownvote = "btn btn-warning";
-    this.setState({cssdownvote,downvote:'downvoting...'})
+    this.setState({cssdownvote,
+      downvote:(<div><i className="fa fa-spinner fa-spin fa-2x fa-fw" aria-hidden="true"></i>downvoting...</div>)})
   } 
     this.setState({inform:true})
      this.props.actions.getVotes(this.props.match.params.recipeId,vote)
@@ -143,6 +146,13 @@ const getVote = (vote) => {
      
     }
 let recipe =this.props.recipe
+let monthNames = [
+  "January", "February", "March",
+  "April", "May", "June",
+  "July", "August", "September",
+  "October", "November", "December"
+];
+let days = ["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"];
 
     return (
   <div className="detail">
@@ -224,7 +234,13 @@ let recipe =this.props.recipe
               </p>            
             </div>
             <div className="card-footer text-muted">
-              Posted on { recipe.createdAt}<br/><img src={this.state.user.image}
+              Posted on  { trim.trim4(days[new Date(recipe.createdAt).getDay()])},&nbsp;{ trim.trim4(monthNames[new Date(recipe.createdAt).getMonth()])},
+               &nbsp;{ new Date(recipe.createdAt).getDate()}&nbsp;
+               { new Date(recipe.createdAt).getFullYear()}&nbsp; 
+               at &nbsp; {new Date(recipe.createdAt).getHours() > 12 ? 
+                (new Date(recipe.createdAt).getHours())-12 + ':' + new Date(recipe.createdAt).getMinutes() +' PM' : new Date(recipe.createdAt).getHours() + ':' + new Date(recipe.createdAt).getMinutes() +' AM'}
+         
+               <br/><img src={this.state.user.image}
                className="rounded-circle" height="50px" width="50px"/>
               <h4 className="text-primary">{ this.state.user.username}</h4>
               <button type="button" className={this.state.cssupvote} id="up"
@@ -359,8 +375,12 @@ let recipe =this.props.recipe
              </p>
             </div>
       <div className="card-footer text-muted">
-              Reviewed on: {review.createdAt}<br/>
-              By: {review.reviewedBy}
+              Reviewed on:  { trim.trim4(days[new Date(recipe.createdAt).getDay()])},&nbsp;{ trim.trim4(monthNames[new Date(recipe.createdAt).getMonth()])},
+               &nbsp;{ new Date(recipe.createdAt).getDate()}&nbsp;
+               { new Date(recipe.createdAt).getFullYear()}&nbsp; 
+               at &nbsp; {new Date(recipe.createdAt).getHours() > 12 ? 
+                (new Date(recipe.createdAt).getHours())-12 + ':' + new Date(recipe.createdAt).getMinutes() +' PM' : new Date(recipe.createdAt).getHours() + ':' + new Date(recipe.createdAt).getMinutes() +' AM'}
+             <br/> By: {review.reviewedBy}
       </div>
           </div>
         )}

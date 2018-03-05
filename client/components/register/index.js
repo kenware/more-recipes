@@ -82,7 +82,9 @@ register(e){
    const name = this.state.name;
    if(this.state.passwordmismatch=='' && this.state.passwordmatch!=='' && validator.isEmail(this.state.email)){
       this.props.actions.register(email,password,name,username);
-      this.setState({register:"Registering..."});
+      this.setState({
+          register:(<div><i className="fa fa-spinner fa-spin fa-2x fa-fw" aria-hidden="true"></i>registering...</div>)
+        });
     }
   }
 render() {

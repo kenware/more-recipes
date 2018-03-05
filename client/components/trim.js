@@ -46,4 +46,21 @@ const trim=(n)=>{
    }
    return result+'...';
   }
-export default {trim,trim2,trim3};
+  const trim4=(n)=>{
+    n=n+''
+    if (n.length<4) {
+          n=n+'...';
+          return n
+      }
+    let result = "";
+      for (let i of n){
+       
+        result = result + i;
+       
+       if(result.length==3) {
+           break;
+          }
+   }
+   return result;
+  }
+export default {trim,trim2,trim3,trim4};

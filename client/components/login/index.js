@@ -42,7 +42,9 @@ componentWillReceiveProps(newProps){
 
 login(e){
    e.preventDefault();
-   this.setState({login:"verifying..."})
+   this.setState({
+       login:(<div><i className="fa fa-spinner fa-spin fa-2x fa-fw" aria-hidden="true"></i>verifying...</div>)
+    })
    const email = this.state.email;
    const password = this.state.password;
    this.props.actions.login(email,password);
