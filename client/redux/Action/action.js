@@ -169,9 +169,10 @@ export const sendReview = (id,title,message) => {
       if(typeof reviews == 'string'){
         return dispatch(getMessage({error:reviews,review:"show"}));
       }else{
-       return dispatch(getMessage({
+        dispatch(getMessage({
          success:"successfully reviewed!",review:"show",reviews:reviews
         }));
+        dispatch(getAllReviews(id))
       }
     }
       );

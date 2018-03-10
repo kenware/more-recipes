@@ -14,6 +14,7 @@ import Popover from 'react-simple-popover';
 import { Markup } from 'interweave';
 import trim from '../trim';
 import ReactCardFlip from 'react-card-flip';
+import FacebookProvider, { Comments,Share } from 'react-facebook';
 //@wrapReactLifecycleMethodsWithTryCatch 
 class Detail extends Component {
   constructor(props){
@@ -68,7 +69,7 @@ componentWillMount() {
      
      }else if(newProps.message.success && this.state.inform){
       this.setState({reviewSuccess:"",reviewButton:'review'})
-      this.props.reviews.push(newProps.message.reviews);
+      
      }else if(newProps.message.error && this.state.inform){
       this.setState({reviewError:"",reviewButton:'review'})
       }else if(newProps && this.state.inform){
@@ -170,8 +171,13 @@ let days = ["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturda
       <Header.nav />
  
     <div className="container">
+    <div className="row text-center text-lg-left">
+    </div>
     <div className="row">
     <h3 className="text-center col-12">Most Loved Recipes</h3>
+
+    
+
      { this.props.mostLoved.map(recipe =>
       <div key={recipe.id} className="col-6 col-sm-4 col-lg-2 p-3" style={{background:''}}>
         <div>
@@ -179,7 +185,7 @@ let days = ["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturda
        
       <div className="text-center" style={{height:'13rem'}}>
       
-       <img src={recipe.image}  className=" img-fluid h-100 w-100"/>
+       <img src={recipe.image}  className="img-thumbnail img-fluid h-100 w-100"/>
        <div className="mbr-overlay"
        style={{opacity:'0.25'}}>
          </div >
@@ -199,7 +205,7 @@ let days = ["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturda
          </Link>
          </div>
          <div className="col-12">
-         <button className="btn btn-outline-success btn-sm text-white">
+         <button className="btn btn-outline-success btn-sm text-white bg-info">
          <i className="fa fa-thumbs-up text-white" aria-hidden="true"></i>&nbsp;
          {recipe.upvote}
          </button>
@@ -332,10 +338,10 @@ let days = ["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturda
        </div>
       </div>
       <div className="row">
-      <div className="col-2"></div>
-      <div className="col-md-8 text-center">
+      
+      <div className="col-md-8">
           <div className="card my-4" >
-            <h5 className="card-header">Provide reviews</h5>
+            <h5 className="card-header text-center">Provide reviews</h5>
             <div className="card-body" style={{background: 'aliceblue'}}>
               <form onSubmit={this.onReview}>      
                 <fieldset className="form-group">
@@ -366,26 +372,79 @@ let days = ["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturda
               </div>
             </div>
           </div>
+         
       <h1 className="my-4 text-center" >{this.props.reviews.length}&nbsp;{this.props.reviews.length>1 ?'Reviews':'Review'}</h1>
-      { this.props.reviews.map(review =>
-      <div className="card my-4">           
-            <div className="card-body">
-              <p className="card-text text-justify">
-                    { review.reviews}
-             </p>
-            </div>
-      <div className="card-footer text-muted">
-              Reviewed on:  { trim.trim4(days[new Date(recipe.createdAt).getDay()])},&nbsp;{ trim.trim4(monthNames[new Date(recipe.createdAt).getMonth()])},
-               &nbsp;{ new Date(recipe.createdAt).getDate()}&nbsp;
-               { new Date(recipe.createdAt).getFullYear()}&nbsp; 
-               at &nbsp; {new Date(recipe.createdAt).getHours() > 12 ? 
-                (new Date(recipe.createdAt).getHours())-12 + ':' + new Date(recipe.createdAt).getMinutes() +' PM' : new Date(recipe.createdAt).getHours() + ':' + new Date(recipe.createdAt).getMinutes() +' AM'}
-             <br/> By: {review.reviewedBy}
-      </div>
-          </div>
-        )}
+{ this.props.reviews.map(review =>
+  <div>
+  <div className="media">
+  <img className="g-width-50 g-height-50 rounded-circle bg-white" src={review.user.image} alt="Image Description"/>
+      
+      <div className="media-body bg-white">
+      <h5 className="mt-0 text-info">  {review.reviewedBy}</h5>
+      <h6 className="mt-0 text-muted"> Reviewed on&nbsp;
+      { trim.trim4(days[new Date(review.createdAt).getDay()])},&nbsp;{ trim.trim4(monthNames[new Date(recipe.createdAt).getMonth()])}
+        &nbsp;{ new Date(review.createdAt).getDate()}&nbsp;
+        { new Date(review.createdAt).getFullYear()}&nbsp; 
+        at &nbsp; {new Date(recipe.createdAt).getHours() > 12 ? 
+        (new Date(review.createdAt).getHours())-12 + ':' + new Date(review.createdAt).getMinutes() +' PM' : new Date(recipe.createdAt).getHours() + ':' + new Date(recipe.createdAt).getMinutes() +' AM'}
+      </h6>
+    <p> { review.reviews}</p>  
+      
+        <ul className="list-inline d-sm-flex my-0">
+         &nbsp;&nbsp;
+          <li className="list-inline-item g-mr-20">
+            <a className="u-link-v5 g-color-gray-dark-v4 g-color-primary--hover" href="#!">
+              <i className="fa fa-thumbs-up g-pos-rel g-top-1 g-mr-3"></i>
+              178
+            </a>
+          </li>
+          <li className="list-inline-item g-mr-20">
+            <a className="u-link-v5 g-color-gray-dark-v4 g-color-primary--hover" href="#!">
+              <i className="fa fa-thumbs-down g-pos-rel g-top-1 g-mr-3"></i>
+              34
+            </a>
+          </li>
+          &nbsp;&nbsp;
+          <li className="list-inline-item g-mr-20">
+            <a className="u-link-v5 g-color-gray-dark-v4 g-color-primary--hover" href="https://www.facebook.com">
+              <i className="fa fa-facebook g-pos-rel g-top-1 g-mr-3"></i>
+            </a>
+          </li>
+          <li className="list-inline-item g-mr-20">
+            <a className="u-link-v5 g-color-gray-dark-v4 g-color-primary--hover" href="https://www.twitter.com">
+              <i className="fa fa-twitter g-pos-rel g-top-1 g-mr-3"></i>
+              
+            </a>
+          </li>
+          <li className="list-inline-item g-mr-20">
+            <a className="u-link-v5 g-color-gray-dark-v4 g-color-primary--hover" href="https://www.linkedin.com">
+              <i className="fa fa-linkedin g-pos-rel g-top-1 g-mr-3"></i>
+              
+            </a>
+          </li>
+          <li className="list-inline-item ml-auto">
+            <a className="u-link-v5 g-color-gray-dark-v4 g-color-primary--hover" href="#!">
+              <i className="fa fa-reply g-pos-rel g-top-1 g-mr-3"></i>
+              Reply
+            </a>
+          </li>
+          &nbsp;&nbsp;
+        </ul>
+        <br/>
+      </div>    
+  </div>
+  <br/><br/>
+</div>
+ )}
+
+
+
+
+
+
+  
         </div>
-        <div className="col-2"></div>
+        <div className="col-4"></div>
     </div>
     <div class="container">
      <div className="row">
@@ -433,18 +492,17 @@ let days = ["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturda
   }
 }
 
-const users=(users,recipes)=>{
-  for(let user of users){
-    for(let i=0; i<recipes.length; i++){
-      if(user.id==recipes[i].UserId){
-        return user
-      }
-        }
-      }
-}
+
 
 function mapStateToProps(state, ownProps) { 
- 
+  let allReviews = state.reviews
+  for(let user of state.users){
+    for(let x=0; x<allReviews.length;x++){
+      if(user.username==allReviews[x].reviewedBy){
+        allReviews[x]["user"]=user
+      }
+    }
+  } 
   if(state.recipes.length>0){
    const upvoted = state.recipes.sort((a,b)=>b.upvote-a.upvote);
   const recipes = upvoted.slice(0,6);
@@ -456,7 +514,7 @@ function mapStateToProps(state, ownProps) {
        mostLoved:recipes,
        recipe:recipe,
        message:state.message,
-       reviews:state.reviews,
+       reviews:allReviews,
        user:state.users
      } 
     }else{
@@ -468,7 +526,7 @@ function mapStateToProps(state, ownProps) {
         mostLoved:recip,
         recipe:recipes,
         message:state.message,
-        reviews:state.reviews,
+        reviews:allReviews,
         user:state.users
       } 
     }

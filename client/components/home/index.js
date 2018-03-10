@@ -38,6 +38,7 @@ class Home extends Component {
   }
 
   componentWillMount() {
+    this.props.actions.users();
     const pag = this.props.match.params.page;
     const defaultPage =1;
     if (pag) {
@@ -100,6 +101,18 @@ search(e){
      //this.setState({ isFlipped: !this.state.isFlipped });
      
     }
+  
+    let monthNames = [
+      "January", "February", "March",
+      "April", "May", "June",
+      "July", "August", "September",
+      "October", "November", "December"
+    ];
+    let days = ["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"];
+    
+
+     
+
         return (
          
           <div>
@@ -312,10 +325,25 @@ search(e){
           { recipes.map(recipe =>
            <div key={recipe.id}  id="bg-al" className="card p-4 col-12 col-sm-6 col-md-6 col-lg-4 col-xl-3 " >
              <div className="card-wrapper">
-             
-             
-            
+              <div className="card-header">
+               <div className="row">
+                <div className="col-2">
+                 <img src={recipe.user.image} className="rounded-circle" height="50px" width="50px"/> 
+                </div>
+                <div className="col-10">
+                 <font className="text-info">{recipe.user.username}
+                 </font><br/><font className="text-muted">
+                  { trim.trim4(monthNames[new Date(recipe.createdAt).getMonth()])}
+                  &nbsp;{ new Date(recipe.createdAt).getDate()}, 
+                  { new Date(recipe.createdAt).getFullYear() }  
+                   &nbsp;at {new Date(recipe.createdAt).getHours() > 12 ? 
+                  (new Date(recipe.createdAt).getHours())-12 + ':' + new Date(recipe.createdAt).getMinutes() +' PM' : new Date(recipe.createdAt).getHours() + ':' + new Date(recipe.createdAt).getMinutes() +' AM'}
+                 </font>
+               </div>
+              </div>
+              </div>
                <div className="ml-auto card-img" style={{height:"14rem"}}>
+               
                <Link to={`/recipes/${recipe.id}`}>
                <img className="img-fluid rounded card-img-top h-100 w-100" src={recipe.image}
                 alt="Recipe Image"/>
@@ -475,13 +503,21 @@ search(e){
   }
 }
 
-function mapStateToProps(state, ownProps) { 
+function mapStateToProps(state, ownProps) {
+  let urecipe = state.paginate
+ for(let user of state.users){
+   for(let x=0; x<urecipe.length;x++){
+     if(user.id==urecipe[x].UserId){
+      urecipe[x]["user"]=user
+     }
+   }
+ } 
  const upvoted = state.recipes.sort((a,b)=>b.upvote-a.upvote);
  const recipes = upvoted.slice(0,6);
     return {
       allRecipes:state.recipes,
       recipes: recipes,
-      paginate:state.paginate
+      paginate:urecipe
     };
   
 

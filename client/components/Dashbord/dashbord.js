@@ -381,7 +381,7 @@ const handleClose = (value) => {
         </div>
       </div>
     </div>
-
+ <Header.footer/>
 </div>
 
     );
