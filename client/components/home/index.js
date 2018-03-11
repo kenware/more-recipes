@@ -15,7 +15,8 @@ import ReactEasyPaginate from 'react-easy-paginate';
 import 'react-easy-paginate/dist/react-easy-paginate.css';
 
 import ReactCardFlip from 'react-card-flip';
- 
+import { DefaultPlayer as Video } from 'react-html5video';
+import 'react-html5video/dist/styles.css';
 //SmoothScrollbar.use(OverscrollPlugin);
 const limit = 6;
 class Home extends Component {
@@ -493,7 +494,83 @@ search(e){
      )}
     </div>
     
-   </div> 
+   </div>
+   <div class="container-fluid">
+    <div className="row user-testimonial">
+     <h2 className="col-12 text-center text-info"><br/><br/>WHAT OUR FANTASTIC USERS SAY</h2>
+     <h4 className="col-12 text-center text-info">Best site to get latest recipe with just a click<br/><br/></h4>
+     <div className="col-1"></div>
+     <div className="user-panel col-10">
+       <div className="card-block">
+         <div className="testimonial-photo mx-auto d-block">
+            <img src="image/eze.jpg"
+            className="rounded-circle  h-100 w-100"/>
+          </div>
+          
+          <p class="mbr-text mbr-fonts-style mbr-white display-7">
+             More-recipes is amazing!. For the first time i can prepare an recipe 
+             From any culture, raceor country without having to travel there.
+             All i have to do is follow strickly the instructions and procedure
+             as provided by the recipe.This is really awsome.
+          </p>
+          </div>
+          <div className="text-center text-white">
+            <div className=" display-5 ">
+                  John Smith
+            </div>
+            <small className=" display-7 ">
+                    Developer
+            </small>
+          </div>
+        </div>
+        <div className="col-1"></div>
+        <div className="col-1"></div>
+     <div className="user-panel col-10">
+       <div className="card-block">
+         <div className="testimonial-photo mx-auto d-block">
+            <img src="image/eze.jpg"
+            className="rounded-circle  h-100 w-100"/>
+          </div>
+          
+          <p class="mbr-text mbr-fonts-style mbr-white display-7">
+          More-recipes is awsome!. I was not a good cook for my husband but with
+          more-recipes, i can now prepare a very delicous meal. 
+          It really changed me and my family.
+          All i have to do is follow strickly the instructions and procedure
+          as provided by the recipe.This is really awsome.
+          </p>
+          </div>
+          <div className="text-center text-white">
+            <div className=" display-5 ">
+                  John Smith
+            </div>
+            <small className=" display-7 ">
+                    Developer
+            </small>
+          </div>
+        </div>
+        <div className="col-1"></div>
+        
+  
+    </div>
+   </div>
+   <div class="container-fluid">
+    <div className="row">
+    <div className="col-6">
+   
+
+
+
+     </div>
+     <div className="col-6">
+     <figure class="mbr-figure align-center container">
+        <div class="video-block" style={{width: '66%'}}>
+            <div><iframe class="mbr-embedded-video" src="https://www.w3schools.com/html/mov_bbb.mp4#t=0.5" width="1280" height="720" frameborder="0" allowfullscreen></iframe></div>
+        </div>
+    </figure>
+     </div>
+    </div>
+    </div> 
     <br/>
     </div> 
        <Header.footer />

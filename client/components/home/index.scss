@@ -180,3 +180,45 @@ opacity: 1 !important;
   border-radius: 42%;
 }
 }
+
+.user-testimonial{
+  
+  background: url("../../image/jumbotron2.jpg") no-repeat center center fixed;
+  -webkit-transition: opacity 1s;
+  -moz-transition: opacity 1s;
+  -ms-transition: opacity 1s;
+  -o-transition: opacity 1s;
+  transition: opacity 1s;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+.user-panel{
+  height: 20rem;
+  margin-top: 5rem;
+  background-color: #efefef;
+  background: linear-gradient(#efefef, transparent);
+  .testimonial-photo{
+    margin-top: -4rem;
+    display: inline-block;
+    width: 120px;
+    height: 120px;
+    margin-bottom: 1.6rem;
+    overflow: hidden;
+    
+  }
+  }
+}
+
+
+#background-video{
+  
+  height: 100%;
+  width: 100%;
+  float: left;
+  top: 0;
+  padding: none;
+  position: fixed; // optional depending on what you want
+  
+  
+  }
