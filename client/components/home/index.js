@@ -528,7 +528,7 @@ search(e){
      <div className="user-panel col-10">
        <div className="card-block">
          <div className="testimonial-photo mx-auto d-block">
-            <img src="image/eze.jpg"
+            <img src="image/face1.jpg"
             className="rounded-circle  h-100 w-100"/>
           </div>
           
