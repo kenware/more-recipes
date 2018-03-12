@@ -508,15 +508,15 @@ search(e){
           </div>
           
           <p class="mbr-text mbr-fonts-style mbr-white display-7">
-             More-recipes is amazing!. For the first time i can prepare an recipe 
-             From any culture, raceor country without having to travel there.
+             More-recipes is amazing!. For the first time i can prepare any recipe 
+             From any culture, race country without having to travel there.
              All i have to do is follow strickly the instructions and procedure
              as provided by the recipe.This is really awsome.
           </p>
           </div>
           <div className="text-center text-white">
             <div className=" display-5 ">
-                  John Smith
+                  Kevin Smith
             </div>
             <small className=" display-7 ">
                     Developer
@@ -533,19 +533,18 @@ search(e){
           </div>
           
           <p class="mbr-text mbr-fonts-style mbr-white display-7">
-          More-recipes is awsome!. I was not a good cook for my husband but with
+          More-recipes is awsome!. I was not a good cook for my husband and my family but with
           more-recipes, i can now prepare a very delicous meal. 
-          It really changed me and my family.
           All i have to do is follow strickly the instructions and procedure
           as provided by the recipe.This is really awsome.
           </p>
           </div>
           <div className="text-center text-white">
             <div className=" display-5 ">
-                  John Smith
+                  Jessica Janet
             </div>
             <small className=" display-7 ">
-                    Developer
+                    Banker
             </small>
           </div>
         </div>
@@ -563,11 +562,7 @@ search(e){
 
      </div>
      <div className="col-6">
-     <figure class="mbr-figure align-center container">
-        <div class="video-block" style={{width: '66%'}}>
-            <div><iframe class="mbr-embedded-video" src="https://www.w3schools.com/html/mov_bbb.mp4#t=0.5" width="1280" height="720" frameborder="0" allowfullscreen></iframe></div>
-        </div>
-    </figure>
+     
      </div>
     </div>
     </div> 
