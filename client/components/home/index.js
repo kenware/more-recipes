@@ -13,10 +13,14 @@ import { Markup } from 'interweave';
 import trim from '../trim';
 import ReactEasyPaginate from 'react-easy-paginate';
 import 'react-easy-paginate/dist/react-easy-paginate.css';
-
 import ReactCardFlip from 'react-card-flip';
 import { DefaultPlayer as Video } from 'react-html5video';
 import 'react-html5video/dist/styles.css';
+import "video-react/dist/video-react.css"; 
+import { Player,BigPlayButton } from 'video-react';
+import VideoCover from 'react-video-cover'
+import $ from 'jquery';
+
 //SmoothScrollbar.use(OverscrollPlugin);
 const limit = 6;
 class Home extends Component {
@@ -111,7 +115,20 @@ search(e){
     ];
     let days = ["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"];
     
-
+    const videoOptions = {
+      src: 'http://download.blender.org/peach/bigbuckbunny_movies/BigBuckBunny_320x180.mp4',
+      ref: videoRef => {
+        this.videoRef = videoRef;
+      },
+      onClick: () => {
+        if (this.videoRef && this.videoRef.paused) {
+          this.videoRef.play();
+        } else if (this.videoRef) {
+          this.videoRef.pause();
+        }
+      },
+      title: 'click to play/pause',
+    };
      
 
         return (
@@ -549,21 +566,50 @@ search(e){
           </div>
         </div>
         <div className="col-1"></div>
-        
-  
     </div>
    </div>
-   <div class="container-fluid">
+   <div className="container">
     <div className="row">
-    <div className="col-6">
-   
-
-
-
+     <h4 className="text-center display-4 col-12">Videos of our Top Recipes</h4>
+    </div>
+  </div>
+   <div className="container-fluid ">
+    <div className="row" >
+    <div className="col-2">
+    </div>
+    <div className="col-8 bg-white p-2" >
+    <div>
+    <Player 
+     poster="https://img.buzzfeed.com/thumbnailer-prod-us-east-1/13b12570812444f1bc86415b6e4c5284/BFV39875_VeganLunchMealPrep_FB_FINAL_FINAL_FINAL.jpg"
+    >
+      <source src="https://vid.buzzfeed.com/output/83972/landscape_720/1520642061" />
+      <BigPlayButton position="center" />
+    </Player>
+    </div>
      </div>
-     <div className="col-6">
+     <div className="col-2">
      
      </div>
+     
+    </div>
+    </div>
+    <div className="container-fluid">
+    <div className="row"><br/><br/>
+    <div className="col-2">
+    </div>
+    <div className="col-8 bg-white p-2">
+    
+    <Player 
+     preload="metadata"
+    >
+      <source src="https://vid.buzzfeed.com/output/83005/landscape_720/1520379369" />
+      <BigPlayButton position="center" />
+    </Player>
+     </div>
+     <div className="col-2">
+     
+     </div>
+     
     </div>
     </div> 
     <br/>
