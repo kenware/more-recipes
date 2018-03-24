@@ -4,7 +4,7 @@ import { render } from 'react-dom';
 import Home from './components/home/index';
 //import './components/home/Navsticky';
 import 'bootstrap/dist/css/bootstrap.min.css'; 
-import 'bootstrap/dist/js/bootstrap.min.js';
+//import  'bootstrap/dist/js/bootstrap.min.js';
 //import $ from 'jquery';
 //import 'popper';
 //import 'bootstrap'; 

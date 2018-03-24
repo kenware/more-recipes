@@ -363,7 +363,7 @@ let days = ["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturda
                      </span>
                   </strong>
               </div>
-              <div class="alert alert-warning alert-dismissible" role="alert" id={this.state.reviewSuccess}>
+              <div className="alert alert-warning alert-dismissible" role="alert" id={this.state.reviewSuccess}>
                 <button type="button" className="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                   <strong>
                     <span><font color='green'> {this.props.message.success} !</font></span>
@@ -379,7 +379,7 @@ let days = ["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturda
   <div className="media">
   <img className="g-width-50 g-height-50 rounded-circle bg-white" src={review.user.image} alt="Image Description"/>
       
-      <div className="media-body bg-white">
+      <div className="media-body bg-white p-3">
       <h5 className="mt-0 text-info">  {review.reviewedBy}</h5>
       <h6 className="mt-0 text-muted"> Reviewed on&nbsp;
       { trim.trim4(days[new Date(review.createdAt).getDay()])},&nbsp;{ trim.trim4(monthNames[new Date(recipe.createdAt).getMonth()])}
@@ -428,7 +428,7 @@ let days = ["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturda
               Reply
             </a>
           </li>
-          &nbsp;&nbsp;
+         
         </ul>
         <br/>
       </div>    
