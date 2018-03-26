@@ -72,7 +72,7 @@ render() {
     <h2 className="text-center mb-5"><font color="white">Login To Your Account</font></h2>
     <div className="row">
         <div className="col-md-6 mx-auto">
-            <div className="card border-secondary">
+            <div className="card border-secondary login">
                 <div className="card-header">
                     <h3 className="mb-0 my-2 text-center">Login To Your Account</h3>
                     <div className="alert alert-warning alert-dismissible" role="alert" id={`show` + this.props.appMessage.appMessage }>

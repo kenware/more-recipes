@@ -96,7 +96,7 @@ render() {
         <div className="col-md-12">
             <div className="row">
                 <div className="col-md-6 mx-auto">
-                    <div className="card border-secondary">
+                    <div className="card border-secondary register">
                         <div className="card-header">
                             <h4 className="mb-0 my-2 text-center">Enter your Details to Sign Up</h4>
                              <div className="alert alert-warning alert-dismissible" role="alert" id={this.state.inform }>

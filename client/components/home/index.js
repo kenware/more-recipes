@@ -346,7 +346,7 @@ search(e){
               <div className="card-header">
                <div className="row">
                 <div className="col-2">
-                 <img src={recipe.user.image} className="rounded-circle" height="50px" width="50px"/> 
+                 <img src={recipe.user.image} className="rounded-circle" height="50px" width="50px"/>
                 </div>
                 <div className="col-10">
                  <font className="text-info">{recipe.user.username}
@@ -360,7 +360,7 @@ search(e){
                </div>
               </div>
               </div>
-               <div className="ml-auto card-img" style={{height:"14rem"}}>
+               <div className="ml-auto card-img recipe-img">
                
                <Link to={`/recipes/${recipe.id}`}>
                <img className="img-fluid rounded card-img-top h-100 w-100" src={recipe.image}

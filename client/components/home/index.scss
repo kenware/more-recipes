@@ -222,3 +222,20 @@ opacity: 1 !important;
   
   
   }
+  .card-wrapper{
+    -moz-box-shadow: 5px 5px 5px 5px #777777;
+    -webkit-box-shadow: 5px 5px 5px 5px #777777;
+    box-shadow: 5px 5px 5px 5px #777777;
+   
+  } 
+  .recipe-img{
+    height: 14rem;
+  }
+  .recipe-img:hover{
+    background-color: #000;
+    content:"here we go";
+    opacity: .6;
+    height: 15rem;
+    
+    z-index: 10;
+  }
