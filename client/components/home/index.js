@@ -20,7 +20,7 @@ import "video-react/dist/video-react.css";
 import { Player,BigPlayButton } from 'video-react';
 import VideoCover from 'react-video-cover'
 import $ from 'jquery';
-
+//import  'bootstrap/dist/js/bootstrap.min.js';
 //SmoothScrollbar.use(OverscrollPlugin);
 const limit = 6;
 class Home extends Component {

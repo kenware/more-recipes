@@ -15,6 +15,8 @@ import { Markup } from 'interweave';
 import trim from '../trim';
 import ReactCardFlip from 'react-card-flip';
 import FacebookProvider, { Comments,Share } from 'react-facebook';
+import $ from 'jquery';
+
 //@wrapReactLifecycleMethodsWithTryCatch 
 class Detail extends Component {
   constructor(props){
@@ -41,9 +43,9 @@ class Detail extends Component {
   }
 
 componentWillMount() {
-  if(this.props.recipe.title==' '){
+  //if(this.props.recipe.title==' '){
   this.props.actions.loadRecipes('id','DESC',0,6,'none');
-}
+//}
  this.props.actions.getAllReviews(this.props.match.params.recipeId);
  this.props.actions.users();
  
@@ -375,11 +377,11 @@ let days = ["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturda
          
       <h1 className="my-4 text-center" >{this.props.reviews.length}&nbsp;{this.props.reviews.length>1 ?'Reviews':'Review'}</h1>
 { this.props.reviews.map(review =>
-  <div>
-  <div className="media">
-  <img className="g-width-50 g-height-50 rounded-circle bg-white" src={review.user.image} alt="Image Description"/>
-      
-      <div className="media-body bg-white p-3">
+  <div >
+  <div className="media"  >
+  <h6><img className="g-width-50 g-height-50 rounded-circle bg-white" src={review.user.image} alt="Image Description"/>
+      <em className="fa fa-caret-left text-white fa-4x arrow"></em></h6>
+      <div className="media-body bg-white p-3" >
       <h5 className="mt-0 text-info">  {review.reviewedBy}</h5>
       <h6 className="mt-0 text-muted"> Reviewed on&nbsp;
       { trim.trim4(days[new Date(review.createdAt).getDay()])},&nbsp;{ trim.trim4(monthNames[new Date(recipe.createdAt).getMonth()])}
