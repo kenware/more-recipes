@@ -15,10 +15,8 @@ import ReactEasyPaginate from 'react-easy-paginate';
 import 'react-easy-paginate/dist/react-easy-paginate.css';
 import ReactCardFlip from 'react-card-flip';
 import { DefaultPlayer as Video } from 'react-html5video';
-import 'react-html5video/dist/styles.css';
 import "video-react/dist/video-react.css"; 
 import { Player,BigPlayButton } from 'video-react';
-import VideoCover from 'react-video-cover'
 import $ from 'jquery';
 //import  'bootstrap/dist/js/bootstrap.min.js';
 //SmoothScrollbar.use(OverscrollPlugin);
@@ -342,7 +340,7 @@ search(e){
         <br/>
           { recipes.map(recipe =>
            <div key={recipe.id}  id="bg-al" className="card p-4 col-12 col-sm-6 col-md-6 col-lg-4 col-xl-3 " >
-             <div className="card-wrapper">
+             <div className="card-wrapper carousel slide">
               <div className="card-header">
                <div className="row">
                 <div className="col-2">
@@ -360,12 +358,18 @@ search(e){
                </div>
               </div>
               </div>
-               <div className="ml-auto card-img recipe-img">
-               
-               <Link to={`/recipes/${recipe.id}`}>
-               <img className="img-fluid rounded card-img-top h-100 w-100" src={recipe.image}
-                alt="Recipe Image"/>
-                 </Link>
+               <div className="ml-auto card-img recipe-img"> 
+                <div className="mbr-overla"></div>             
+                <Link to={`/recipes/${recipe.id}`}>
+                 <img className="img-fluid rounded card-img-top h-100 w-100" src={recipe.image}
+                 alt="Recipe Image"/>
+                
+                <div className="carousel-caption">
+                   <p className="text-white p-3"> 
+                   {recipe.title}
+                   </p>
+                 </div>
+                </Link>
                </div>
                <div className="card-header">
                 <h4 className="lead card-title text-sucess" >
@@ -533,10 +537,10 @@ search(e){
           </div>
           <div className="text-center text-white">
             <div className=" display-5 ">
-                  Kevin Smith
+             Kevin Smith
             </div>
             <small className=" display-7 ">
-                    Developer
+             Developer
             </small>
           </div>
         </div>
@@ -575,47 +579,36 @@ search(e){
   </div>
    <div className="container-fluid ">
     <div className="row" >
-    <div className="col-2">
-    </div>
-    <div className="col-8 bg-white p-2" >
-    <h5 className="text-center"> French Recipe</h5>
-    <Player 
-     poster="https://img.buzzfeed.com/thumbnailer-prod-us-east-1/13b12570812444f1bc86415b6e4c5284/BFV39875_VeganLunchMealPrep_FB_FINAL_FINAL_FINAL.jpg"
-    >
-      <source src="https://vid.buzzfeed.com/output/83972/landscape_720/1520642061" />
-      <BigPlayButton position="center" />
-    </Player>
-    
+     <div className="col-2"> </div>
+     <div className="col-8 bg-white p-2" >
+      <h5 className="text-center"> French Recipe</h5>
+       <Player  poster="https://img.buzzfeed.com/thumbnailer-prod-us-east-1/13b12570812444f1bc86415b6e4c5284/BFV39875_VeganLunchMealPrep_FB_FINAL_FINAL_FINAL.jpg"
+        >
+         <source src="https://vid.buzzfeed.com/output/83972/landscape_720/1520642061" />
+        <BigPlayButton position="center" />
+       </Player>
      </div>
      <div className="col-2">
-     
      </div>
-     
     </div>
-    </div>
-    <div className="container-fluid">
+   </div>
+   <div className="container-fluid">
     <div className="row"><br/><br/>
-    <div className="col-2">
-    </div>
-    <div className="col-8 bg-white p-2">
-    <h5 className="text-center"> French Brunch</h5>
-    <Player 
-     preload="metadata"
-    >
-      <source src="https://vid.buzzfeed.com/output/83005/landscape_720/1520379369" />
-      <BigPlayButton position="center" />
-    </Player>
+     <div className="col-2"> </div>
+     <div className="col-8 bg-white p-2">
+      <h5 className="text-center"> French Brunch</h5>
+       <Player preload="metadata">
+        <source src="https://vid.buzzfeed.com/output/83005/landscape_720/1520379369" />
+        <BigPlayButton position="center" />
+       </Player>
      </div>
-     <div className="col-2">
-     
-     </div>
-     
+     <div className="col-2"></div>
     </div>
-    </div> 
+   </div> 
     <br/>
-    </div> 
+  </div> 
        <Header.footer />
-    </div>   
+</div>   
      
     );
   }

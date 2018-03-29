@@ -140,7 +140,7 @@ export const getVotes = (id,vote) => {
     if(typeof recipes == 'string'){
       return dispatch(getMessage({voteError:recipes,vote:"show"}));
     }else{
- 
+      dispatch(getMessage({vote:"show"}));
      return dispatch(loadRecipes('id','DESC',0,6,'none'));
     }
    });

@@ -230,12 +230,31 @@ opacity: 1 !important;
   } 
   .recipe-img{
     height: 14rem;
+    .mbr-overla{
+      display: none;
+    }
+    .carousel-caption{
+      display:none;
+    }
   }
   .recipe-img:hover{
-    background-color: #000;
-    content:"here we go";
-    opacity: .6;
     height: 15rem;
-    
-    z-index: 10;
-  }
+    .carousel-caption{
+      display:block;
+      margin-top: 20%;
+      margin-bottom: 50%;
+      font-size: 20px;
+      font-weight: bold;
+    }
+    .mbr-overla{
+      display: inline;
+      background-color: #000;
+      left: 0;
+      opacity: .6;
+      position: absolute;
+      right: 0;
+      top: 15%;
+      z-index: 10;
+      height: 15rem;
+    }
+  } 

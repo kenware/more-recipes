@@ -126,11 +126,11 @@ render() {
 const getVote = (vote) => {
   if(vote == "upvote"){
     const cssupvote = "btn btn-warning";
-    this.setState({cssupvote,upvote:(<div><i className="fa fa-spinner fa-spin fa-2x fa-fw" aria-hidden="true"></i>downvoting...</div>)})
+    this.setState({cssupvote,upvote:(<i className="fa fa-spinner fa-spin fa-2x fa-fw" aria-hidden="true"></i>)})
   }else{
     const cssdownvote = "btn btn-warning";
     this.setState({cssdownvote,
-      downvote:(<div><i className="fa fa-spinner fa-spin fa-2x fa-fw" aria-hidden="true"></i>downvoting...</div>)})
+      downvote:(<i className="fa fa-spinner fa-spin fa-2x fa-fw" aria-hidden="true"></i>)})
   } 
     this.setState({inform:true})
      this.props.actions.getVotes(this.props.match.params.recipeId,vote)
