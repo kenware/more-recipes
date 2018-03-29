@@ -22,11 +22,11 @@ class Detail extends Component {
   constructor(props){
     super(props);
     this.state = {
-      upvote:'upvote',
-      downvote:'downvote',
+      upvote:'Upvote',
+      downvote:'Downvote',
       reviewButton:'review',
-      cssupvote:"btn btn-info",
-      cssdownvote:"btn btn-info",
+      cssupvote:"btn btn-outline-info btn-sm",
+      cssdownvote:"btn btn-outline-info btn-sm",
       message:"",
       messages:"",
       inform:false,
@@ -211,7 +211,7 @@ let days = ["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturda
          <i className="fa fa-thumbs-up text-white" aria-hidden="true"></i>&nbsp;
          {recipe.upvote}
          </button>
-         <button className="btn btn-outline-success btn-sm text-white">
+         <button className="btn btn-outline-success btn-sm text-white bg-info">
          <i className="fa fa-thumbs-down text-white" aria-hidden="true"></i>&nbsp;
          {recipe.downvote}
          </button>
@@ -251,11 +251,10 @@ let days = ["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturda
                <br/><img src={this.state.user.image}
                className="rounded-circle" height="50px" width="50px"/>
               <h4 className="text-primary">{ this.state.user.username}</h4>
-              <button type="button" className={this.state.cssupvote} id="up"
-              onClick={ () => { getVote("upvote") } }>{this.state.upvote}&nbsp;<i className="fa fa-thumbs-up" aria-hidden="true">&nbsp;{recipe.upvote}</i></button>&nbsp;
- 
+              <button className={this.state.cssupvote} id="up"
+              onClick={ () => { getVote("upvote") } }><i className="fa fa-thumbs-up" aria-hidden="true"></i>&nbsp;{this.state.upvote}&nbsp;{recipe.upvote}</button>&nbsp;
               <button type="button" className={this.state.cssdownvote} type="button" id="down"
-              onClick={ () => { getVote("downvote") } }>{this.state.downvote}&nbsp;<i className="fa fa-thumbs-down" aria-hidden="true"></i>&nbsp;{recipe.downvote}</button>&nbsp;
+              onClick={ () => { getVote("downvote") } }><i className="fa fa-thumbs-down" aria-hidden="true"></i>&nbsp;{this.state.downvote}&nbsp;{recipe.downvote}</button>&nbsp;
            
           
             </div>
@@ -282,7 +281,7 @@ let days = ["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturda
             <a className="dropdown-item" href="#"><em className="fa fa-remove mr-1"></em> Close Window</a></div>
         </div>
         <h6 className="card-subtitle mb-2 text-muted">Important Links</h6>
-        <ul className="timeline">
+        <ul className="timeline" >
           <li>
             <div className="timeline-badge"><em className="fa fa-camera"></em></div>
             <div className="timeline-panel bg-light">
@@ -291,9 +290,20 @@ let days = ["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturda
               </div>
               <div className="timeline-body">
               <ul>
-              <li><Link to="/profile">My profile</Link></li>
-              <li><h6><Link to="/profile">Change profile photo</Link></h6></li>
-              <li><h6><Link to="/profile">Edit profile</Link></h6></li>
+              <li>
+               <Link to="/profile">
+                 <em className="fa fa-user fa-2x"></em>
+                &nbsp;My profile
+               </Link></li>
+              <li><h6><Link to="/profile">
+              <em className="fa fa-edit fa-2x"></em>
+                 Change profile
+              </Link></h6></li>
+              <li><h6>
+               <Link to="/profile">
+               <em className="fa fa-pencil fa-2x"></em>
+                 Edit profile
+               </Link></h6></li>
               <li><h6><Link to="/profile">Change Password</Link></h6></li>
              </ul>
               </div>
@@ -308,9 +318,27 @@ let days = ["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturda
               <div className="timeline-body">
                <p>
                 <ul>
-                <li><Link to="/dashbord/add-recipe">Add new Recipe</Link></li>
-                <li><Link to="/dashbord/favorite">All recipes</Link></li>
-                <li><Link to="/dashbord/favorite">My favorite recipes</Link></li>
+                <li>
+                 <Link to="/dashbord">
+                 <em className="fa fa-dashboard"></em>
+                  &nbsp;Dashboard
+                 </Link></li>
+                <li>
+                 <Link to="/dashbord/add-recipe">
+                 <em className="fa fa-edit fa-plus-square"></em>
+                  &nbsp;Add new Recipe
+                 </Link></li>
+                <li>
+                 <Link to="/dashbord/favorite">
+                 <em className="fa fa-edit fa-list"></em>
+                  &nbsp;
+                   All recipes
+                 </Link></li>
+                <li>
+                 <Link to="/dashbord/favorite">
+                  <em className="fa fa-heart"></em>
+                  &nbsp;My favorite recipes
+                 </Link></li>
                 <li><Link to="/dashbord/add-recipe">Add new favorite recipe</Link></li>
                 <li><Link to="/dashbord/my-recipe">add favorite recipe from my recipes</Link></li>
                </ul>
@@ -326,8 +354,13 @@ let days = ["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturda
                </div>
                <div className="timeline-body">
                  <p>
-                 <ul>
-                <li><Link to="/dashbord/add-recipe">Most upvoted recipes</Link></li>
+                 <ul style={{listStyle:'none'}}>
+                <li>
+                 <Link to="/dashbord/add-recipe">
+                 <em className="fa fa-thumbs-up"></em>
+                  &nbsp;
+                  Most upvoted
+                 </Link></li>
                 <li>Recently reviewed</li>
                 <li><Link to="/dashbord/favorite">Top reviewed recipes</Link></li>
                 <li>top upvoted reviews</li>
