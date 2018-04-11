@@ -16,7 +16,7 @@
     "dialect": "postgres"
   },
   "production": {
-    "use_env_variable": "DATABASE_URL"
+    "use_env_variable": "postgres://zgupjjao:LYx8skha_GfI3Kb2cl1NRz5ydiM1hhXm@elmer.db.elephantsql.com:5432/zgupjjao"
     
   }
 }
