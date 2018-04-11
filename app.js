@@ -19,7 +19,7 @@ var pg = require('pg');
 //or native libpq bindings
 //var pg = require('pg').native
 
-var conString = process.env.ELEPHANTSQL_URL || "postgres://postgres:5432@localhost/postgres";
+var conString = process.env.ELEPHANTSQL_URL || "postgres://zgupjjao:LYx8skha_GfI3Kb2cl1NRz5ydiM1hhXm@elmer.db.elephantsql.com:5432/zgupjjao";
 
 var client = new pg.Client(conString);
 client.connect(function(err) {
