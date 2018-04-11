@@ -9,26 +9,32 @@ app.use(morgan(':remote-addr - :remote-user [:date[clf]] ":method :url HTTP/:htt
 
 app.use(bodyParser.json({ type: 'application/json'}));
 import route from './server/route/index.js';
-const { Client } = require('pg');
+//const { Client } = require('pg');
 app.use(express.static(path.join(__dirname, '/client')));
 const volleyball = require('volleyball');
 app.use(volleyball);
 app.use('/api', route);
-const client = new Client({
-  connectionString: process.env.DATABASE_URL,
-  //ssl: true,
-});
 
-client.connect();
+var pg = require('pg');
+//or native libpq bindings
+//var pg = require('pg').native
 
-client.query('SELECT table_schema,table_name FROM information_schema.tables;', (err, res) => {
-  if (err) throw err;
-  for (let row of res.rows) {
-    console.log(JSON.stringify(row));
+var conString = process.env.ELEPHANTSQL_URL || "postgres://postgres:5432@localhost/postgres";
+
+var client = new pg.Client(conString);
+client.connect(function(err) {
+  if(err) {
+    return console.error('could not connect to postgres', err);
   }
-  client.end();
+  client.query('SELECT NOW() AS "theTime"', function(err, result) {
+    if(err) {
+      return console.error('error running query', err);
+    }
+    console.log(result.rows[0].theTime);
+    //output: Tue Jan 15 2013 19:12:47 GMT-600 (CST)
+    client.end();
+  });
 });
-
 
 app.get('*', (req, res) => {
   res.sendFile(path.join(__dirname, './client/index.html'));
