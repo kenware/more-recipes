@@ -14,15 +14,14 @@ app.use(express.static(path.join(__dirname, '/client')));
 const volleyball = require('volleyball');
 app.use(volleyball);
 app.use('/api', route);
+
 //app.use(express.static(path.resolve(__dirname, './', 'node_modules')));
 
 const client = new Client({
   connectionString: process.env.DATABASE_URL,
-  //ssl: true,
+  ssl: true,
 });
-
 client.connect();
-
 client.query('SELECT table_schema,table_name FROM information_schema.tables;', (err, res) => {
   if (err) throw err;
   for (let row of res.rows) {
