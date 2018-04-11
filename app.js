@@ -14,11 +14,6 @@ app.use(express.static(path.join(__dirname, '/client')));
 const volleyball = require('volleyball');
 app.use(volleyball);
 app.use('/api', route);
-
-//serve up static files
-//app.use(express.static(path.resolve(__dirname, './', 'client')));
-//app.use(express.static(path.resolve(__dirname, './', 'node_modules')));
-
 const client = new Client({
   connectionString: process.env.DATABASE_URL,
   //ssl: true,
