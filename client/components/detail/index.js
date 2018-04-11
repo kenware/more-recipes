@@ -16,7 +16,7 @@ import trim from '../trim';
 import ReactCardFlip from 'react-card-flip';
 import FacebookProvider, { Comments,Share } from 'react-facebook';
 import $ from 'jquery';
-
+import { Player,BigPlayButton } from 'video-react';
 //@wrapReactLifecycleMethodsWithTryCatch 
 class Detail extends Component {
   constructor(props){
@@ -373,8 +373,8 @@ let days = ["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturda
        </div>
       </div>
       <div className="row">
-      
-      <div className="col-md-8">
+       <div className="col-12 card-header"></div>    
+       <div className="col-12 col-md-7">
           <div className="card my-4" >
             <h5 className="card-header text-center">Provide reviews</h5>
             <div className="card-body" style={{background: 'aliceblue'}}>
@@ -478,10 +478,39 @@ let days = ["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturda
 
 
   
-        </div>
-        <div className="col-4"></div>
-    </div>
-    <div class="container">
+</div>
+<div className="col-12 col-md-5"><br/>
+  <div className="row bg-white">
+  <div className="col-12 card-header">Recommended 
+  <label className="float-right"><Link to="/recipes">See More</Link></label></div>
+   <div className="col-6">
+    <figure>
+      <img src="image/g.jpg" className="img-fluid"/>
+      <p>French Recipes</p>
+    </figure>
+   </div>
+   <div className="col-6">
+    <figure>
+      <img src="image/g.jpg" className="img-fluid"/>
+    </figure>
+   </div>
+   <div className="col-6">
+    <Player preload="metadata">
+     <source src="https://vid.buzzfeed.com/output/83005/landscape_720/1520379369" />
+     <BigPlayButton position="center" />
+    </Player>
+   </div>
+   <div className="col-6">
+    <Player  poster="https://img.buzzfeed.com/thumbnailer-prod-us-east-1/13b12570812444f1bc86415b6e4c5284/BFV39875_VeganLunchMealPrep_FB_FINAL_FINAL_FINAL.jpg"
+      >
+      <source src="https://vid.buzzfeed.com/output/83972/landscape_720/1520642061" />
+      <BigPlayButton position="center" />
+    </Player>
+   </div>
+  </div>
+</div>
+  </div>
+    <div className="container">
      <div className="row">
      { this.props.mostLoved.map(recipe =>
      <div className="col-12 col-sm-4 col-xl-2 p-3" key={recipe.id}>
