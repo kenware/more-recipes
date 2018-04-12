@@ -1,9 +1,10 @@
 {
   "development": {
-    "username": "postgres",
-    "password": "dehydrogenase",
-    "database": "recipesdb",
-    "host": "127.0.0.1",
+   
+    "username": "qiuwbwyt",
+    "password": "FiTRsS2FLMKaJAF6N6VosCGhgEho1eSY",
+    "database": "qiuwbwyt",
+    "host": "baasu.db.elephantsql.com",
     "port": 5432,
     "dialect": "postgres"
   },
