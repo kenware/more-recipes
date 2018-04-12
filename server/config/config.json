@@ -1,12 +1,12 @@
 {
   "development": {
-   
-    "username": "qiuwbwyt",
-    "password": "FiTRsS2FLMKaJAF6N6VosCGhgEho1eSY",
-    "database": "qiuwbwyt",
-    "host": "baasu.db.elephantsql.com",
+    "username": "postgres",
+    "password": "dehydrogenase",
+    "database": "recipesdb",
+    "host": "127.0.0.1",
     "port": 5432,
     "dialect": "postgres"
+    
   },
   "test": {
     "username": "postgres",
@@ -17,7 +17,7 @@
     "dialect": "postgres"
   },
   "production": {
-    "use_env_variable": "postgres://qiuwbwyt:FiTRsS2FLMKaJAF6N6VosCGhgEho1eSY@baasu.db.elephantsql.com:5432/qiuwbwyt",
+    "url": "postgres://qiuwbwyt:FiTRsS2FLMKaJAF6N6VosCGhgEho1eSY@baasu.db.elephantsql.com:5432/qiuwbwyt",
     "dialect": "postgres"
   }
 }
