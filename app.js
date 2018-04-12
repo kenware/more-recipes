@@ -14,7 +14,7 @@ app.use(express.static(path.join(__dirname, '/client')));
 const volleyball = require('volleyball');
 app.use(volleyball);
 app.use('/api', route);
-
+/*
 var pg = require('pg');
 //or native libpq bindings
 //var pg = require('pg').native
@@ -35,7 +35,7 @@ client.connect(function(err) {
     client.end();
   });
 });
-
+*/
 app.get('*', (req, res) => {
   res.sendFile(path.join(__dirname, './client/index.html'));
 });
